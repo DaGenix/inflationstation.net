@@ -207,6 +207,7 @@ DATA.data.sort((a, b) => {
 
 for (data of DATA.data) {
     data.price = inflation({year: data.year, amount: data.orig_price}, {year: DATA.inflation_year});
+    data.price = data.price.toLocaleString();
 }
 
 const template = fs.readFileSync("index.hbs", {encoding: "utf-8"});
