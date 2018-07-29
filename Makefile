@@ -1,7 +1,7 @@
 DEST := out
 
 .PHONY: all
-all: convert-images build-html copy-css
+all: convert-images build-html copy-css $(DEST)/favicon.ico
 
 IMG := $(patsubst %,img/%-200.jpg, $(basename $(wildcard src/img/*)))
 IMG := $(IMG) $(patsubst %,img/%-400.jpg, $(basename $(wildcard src/img/*)))
@@ -61,6 +61,9 @@ $(DEST)/img/%-1600.jpg: src/img/%.*
 	@mkdir -p $(DEST)/img/
 	convert -define jpeg:size=3200x1600 $< -thumbnail '1600x800>' \
 		-background white -gravity center -extent 1600x800 $@ 2>/dev/null
+
+$(DEST)/favicon.ico: src/ico/favicon.ico
+	@cp $< $@
 
 .PHONY: convert-images
 convert-images: $(IMG)
