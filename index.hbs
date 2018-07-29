@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css" />
+
+    <style>
+        body {
+            background-color: #f1f1f1;
+        }
+        header {
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+            text-align: center;
+            color: white;
+            background-color: #6c4d70;
+            box-shadow: 0px 2px 5px rgb(192, 192, 192);
+        }
+        footer {
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+            color: white;
+            background-color: #777777;
+            box-shadow: 0px -2px 5px rgb(192, 192, 192);
+        }
+        footer a {
+            color: white;
+            text-decoration: underline;
+            font-weight: 600;
+        }
+        footer a:hover {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Console prices adjusted for inflation</h1>
+</header>
+
+<div class="container">
+  <div class="row" style="text-align:center">
+    {{#each data}} 
+    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 p-2">
+        <div class="console-container shadow p-2 bg-white rounded h-100">
+        <a href="{{link}}">
+            <picture>
+                <source srcset="
+                    img/{{img}}-200.webp 200w,
+                    img/{{img}}-400.webp 400w,
+                    img/{{img}}-600.webp 600w,
+                    img/{{img}}-800.webp 800w,
+                    img/{{img}}-1600.webp 1600w"
+                    sizes="
+                    (max-width: 576px) 80vw,
+                    200px"
+                    type="image/webp">
+                <img class="console-img"
+                    alt="Picture of {{name}}"
+                    srcset="
+                    img/{{img}}-200.jpg 200w,
+                    img/{{img}}-400.jpg 400w,
+                    img/{{img}}-600.jpg 600w,
+                    img/{{img}}-800.jpg 800w,
+                    img/{{img}}-1600.jpg 1600w"
+                    sizes="
+                    (max-width: 576px) 100vw,
+                    200px"
+                    src="img/{{img}}.jpg" />
+            </picture>
+        </a>
+        <ul class="list-unstyled">
+            <li><h1>${{price}}</h1></li>
+            <li>{{name}} ({{year}})</li>
+            <li>Original Price: ${{orig_price}}</li>
+        </ul>
+        </div>
+    </div>
+    {{/each}}
+  </div>
+</div>
+
+<footer>
+    <div class="container">
+        <ul class="list-unstyled">
+            <li>All console images (except as noted below) by <a href="https://commons.wikimedia.org/wiki/User:Evan-Amos" title="User:Evan-Amos">Evan-Amos</a></li>
+            <li>Wii U image by <a href="https://commons.wikimedia.org/w/index.php?curid=23214469">Takimata</a></li>
+            <li>Prices and release dates from <a href="http://vgsales.wikia.com/wiki/Launch_price">Video Game Sales Wiki</a></li>
+            <li>Inflation data provided by <a href="https://www.npmjs.com/package/us-inflation">us-inflation</a> and calculated for {{inflation_year}}</li>
+        </ul>
+    </div>
+</footer>
+
+</body>
+</html>
