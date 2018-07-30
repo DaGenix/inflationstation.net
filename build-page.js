@@ -407,7 +407,7 @@ DATA.data.sort((a, b) => {
 });
 
 for (data of DATA.data) {
-    data.raw_price = inflation({year: data.year, amount: data.raw_orig_price}, {year: DATA.inflation_year});
+    data.raw_price = Math.round(inflation({year: data.year, amount: data.raw_orig_price}, {year: DATA.inflation_year}));
     data.price = data.raw_price.toLocaleString();
     data.orig_price = data.raw_orig_price.toLocaleString()
 }
