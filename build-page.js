@@ -6,6 +6,7 @@ const DATA = {
     inflation_year: 2017,
     data: [
         {
+            type: "home",
             raw_orig_price: 199,
             name: "NES",
             manufacturer: "Nintendo",
@@ -14,6 +15,7 @@ const DATA = {
             link: "https://en.wikipedia.org/wiki/Nintendo_Entertainment_System",
         },
         {
+            type: "home",
             raw_orig_price: 199,
             name: "SNES",
             manufacturer: "Nintendo",
@@ -22,6 +24,7 @@ const DATA = {
             link: "https://en.wikipedia.org/wiki/Super_Nintendo_Entertainment_System",
         },
         {
+            type: "home",
             raw_orig_price: 199,
             name: "Nintendo 64",
             manufacturer: "Nintendo",
@@ -30,6 +33,7 @@ const DATA = {
             link: "https://en.wikipedia.org/wiki/Nintendo_64",
         },
         {
+            type: "home",
             raw_orig_price: 199,
             name: "GameCube",
             manufacturer: "Nintendo",
@@ -38,6 +42,7 @@ const DATA = {
             link: "https://en.wikipedia.org/wiki/GameCube",
         },
         {
+            type: "home",
             raw_orig_price: 249,
             name: "Wii",
             manufacturer: "Nintendo",
@@ -46,6 +51,7 @@ const DATA = {
             link: "https://en.wikipedia.org/wiki/Wii",
         },
         {
+            type: "home",
             raw_orig_price: 349,
             name: "Wii U",
             manufacturer: "Nintendo",
@@ -54,6 +60,7 @@ const DATA = {
             link: "https://en.wikipedia.org/wiki/Wii_U",
         },
         {
+            type: "hybrid",
             raw_orig_price: 299,
             name: "Switch",
             manufacturer: "Nintendo",
@@ -62,6 +69,7 @@ const DATA = {
             link: "https://en.wikipedia.org/wiki/Nintendo_Switch",
         },
         {
+            type: "home",
             raw_orig_price: 299,
             name: "PlayStation",
             manufacturer: "Sony",
@@ -70,6 +78,7 @@ const DATA = {
             link: "https://en.wikipedia.org/wiki/PlayStation",
         },
         {
+            type: "home",
             raw_orig_price: 299,
             name: "PlayStation 2",
             manufacturer: "Sony",
@@ -78,6 +87,7 @@ const DATA = {
             link: "https://en.wikipedia.org/wiki/PlayStation_2",
         },
         {
+            type: "home",
             raw_orig_price: 499,
             name: "PlayStation 3",
             manufacturer: "Sony",
@@ -86,6 +96,7 @@ const DATA = {
             link: "https://en.wikipedia.org/wiki/PlayStation_3",
         },
         {
+            type: "home",
             raw_orig_price: 399,
             name: "PlayStation 4",
             manufacturer: "Sony",
@@ -94,6 +105,7 @@ const DATA = {
             link: "https://en.wikipedia.org/wiki/PlayStation_4",
         },
         {
+            type: "home",
             raw_orig_price: 299,
             name: "Xbox",
             manufacturer: "Microsoft",
@@ -102,6 +114,7 @@ const DATA = {
             link: "https://en.wikipedia.org/wiki/Xbox_(console)",
         },
         {
+            type: "home",
             raw_orig_price: 299,
             name: "Xbox 360",
             manufacturer: "Microsoft",
@@ -110,6 +123,7 @@ const DATA = {
             link: "https://en.wikipedia.org/wiki/Xbox_360",
         },
         {
+            type: "home",
             raw_orig_price: 499,
             name: "Xbox One",
             manufacturer: "Microsoft",
@@ -118,6 +132,7 @@ const DATA = {
             link: "https://en.wikipedia.org/wiki/Xbox_One",
         },
         {
+            type: "home",
             raw_orig_price: 200,
             name: "Master System",
             manufacturer: "Sega",
@@ -126,6 +141,7 @@ const DATA = {
             link: "https://en.wikipedia.org/wiki/Master_System",
         },
         {
+            type: "home",
             raw_orig_price: 189,
             name: "Sega Genesis",
             manufacturer: "Sega",
@@ -134,6 +150,7 @@ const DATA = {
             link: "https://en.wikipedia.org/wiki/Sega_Genesis",
         },
         {
+            type: "home",
             raw_orig_price: 399,
             name: "Sega Saturn",
             manufacturer: "Sega",
@@ -142,6 +159,7 @@ const DATA = {
             link: "https://en.wikipedia.org/wiki/Sega_Saturn",
         },
         {
+            type: "home",
             raw_orig_price: 199,
             name: "DreamCast",
             manufacturer: "Sega",
@@ -150,6 +168,7 @@ const DATA = {
             link: "https://en.wikipedia.org/wiki/Dreamcast",
         },
         {
+            type: "home",
             raw_orig_price: 199,
             name: "Atari 2600",
             manufacturer: "Atari",
@@ -158,6 +177,7 @@ const DATA = {
             link: "https://en.wikipedia.org/wiki/Atari_2600",
         },
         {
+            type: "home",
             raw_orig_price: 269,
             name: "Atari 5200",
             manufacturer: "Atari",
@@ -166,6 +186,7 @@ const DATA = {
             link: "https://en.wikipedia.org/wiki/Atari_5200",
         },
         {
+            type: "home",
             raw_orig_price: 139,
             name: "Atari 7800",
             manufacturer: "Atari",
@@ -174,6 +195,7 @@ const DATA = {
             link: "https://en.wikipedia.org/wiki/Atari_7800",
         },
         {
+            type: "home",
             raw_orig_price: 249,
             name: "Atari Jaguar",
             manufacturer: "Atari",
@@ -182,6 +204,7 @@ const DATA = {
             link: "https://en.wikipedia.org/wiki/Atari_Jaguar",
         },
         {
+            type: "home",
             raw_orig_price: 299,
             name: "Intellivision",
             manufacturer: "Mattel",
@@ -190,6 +213,7 @@ const DATA = {
             link: "https://en.wikipedia.org/wiki/Intellivision",
         },
         {
+            type: "home",
             raw_orig_price: 175,
             name: "ColecoVision",
             manufacturer: "Coleco",
@@ -198,6 +222,7 @@ const DATA = {
             link: "https://en.wikipedia.org/wiki/ColecoVision",
         },
         {
+            type: "home",
             raw_orig_price: 199,
             name: "TurboGrafx-16",
             manufacturer: "Hudson Soft & Nec Home Electronics",
@@ -206,6 +231,7 @@ const DATA = {
             link: "https://en.wikipedia.org/wiki/TurboGrafx-16",
         },
         {
+            type: "home",
             raw_orig_price: 649,
             name: "Neo Geo",
             manufacturer: "SNK",
@@ -214,6 +240,7 @@ const DATA = {
             link: "https://en.wikipedia.org/wiki/Neo_Geo_(system)",
         },
         {
+            type: "home",
             raw_orig_price: 699,
             name: "3DO",
             manufacturer: "3DO",
@@ -221,6 +248,153 @@ const DATA = {
             img: "3DO-FZ1-Console-Set",
             link: "https://en.wikipedia.org/wiki/3DO_Interactive_Multiplayer",
         },
+        {
+            type: "handheld",
+            raw_orig_price: 89,
+            name: "Game Boy",
+            manufacturer: "Nintendo",
+            year: 1989,
+            img: "Game-Boy-FL",
+            link: "https://en.wikipedia.org/wiki/Game_Boy",
+        },
+        {
+            type: "handheld",
+            raw_orig_price: 179,
+            name: "Virtual Boy",
+            manufacturer: "Nintendo",
+            year: 1995,
+            img: "Virtual-Boy-Set",
+            link: "https://en.wikipedia.org/wiki/Virtual_Boy",
+        },
+        {
+            type: "handheld",
+            raw_orig_price: 69,
+            name: "Game Boy Color",
+            manufacturer: "Nintendo",
+            year: 1998,
+            img: "Nintendo-Game-Boy-Color-FL",
+            link: "https://en.wikipedia.org/wiki/Game_Boy_Color",
+        },
+        {
+            type: "handheld",
+            raw_orig_price: 99,
+            name: "Game Boy Advance",
+            manufacturer: "Nintendo",
+            year: 2001,
+            img: "Nintendo-Game-Boy-Advance-Purple-FL",
+            link: "https://en.wikipedia.org/wiki/Game_Boy_Advance",
+        },
+        {
+            type: "handheld",
+            raw_orig_price: 149,
+            name: "Nintendo DS",
+            manufacturer: "Nintendo",
+            year: 2004,
+            img: "Nintendo-DS-Lite-Black-Open",
+            link: "https://en.wikipedia.org/wiki/Nintendo_ds",
+        },
+        {
+            type: "handheld",
+            raw_orig_price: 249,
+            name: "Nintendo 3DS",
+            manufacturer: "Nintendo",
+            year: 2011,
+            img: "Nintendo-3DS-AquaOpen",
+            link: "https://en.wikipedia.org/wiki/3ds",
+        },
+        {
+            type: "handheld",
+            raw_orig_price: 249,
+            name: "PSP",
+            manufacturer: "Sony",
+            year: 2005,
+            img: "Psp-1000",
+            link: "https://en.wikipedia.org/wiki/PlayStation_Portable",
+        },
+        {
+            type: "handheld",
+            raw_orig_price: 249,
+            name: "Playstation Vita",
+            manufacturer: "Sony",
+            year: 2012,
+            img: "PlayStation-Vita-1101-FL",
+            link: "https://en.wikipedia.org/wiki/PlayStation_Vita",
+        },
+        {
+            type: "handheld",
+            raw_orig_price: 179,
+            name: "Atari Lynx",
+            manufacturer: "Atari",
+            year: 1989,
+            img: "Atari-Lynx-Handheld-Angled",
+            link: "https://en.wikipedia.org/wiki/Atari_Lynx",
+        },
+        {
+            type: "handheld",
+            raw_orig_price: 149,
+            name: "Sega Game Gear",
+            manufacturer: "Sega",
+            year: 1991,
+            img: "Game-Gear-Handheld",
+            link: "https://en.wikipedia.org/wiki/Game_gear",
+        },
+        {
+            type: "handheld",
+            raw_orig_price: 180,
+            name: "Sega Nomad",
+            manufacturer: "Sega",
+            year: 1995,
+            img: "Sega-Nomad-Front",
+            link: "https://en.wikipedia.org/wiki/Sega_Nomad",
+        },
+        {
+            type: "handheld",
+            raw_orig_price: 249,
+            name: "TurboExpress",
+            manufacturer: "NEC",
+            year: 1990,
+            img: "NEC-TurboExpress-Upright-FL",
+            link: "https://en.wikipedia.org/wiki/TurboExpress",
+        },
+        {
+            type: "handheld",
+            raw_orig_price: 69,
+            name: "Game.com",
+            name: "Tiger",
+            year: 1997,
+            img: "Tiger-Game-Com-FL",
+            link: "https://en.wikipedia.org/wiki/Game.com",
+        },
+        {
+            type: "handheld",
+            raw_orig_price: 69,
+            name: "Neo Geo Pocket",
+            manufacturer: "SNK",
+            year: 1999,
+            img: "Neo-Geo-Pocket-Anthra-Left",
+            link: "https://en.wikipedia.org/wiki/NeoGeo_Pocket",
+        },
+        /*
+        Appears to have been Japan only
+        {
+            type: "handheld",
+            raw_orig_price: ???,
+            name: "WonderSwan",
+            manufacturer: "Bandai",
+            year: 1999,
+            img: "",
+            link: "",
+        },
+        */
+        {
+            type: "handheld",
+            raw_orig_price: 299,
+            name: "N-Gage",
+            manufacturer: "Nokia",
+            year: 2003,
+            img: "Nokia-NGage-LL",
+            link: "https://en.wikipedia.org/wiki/N-Gage_(device)",
+        }
     ],
 }
 

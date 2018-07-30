@@ -57,10 +57,10 @@
 <div class="container hide-without-js">
     <div class="row justify-content-end filter-row">
         <div class="col-md-4 pt-2 pr-2 pl-2">
-            <select id="include-consoles" class="custom-select">
-                <option value="1" selected>Home Consoles</option>
-                <option value="2">Portables</option>
-                <option value="3">All</option>
+            <select id="filter-type" class="custom-select">
+                <option value="all" selected>All Consoles</option>
+                <option value="home">Home Consoles</option>
+                <option value="handheld">Handheld Consoles</option>
             </select>
         </div>
         <div class="col-md-6 pt-2 pr-2 pl-2">
@@ -91,6 +91,7 @@
   <div id="console-list" class="row console-row">
     {{#each data}} 
     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 p-2"
+        data-type="{{type}}"
         data-name="{{name}}"
         data-year="{{year}}"
         data-orig-price="{{raw_orig_price}}"
@@ -185,15 +186,30 @@
             }
         });
 
-        var filter = document.getElementById("filter").value.toLocaleLowerCase();
+        var filter_type = document.getElementById("filter-type").value;
         nodes.forEach(function (e) {
-            if (filter === "") {
+            if (filter_type === "all") {
                 e.classList.remove("d-none");
-            } else {
-                if (e.getAttribute("data-name").toLocaleLowerCase().includes(filter) ||
-                    e.getAttribute("data-manufacturer").toLocaleLowerCase().includes(filter)) {
+            } else if (filter_type === "home") {
+                if (e.getAttribute("data-type") === "home" || e.getAttribute("data-type") === "hybrid") {
                     e.classList.remove("d-none");
                 } else {
+                    e.classList.add("d-none");
+                }
+            } else if (filter_type === "handheld") {
+                if (e.getAttribute("data-type") === "handheld" || e.getAttribute("data-type") === "hybrid") {
+                    e.classList.remove("d-none");
+                } else {
+                    e.classList.add("d-none");
+                }
+            }
+        });
+
+        var filter = document.getElementById("filter").value.toLocaleLowerCase();
+        nodes.forEach(function (e) {
+            if (filter !== "") {
+                if (!e.getAttribute("data-name").toLocaleLowerCase().includes(filter) &&
+                    !e.getAttribute("data-manufacturer").toLocaleLowerCase().includes(filter)) {
                     e.classList.add("d-none");
                 }
             }
@@ -202,6 +218,7 @@
         nodes.forEach(function(e) { consoleList.appendChild(e); })
     };
 
+    document.querySelector("#filter-type").addEventListener("change", function(event) { doSort(); });
     document.querySelector("#sort-by").addEventListener("change", function(event) { doSort(); });
     document.querySelector("#sort-order").addEventListener("change", function(event) { doSort(); });
 
