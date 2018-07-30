@@ -37,6 +37,15 @@
         .console-row {
             text-align: center;
         }
+        .custom-select {
+            /* width: auto; */
+        }
+        .filter-row {
+            text-align: right;
+        }
+        .hide-without-js {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -45,10 +54,48 @@
     <h1>Console prices adjusted for inflation</h1>
 </header>
 
+<div class="container hide-without-js">
+    <div class="row justify-content-end filter-row">
+        <div class="col-md-4 pt-2 pr-2 pl-2">
+            <select id="include-consoles" class="custom-select">
+                <option value="1" selected>Home Consoles</option>
+                <option value="2">Portables</option>
+                <option value="3">All</option>
+            </select>
+        </div>
+        <div class="col-md-6 pt-2 pr-2 pl-2">
+            <div class="row">
+                <div class="col-6 pr-1">
+                    <select id="sort-by" class="custom-select">
+                        <option value="year" selected>Year</option>
+                        <option value="price">Today's Price</option>
+                        <option value="orig-price">Original Price</option>
+                        <option value="manufacturer">Manufacturer</option>
+                    </select>
+                </div>
+                <div class="col-6 pl-2">
+                    <select id="sort-order" class="custom-select">
+                        <option value="asc" selected>Ascending</option>
+                        <option value="desc">Descending</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2 pt-2 pr-2 pl-2">
+            <input id="filter" type="text" class="form-control" placeholder="Filter">
+        </div>
+    </div>
+</div>
+
 <div class="container">
-  <div class="row console-row">
+  <div id="console-list" class="row console-row">
     {{#each data}} 
-    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 p-2">
+    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 p-2"
+        data-name="{{name}}"
+        data-year="{{year}}"
+        data-orig-price="{{raw_orig_price}}"
+        data-price="{{raw_price}}"
+        data-manufacturer="{{manufacturer}}">
         <div class="console-container shadow p-2 bg-white rounded h-100">
         <a href="{{link}}">
             <picture>
@@ -99,4 +146,75 @@
 </footer>
 
 </body>
+<script>
+    // Un-hide all the stuff that only works when JavaScript is enabled.
+    document.querySelectorAll(".hide-without-js").forEach(function(el) {
+        el.classList.remove("hide-without-js");
+    });
+
+    var doSort = function() {
+        var order = document.querySelector("#sort-order").value === "asc" ? 1 : -1;
+
+        var sortFunc;
+        var sortBy = document.querySelector("#sort-by").value;
+        if (sortBy === "year") {
+            sortFunc = function(a, b) { return a.getAttribute("data-year") - b.getAttribute("data-year"); }
+        } else if (sortBy === "manufacturer") {
+            sortFunc = function(a, b) {
+                var val = a.getAttribute("data-manufacturer").localeCompare(b.getAttribute("data-manufacturer"));
+                if (val === 0) {
+                    return a.getAttribute("data-year") - b.getAttribute("data-year");
+                } else {
+                    return val;
+                }
+            }
+        } else if (sortBy === "orig-price") {
+            sortFunc = function(a, b) { return a.getAttribute("data-orig-price") - b.getAttribute("data-orig-price"); }
+        } else if (sortBy === "price") {
+            sortFunc = function(a, b) { return a.getAttribute("data-price") - b.getAttribute("data-price"); }
+        }
+
+        var consoleList = document.querySelector("#console-list");
+        var nodes = Array.from(consoleList.children);
+        nodes.sort(function(a, b) {
+            var val = sortFunc(a, b);
+            if (val === 0) {
+                return order * a.getAttribute("data-name").localeCompare(b.getAttribute("data-name"));
+            } else {
+                return order * val;
+            }
+        });
+
+        var filter = document.getElementById("filter").value.toLocaleLowerCase();
+        nodes.forEach(function (e) {
+            if (filter === "") {
+                e.classList.remove("d-none");
+            } else {
+                if (e.getAttribute("data-name").toLocaleLowerCase().includes(filter) ||
+                    e.getAttribute("data-manufacturer").toLocaleLowerCase().includes(filter)) {
+                    e.classList.remove("d-none");
+                } else {
+                    e.classList.add("d-none");
+                }
+            }
+        })
+
+        nodes.forEach(function(e) { consoleList.appendChild(e); })
+    };
+
+    document.querySelector("#sort-by").addEventListener("change", function(event) { doSort(); });
+    document.querySelector("#sort-order").addEventListener("change", function(event) { doSort(); });
+
+    var timeout = null;
+    document.querySelector("#filter").addEventListener("input", function(event) {
+        if (timeout) {
+            clearTimeout(timeout);
+            timeout = null;
+        }
+        timeout = setTimeout(function() { timeout = null; doSort(); }, 250);
+    });
+
+</script>
+<script src="js/jquery.slim.min.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
 </html>

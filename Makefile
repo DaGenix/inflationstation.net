@@ -1,7 +1,7 @@
 DEST := out
 
 .PHONY: all
-all: convert-images build-html copy-css $(DEST)/favicon.ico
+all: convert-images build-html copy-css copy-js $(DEST)/favicon.ico
 
 IMG := $(patsubst %,img/%-200.jpg, $(basename $(wildcard src/img/*)))
 IMG := $(IMG) $(patsubst %,img/%-400.jpg, $(basename $(wildcard src/img/*)))
@@ -80,6 +80,17 @@ $(DEST)/css/bootstrap.min.css: node_modules/bootstrap/dist/css/bootstrap.min.css
 
 .PHONY: copy-css
 copy-css: $(DEST)/css/bootstrap.min.css
+
+$(DEST)/js/bootstrap.bundle.min.js: node_modules/bootstrap/dist/js/bootstrap.bundle.min.js
+	@mkdir -p $(DEST)/js/
+	@cp $< $@
+
+$(DEST)/js/jquery.slim.min.js: node_modules/jquery/dist/jquery.slim.min.js
+	@mkdir -p $(DEST)/js/
+	@cp $< $@
+
+.PHONY: copy-js
+copy-js: $(DEST)/js/bootstrap.bundle.min.js $(DEST)/js/jquery.slim.min.js
 
 .PHONY: dist
 dist: clean-dist all
