@@ -12,7 +12,7 @@ if (!fs.existsSync("dist")) {
 
 let html = fs.readFileSync(path.join(SOURCE, "index.html"), {encoding: "utf-8"});
 
-const input_files = glob.sync("img/*", {cwd: SOURCE}).concat(glob.sync("css/*", {cwd: SOURCE}));
+const input_files = glob.sync("img/*", {cwd: SOURCE}).concat(glob.sync("css/*", {cwd: SOURCE})).concat(glob.sync("js/*", {cwd: SOURCE}));
 for (file of input_files) {
     const p = path.parse(file);
 
