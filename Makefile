@@ -89,8 +89,16 @@ $(DEST)/js/jquery.slim.min.js: node_modules/jquery/dist/jquery.slim.min.js
 	@mkdir -p $(DEST)/js/
 	@cp $< $@
 
+$(DEST)/js/main.min.js: src/js/main.js
+	@mkdir -p $(DEST)/js/
+	curl -s -L https://closure-compiler.appspot.com/compile \
+		--data-urlencode js_code@src/js/main.js \
+		-d compilation_level=ADVANCED_OPTIMIZATIONS \
+		-d output_format=text \
+		-d output_info=compiled_code > $@
+
 .PHONY: copy-js
-copy-js: $(DEST)/js/bootstrap.bundle.min.js $(DEST)/js/jquery.slim.min.js
+copy-js: $(DEST)/js/bootstrap.bundle.min.js $(DEST)/js/jquery.slim.min.js $(DEST)/js/main.min.js
 
 .PHONY: dist
 dist: clean-dist all
