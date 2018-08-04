@@ -148,11 +148,11 @@
 </footer>
 
 </body>
+
+
+<!-- Un-hide all the stuff that only works when JavaScript is enabled. -->
+<script>document.querySelectorAll(".hide-without-js").forEach(function(e){e.classList.remove("hide-without-js");});</script>
 <script>
-    // Un-hide all the stuff that only works when JavaScript is enabled.
-    document.querySelectorAll(".hide-without-js").forEach(function(el) {
-        el.classList.remove("hide-without-js");
-    });
 
     var doSort = function() {
         var order = document.querySelector("#sort-order").value === "asc" ? 1 : -1;
