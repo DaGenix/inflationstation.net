@@ -192,9 +192,11 @@ async function processDeps(dest, devMode, deps) {
 
 function buildHtml(basePath, template, context, depMap) {
     let hb = Handlebars.create();
+    let inlineStyleHashes = [], inlineScriptHashes = [];
 
     hb.registerHelper("inlineStyles", function() {
         let s = depMap.inlineStyles.pop();
+        inlineStyleHashes.push(crypto.createHash("sha256").update(s).digest("base64"));
         return new hb.SafeString("<style>" + hb.escapeExpression(s) + "</style>");
     });
     hb.registerHelper("styles", function() {
@@ -212,6 +214,7 @@ function buildHtml(basePath, template, context, depMap) {
         content = content.replace(/<\!--/g, "<\\!--");
         content = content.replace(/<script/g, "<\\script");
         content = content.replace(/<\/script/g, "<\\/script");
+        inlineScriptHashes.push(crypto.createHash("sha256").update(content).digest("base64"));
         return new hb.SafeString("<script>" + content + "</script>");
     });
     hb.registerHelper("scripts", function() {
@@ -222,7 +225,11 @@ function buildHtml(basePath, template, context, depMap) {
         return new hb.SafeString(buffer.join(""));
     });
 
-    return hb.compile(template)(context);
+    return {
+        html: hb.compile(template)(context),
+        inlineStyleHashses: inlineStyleHashes,
+        inlineScriptHashses: inlineScriptHashes,
+    };
 }
 
 module.exports = async function(templatePath, context, dest, devMode=true) {
@@ -236,12 +243,14 @@ module.exports = async function(templatePath, context, dest, devMode=true) {
 
     let deps = findDeps(basePath, template, context);
     let depMap = await processDeps(dest, devMode, deps);
-    let html = buildHtml(basePath, template, context, depMap);
+    let result = buildHtml(basePath, template, context, depMap);
 
     if (!devMode) {
-        html = htmlMinify(html, {
+        result.html = htmlMinify(result.html, {
             removeComments: true,
             collapseWhitespace: true,});
     }
-    await writeFile(path.join(dest, "index.html"), html);
+    await writeFile(path.join(dest, "index.html"), result.html);
+
+    return result;
 }

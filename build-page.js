@@ -439,7 +439,7 @@ for (data of DATA.data) {
 }
 
 async function main() {
-    await templater("index.hbs", DATA, destDir, devMode).catch((err) => console.log(err));
+    let templateResult = await templater("index.hbs", DATA, destDir, devMode);
 
     if (process.argv[2] == "upload") {
         const BUCKET = "inflationstation.net";
@@ -469,21 +469,34 @@ async function main() {
             if (f.endsWith("html")) {
                 contentType = "text/html";
                 cacheControl = "max-age=600";
+                let styleHashes = templateResult.inlineStyleHashses.map((x) => "'sha256-" + x + "'").join(" ");
+                let scriptHashes = templateResult.inlineScriptHashses.map((x) => "'sha256-" + x + "'").join(" ");
+                meta = {
+                    "Content-Security-Policy": "default-src 'self'; img-src 'self' data:; script-src 'self' " + scriptHashes + "; style-src 'self' " + styleHashes,
+                    "X-Content-Type-Options": "nosniff",
+                    "X-Frame-Options": "DENY",
+                    "X-XSS-Protection": "1; mode=block",
+                };
             } else if (f.endsWith(".ico")) {
                 contentType = "image/vnd.microsoft.icon";
                 cacheControl = "max-age=86400";
+                meta = {};
             } else if (f.endsWith(".jpg")) {
                 contentType = "image/jpeg";
                 cacheControl = "max-age=31536000";
+                meta = {};
             } else if (f.endsWith(".webp")) {
                 contentType = "image/webp";
                 cacheControl = "max-age=31536000";
+                meta = {};
             } else if (f.endsWith(".js")) {
                 contentType = "application/javascript";
                 cacheControl = "max-age=31536000";
+                meta = {};
             } else if (f.endsWith(".css")) {
                 contentType = "text/css";
                 cacheControl = "max-age=31536000";
+                meta = {};
             } else {
                 throw "Can't figure out content type or cache-control";
             }
@@ -496,6 +509,7 @@ async function main() {
                     Key: f,
                     CacheControl: cacheControl,
                     ContentType: contentType,
+                    Metadata: meta,
                 }).promise();
             } else {
                 console.log("Already uploaded: " + f);
