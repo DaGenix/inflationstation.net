@@ -196,8 +196,10 @@ function buildHtml(basePath, template, context, depMap) {
 
     hb.registerHelper("inlineStyles", function() {
         let s = depMap.inlineStyles.pop();
-        inlineStyleHashes.push(crypto.createHash("sha256").update(s).digest("base64"));
-        return new hb.SafeString("<style>" + hb.escapeExpression(s) + "</style>");
+        let content = hb.escapeExpression(s);
+        content = content.trim();
+        inlineStyleHashes.push(crypto.createHash("sha256").update(content).digest("base64"));
+        return new hb.SafeString("<style>" + content + "</style>");
     });
     hb.registerHelper("styles", function() {
         let buffer = [];
@@ -214,6 +216,7 @@ function buildHtml(basePath, template, context, depMap) {
         content = content.replace(/<\!--/g, "<\\!--");
         content = content.replace(/<script/g, "<\\script");
         content = content.replace(/<\/script/g, "<\\/script");
+        content = content.trim();
         inlineScriptHashes.push(crypto.createHash("sha256").update(content).digest("base64"));
         return new hb.SafeString("<script>" + content + "</script>");
     });
