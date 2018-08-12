@@ -83,6 +83,10 @@ dev: convert-images $(DEV)/favicon.ico
 dist: clean-dist convert-images $(DIST)/favicon.ico
 	node build-page.js dist
 
+.PHONY: upload
+upload: clean-dist convert-images $(DIST)/favicon.ico
+	node build-page.js upload
+
 .PHONY: clean
 clean: clean-dist
 	@rm -rf out

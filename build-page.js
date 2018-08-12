@@ -1,10 +1,17 @@
 const inflation = require("us-inflation");
 const templater = require("./templater");
+const fs = require('fs');
+const path = require('path');
+const AWS = require('aws-sdk');
+const glob = require('glob');
+const util = require("util");
+
+const readFile = util.promisify(fs.readFile);
 
 if (process.argv[2] == "dev") {
     devMode = true;
     destDir = "out";
-} else if (process.argv[2] == "dist") {
+} else if (process.argv[2] == "dist" || process.argv[2] == "upload") {
     devMode = false;
     destDir = "dist";
 }
@@ -431,4 +438,70 @@ for (data of DATA.data) {
     data.img1600Jpeg = "gen/img/" + data.img + "-1600.jpg";
 }
 
-templater("index.hbs", DATA, destDir, devMode).catch((err) => console.log(err));
+async function main() {
+    await templater("index.hbs", DATA, destDir, devMode).catch((err) => console.log(err));
+
+    if (process.argv[2] == "upload") {
+        const BUCKET = "inflationstation.net";
+
+        AWS.config.credentials = new AWS.SharedIniFileCredentials({profile: 'personal-account'});
+
+        let s3 = new AWS.S3();
+        for (f of await util.promisify(glob)("**", {nodir: true, cwd: "dist"})) {
+
+            let doUpload = false;
+            if (f.endsWith("index.html") || f.endsWith("favicon.ico")) {
+                doUpload = true;
+            } else {
+                try {
+                    await s3.headObject({Bucket: BUCKET, Key: f}).promise();
+                } catch (err) {
+                    if (err.code === "NotFound") {
+                        doUpload = true;
+                    } else {
+                        throw err;
+                    }
+                }
+            }
+
+            let contentType;
+            let cacheControl;
+            if (f.endsWith("html")) {
+                contentType = "text/html";
+                cacheControl = "max-age=600";
+            } else if (f.endsWith(".ico")) {
+                contentType = "image/vnd.microsoft.icon";
+                cacheControl = "max-age=86400";
+            } else if (f.endsWith(".jpg")) {
+                contentType = "image/jpeg";
+                cacheControl = "max-age=31536000";
+            } else if (f.endsWith(".webp")) {
+                contentType = "image/webp";
+                cacheControl = "max-age=31536000";
+            } else if (f.endsWith(".js")) {
+                contentType = "application/javascript";
+                cacheControl = "max-age=31536000";
+            } else if (f.endsWith(".css")) {
+                contentType = "text/css";
+                cacheControl = "max-age=31536000";
+            } else {
+                throw "Can't figure out content type or cache-control";
+            }
+
+            if (doUpload) {
+                console.log("Uploading: " + f);
+                await s3.putObject({
+                    Body: await readFile(path.join("dist", f)),
+                    Bucket: BUCKET, 
+                    Key: f,
+                    CacheControl: cacheControl,
+                    ContentType: contentType,
+                }).promise();
+            } else {
+                console.log("Already uploaded: " + f);
+            }
+        }
+    }
+}
+
+main().catch((err) => console.log(err));
