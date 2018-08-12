@@ -79,14 +79,6 @@ $(DIST)/favicon.ico: src/ico/favicon.ico
 dev: convert-images $(DEV)/favicon.ico
 	node build-page.js dev
 
-# $(DEST)/js/main.min.js: src/js/main.js
-# 	@mkdir -p $(DEST)/js/
-# 	curl -s -L https://closure-compiler.appspot.com/compile \
-# 		--data-urlencode js_code@src/js/main.js \
-# 		-d compilation_level=ADVANCED_OPTIMIZATIONS \
-# 		-d output_format=text \
-# 		-d output_info=compiled_code > $@
-
 .PHONY: dist
 dist: clean-dist convert-images $(DIST)/favicon.ico
 	node build-page.js dist
