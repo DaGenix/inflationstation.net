@@ -3,6 +3,9 @@ const glob = require('glob');
 const crypto = require('crypto');
 const path = require('path');
 
+const Purgecss = require("purgecss");
+const purgeHtml = require("purgecss-from-html");
+
 const SOURCE = "out";
 const DEST = "dist";
 
@@ -34,6 +37,19 @@ for (file of input_files) {
     }
     fs.copyFileSync(path.join(SOURCE, file), path.join(DEST, p.dir, name_with_hash));
 }
+
+const cssContent = new Purgecss({
+    content: [path.join(SOURCE, "index.html")],
+    css: [SOURCE + "/css/*.css"],
+    extractors: [
+        {
+            extractor: purgeHtml,
+            extensions: ["html"]
+        }
+    ]
+}).purge();
+const cssDigest = crypto.createHash("sha256").update(cssContent).digest("hex");
+fs.writeFileSync(path.join(DEST, "css", "style-" + cssDigest + ".css"), cssContent, {encoding: "utf-8"});
 
 fs.copyFileSync(path.join(SOURCE, "favicon.ico"), path.join(DEST, "favicon.ico"))
 

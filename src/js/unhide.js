@@ -1,0 +1,1 @@
+document.querySelectorAll(".hide-without-js").forEach(function(e){e.classList.remove("hide-without-js");});

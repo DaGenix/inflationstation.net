@@ -1,8 +1,16 @@
-const fs = require('fs');
-const hb = require("handlebars");
 const inflation = require("us-inflation");
+const templater = require("./templater");
+
+if (process.argv[2] == "dev") {
+    devMode = true;
+    destDir = "out";
+} else if (process.argv[2] == "dist") {
+    devMode = false;
+    destDir = "dist";
+}
 
 const DATA = {
+    devMode: devMode,
     inflation_year: 2017,
     data: [
         {
@@ -410,10 +418,17 @@ for (data of DATA.data) {
     data.raw_price = Math.round(inflation({year: data.year, amount: data.raw_orig_price}, {year: DATA.inflation_year}));
     data.price = data.raw_price.toLocaleString();
     data.orig_price = data.raw_orig_price.toLocaleString()
+
+    data.img200Webp = "gen/img/" + data.img + "-200.webp";
+    data.img400Webp = "gen/img/" + data.img + "-400.webp";
+    data.img600Webp = "gen/img/" + data.img + "-600.webp";
+    data.img800Webp = "gen/img/" + data.img + "-800.webp";
+    data.img1600Webp = "gen/img/" + data.img + "-1600.webp";
+    data.img200Jpeg = "gen/img/" + data.img + "-200.jpg";
+    data.img400Jpeg = "gen/img/" + data.img + "-400.jpg";
+    data.img600Jpeg = "gen/img/" + data.img + "-600.jpg";
+    data.img800Jpeg = "gen/img/" + data.img + "-800.jpg";
+    data.img1600Jpeg = "gen/img/" + data.img + "-1600.jpg";
 }
 
-const template = fs.readFileSync("index.hbs", {encoding: "utf-8"});
-
-const html = hb.compile(template)(DATA)
-
-fs.writeFileSync(process.argv[2], html, {encoding: "utf-8"});
+templater("index.hbs", DATA, destDir, devMode).catch((err) => console.log(err));

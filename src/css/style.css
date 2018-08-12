@@ -1,0 +1,42 @@
+body {
+    background-color: #f1f1f1;
+}
+header {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    text-align: center;
+    color: white;
+    background-color: #6c4d70;
+    box-shadow: 0 .25rem 0.25rem rgba(0,0,0,.15);
+}
+footer {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    color: white;
+    background-color: #777777;
+    box-shadow: 0 -.25rem 0.25rem rgba(0,0,0,.15);
+    margin-top: 1rem;
+}
+footer a {
+    color: white;
+    text-decoration: underline;
+    font-weight: 600;
+}
+footer a:hover {
+    color: white;
+}
+.console-row {
+    text-align: center;
+}
+.custom-select {
+    /* width: auto; */
+}
+.filter-row {
+    text-align: right;
+}
+.hide-without-js {
+    display: none;
+}
+.price {
+
+}

@@ -6,48 +6,12 @@
     <title>Console prices adjusted for inflation</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="Description" content="Console prices adjusted for inflation">
-    <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css" />
+    {{#if devMode}}
+        {{styles "node_modules/bootstrap/dist/css/bootstrap.min.css" "src/css/style.css"}}
+    {{else}}
+        {{inlineStyles "node_modules/bootstrap/dist/css/bootstrap.min.css" "src/css/style.css"}}
+    {{/if}}
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <style>
-        body {
-            background-color: #f1f1f1;
-        }
-        header {
-            padding-top: 2rem;
-            padding-bottom: 2rem;
-            text-align: center;
-            color: white;
-            background-color: #6c4d70;
-            box-shadow: 0px 2px 5px rgb(192, 192, 192);
-        }
-        footer {
-            padding-top: 2rem;
-            padding-bottom: 2rem;
-            color: white;
-            background-color: #777777;
-            box-shadow: 0px -2px 5px rgb(192, 192, 192);
-        }
-        footer a {
-            color: white;
-            text-decoration: underline;
-            font-weight: 600;
-        }
-        footer a:hover {
-            color: white;
-        }
-        .console-row {
-            text-align: center;
-        }
-        .custom-select {
-            /* width: auto; */
-        }
-        .filter-row {
-            text-align: right;
-        }
-        .hide-without-js {
-            display: none;
-        }
-    </style>
 </head>
 <body>
 
@@ -87,6 +51,7 @@
         </div>
     </div>
 </div>
+{{inlineScripts "src/js/unhide.js"}}
 
 <div class="container">
   <div id="console-list" class="row console-row">
@@ -102,27 +67,23 @@
         <a href="{{link}}">
             <picture>
                 <source srcset="
-                    img/{{img}}-200.webp 200w,
-                    img/{{img}}-400.webp 400w,
-                    img/{{img}}-600.webp 600w,
-                    img/{{img}}-800.webp 800w,
-                    img/{{img}}-1600.webp 1600w"
-                    sizes="
-                    (max-width: 576px) 80vw,
-                    200px"
+                    {{imgName img200Webp}} 200w,
+                    {{imgName img400Webp}} 400w,
+                    {{imgName img600Webp}} 600w,
+                    {{imgName img800Webp}} 800w,
+                    {{imgName img1600Webp}} 1600w"
+                    sizes=" (max-width: 576px) 80vw, 200px"
                     type="image/webp">
                 <img class="console-img"
                     alt="Picture of {{name}}"
                     srcset="
-                    img/{{img}}-200.jpg 200w,
-                    img/{{img}}-400.jpg 400w,
-                    img/{{img}}-600.jpg 600w,
-                    img/{{img}}-800.jpg 800w,
-                    img/{{img}}-1600.jpg 1600w"
-                    sizes="
-                    (max-width: 576px) 70vw,
-                    200px"
-                    src="img/{{img}}-200.jpg" />
+                    {{imgName img200Jpeg}} 200w,
+                    {{imgName img400Jpeg}} 400w,
+                    {{imgName img600Jpeg}} 600w,
+                    {{imgName img800Jpeg}} 800w,
+                    {{imgName img1600Jpeg}} 1600w"
+                    sizes="(max-width: 576px) 70vw, 200px"
+                    src="{{imgName img200Jpeg}}" />
             </picture>
         </a>
         <ul class="list-unstyled">
@@ -150,9 +111,11 @@
 </body>
 
 
+{{scripts "src/js/main.js"}}
+
 <!-- Un-hide all the stuff that only works when JavaScript is enabled. -->
-<script>document.querySelectorAll(".hide-without-js").forEach(function(e){e.classList.remove("hide-without-js");});</script>
-<script src="js/jquery.slim.min.js" async></script>
-<script src="js/bootstrap.bundle.min.js" async></script>
-<script src="js/main.min.js" async></script>
+{{!-- <script>document.querySelectorAll(".hide-without-js").forEach(function(e){e.classList.remove("hide-without-js");});</script> --}}
+{{!-- <script src="js/jquery.slim.min.js" async></script>
+<script src="js/bootstrap.bundle.min.js" async></script> --}}
+{{!-- <script src="js/main.min.js" async></script> --}}
 </html>
