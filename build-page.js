@@ -442,7 +442,7 @@ async function main() {
     let templateResult = await templater("index.hbs", DATA, destDir, devMode);
 
     if (process.argv[2] == "upload") {
-        const BUCKET = "inflationstation.net";
+        const BUCKET = "www.inflationstation.net";
 
         AWS.config.credentials = new AWS.SharedIniFileCredentials({profile: 'personal-account'});
 
