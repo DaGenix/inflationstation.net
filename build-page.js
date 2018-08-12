@@ -360,7 +360,7 @@ const DATA = {
             type: "handheld",
             raw_orig_price: 69,
             name: "Game.com",
-            name: "Tiger",
+            manufacturer: "Tiger",
             year: 1997,
             img: "Tiger-Game-Com-FL",
             link: "https://en.wikipedia.org/wiki/Game.com",
