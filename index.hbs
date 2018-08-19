@@ -20,78 +20,78 @@
     <h1>Console prices adjusted for inflation</h1>
 </header>
 
-<div class="container hide-without-js">
-    <div class="row justify-content-end filter-row">
-        <div class="col-md-4 pt-2 pr-2 pl-2">
-            <select id="filter-type" class="custom-select">
-                <option value="all" selected>All Consoles</option>
-                <option value="home">Home Consoles</option>
-                <option value="handheld">Handheld Consoles</option>
-            </select>
-        </div>
-        <div class="col-md-6 pt-2 pr-2 pl-2">
-            <div class="row">
-                <div class="col-6 pr-1">
-                    <select id="sort-by" class="custom-select">
-                        <option value="year" selected>Year</option>
-                        <option value="price">Today's Price</option>
-                        <option value="orig-price">Original Price</option>
-                        <option value="manufacturer">Manufacturer</option>
-                    </select>
-                </div>
-                <div class="col-6 pl-2">
-                    <select id="sort-order" class="custom-select">
-                        <option value="asc" selected>Ascending</option>
-                        <option value="desc">Descending</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-2 pt-2 pr-2 pl-2">
-            <input id="filter" type="text" class="form-control" placeholder="Filter">
-        </div>
+<div id="filterbar" class="hide-without-js container mt-1">
+    <div id="filterbar-filter">
+        <label for="filter" class="sr-only">Filter</label>
+        <input id="filter" type="text" placeholder="Filter">
+    </div>
+
+    <div id="filterbar-include">
+        <label for="filter-type" class="ml-md-1" >Include:</label>
+        <select id="filter-type">
+            <option value="all" selected>All</option>
+            <option value="home">Home</option>
+            <option value="handheld">Handheld</option>
+        </select>
+    </div>
+
+    <div id="filterbar-order">
+        <label for="sort-by" class="ml-md-1" >Order By:</label>
+        <select id="sort-by">
+            <option value="year" selected>Year</option>
+            <option value="price">Today's Price</option>
+            <option value="orig-price">Original Price</option>
+            <option value="manufacturer">Manufacturer</option>
+        </select>
+
+        <label for="sort-order" class="sr-only">Sort Order:</label>
+        <select id="sort-order">
+            <option value="asc" selected>Ascending</option>
+            <option value="desc">Descending</option>
+        </select>
     </div>
 </div>
+
 {{inlineScripts "src/js/unhide.js"}}
 
 <div class="container">
   <div id="console-list" class="row console-row">
     {{#each data}} 
-    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 p-2"
+    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 console-item"
         data-type="{{type}}"
         data-name="{{name}}"
         data-year="{{year}}"
         data-orig-price="{{raw_orig_price}}"
         data-price="{{raw_price}}"
         data-manufacturer="{{manufacturer}}">
-        <div class="console-container shadow p-2 bg-white rounded h-100">
-        <a href="{{link}}">
-            <picture>
-                <source srcset="
-                    {{imgName img200Webp}} 200w,
-                    {{imgName img400Webp}} 400w,
-                    {{imgName img600Webp}} 600w,
-                    {{imgName img800Webp}} 800w,
-                    {{imgName img1600Webp}} 1600w"
-                    sizes=" (max-width: 576px) 80vw, 200px"
-                    type="image/webp">
-                <img class="console-img"
-                    alt="Picture of {{name}}"
-                    srcset="
-                    {{imgName img200Jpeg}} 200w,
-                    {{imgName img400Jpeg}} 400w,
-                    {{imgName img600Jpeg}} 600w,
-                    {{imgName img800Jpeg}} 800w,
-                    {{imgName img1600Jpeg}} 1600w"
-                    sizes="(max-width: 576px) 70vw, 200px"
-                    src="{{imgName img200Jpeg}}" />
-            </picture>
-        </a>
-        <ul class="list-unstyled">
-            <li><h1>${{price}}</h1></li>
-            <li>{{name}} ({{year}})</li>
-            <li>Original Price: ${{orig_price}}</li>
-        </ul>
+        <div class="shadow bg-white rounded h-100 console-content">
+            <a href="{{link}}">
+                <picture>
+                    <source srcset="
+                        {{imgName img200Webp}} 200w,
+                        {{imgName img400Webp}} 400w,
+                        {{imgName img600Webp}} 600w,
+                        {{imgName img800Webp}} 800w,
+                        {{imgName img1600Webp}} 1600w"
+                        sizes=" (max-width: 576px) 80vw, 200px"
+                        type="image/webp">
+                    <img class="console-img"
+                        alt="Picture of {{name}}"
+                        srcset="
+                        {{imgName img200Jpeg}} 200w,
+                        {{imgName img400Jpeg}} 400w,
+                        {{imgName img600Jpeg}} 600w,
+                        {{imgName img800Jpeg}} 800w,
+                        {{imgName img1600Jpeg}} 1600w"
+                        sizes="(max-width: 576px) 70vw, 200px"
+                        src="{{imgName img200Jpeg}}" />
+                </picture>
+            </a>
+            <ul class="list-unstyled">
+                <li><h1>${{price}}</h1></li>
+                <li>{{name}} ({{year}})</li>
+                <li>Original Price: ${{orig_price}}</li>
+            </ul>
         </div>
     </div>
     {{/each}}
