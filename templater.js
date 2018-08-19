@@ -195,9 +195,11 @@ function buildHtml(basePath, template, context, depMap) {
     let inlineStyleHashes = [], inlineScriptHashes = [];
 
     hb.registerHelper("inlineStyles", function() {
-        let s = depMap.inlineStyles.pop();
-        let content = hb.escapeExpression(s);
+        let content = depMap.inlineStyles.pop();
         content = content.trim();
+        content = content.replace(/<\!--/g, "<\\21--");
+        content = content.replace(/<style/g, "<\\73tyle");
+        content = content.replace(/<\/style/g, "<\\2Fstyle");
         inlineStyleHashes.push(crypto.createHash("sha256").update(content).digest("base64"));
         return new hb.SafeString("<style>" + content + "</style>");
     });
