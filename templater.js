@@ -102,16 +102,16 @@ function findDeps(basePath, template, context) {
         return "";
     });
 
-    result.inlineStyles.reverse();
-    result.styles.reverse();
-    result.inlineScripts.reverse();
-    result.scripts.reverse();
-
     result.images = result.images.sort().filter((val, index, arr) => {
         return index == 0 || val != arr[index - 1];
     })
 
     result.bareHtml = hb.compile(template)(context);
+
+    result.inlineStyles.reverse();
+    result.styles.reverse();
+    result.inlineScripts.reverse();
+    result.scripts.reverse();
 
     return result;
 }
