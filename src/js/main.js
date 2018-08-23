@@ -71,17 +71,25 @@
 
     (function() {
         var urlParams = new URLSearchParams(window.location.search);
+        var needsSort = false;
         if (urlParams.has("type")) {
             filterTypeElem.value = urlParams.get("type");
+            needsSort = true;
         }
         if (urlParams.has("sort")) {
             sortByElem.value = urlParams.get("sort");
+            needsSort = true;
         }
         if (urlParams.has("order")) {
             sortOrderElem.value = urlParams.get("order");
+            needsSort = true;
         }
         if (urlParams.has("filter")) {
             filterElem.value = urlParams.get("filter");
+            needsSort = true;
+        }
+        if (needsSort) {
+            doSort();
         }
     })();
 
@@ -114,6 +122,4 @@
             timeout = setTimeout(function() { timeout = null; updateLocation(); doSort(); }, 250);
         });
     })();
-
-    doSort();
 })();
