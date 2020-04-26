@@ -10,14 +10,14 @@ const CPIU_DATA = csvParse(fs.readFileSync("cpiu.csv", {encoding: "utf-8"}), {
     columns: true,
     skip_empty_lines: true
 }).reduce((result, currentValue) => {
-        result[currentValue["Year"]] = currentValue["Jan"];
+        result[currentValue["Year"]] = currentValue;
         return result;
     },
     {}
 );
 
-function inflation(fromYear, ammount, toYear) {
-    return ammount / CPIU_DATA[fromYear] * CPIU_DATA[toYear];
+function inflation(fromYear, ammount, toYear, toMonth) {
+    return ammount / CPIU_DATA[fromYear]["Jan"] * CPIU_DATA[toYear][toMonth];
 }
 
 const readFile = util.promisify(fs.readFile);
@@ -33,6 +33,7 @@ if (process.argv[2] == "dev") {
 const DATA = {
     devMode: devMode,
     inflation_year: 2020,
+    inflation_month: "Mar",
     data: [
         {
             type: "home",
@@ -436,7 +437,7 @@ DATA.data.sort((a, b) => {
 });
 
 for (data of DATA.data) {
-    data.raw_price = Math.round(inflation(data.year, data.raw_orig_price, DATA.inflation_year));
+    data.raw_price = Math.round(inflation(data.year, data.raw_orig_price, DATA.inflation_year, DATA.inflation_month));
     data.price = data.raw_price.toLocaleString();
     data.orig_price = data.raw_orig_price.toLocaleString()
 
