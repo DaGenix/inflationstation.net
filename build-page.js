@@ -495,7 +495,7 @@ async function main() {
     if (process.argv[2] == "upload") {
         const BUCKET = "www.inflationstation.net";
 
-        AWS.config.credentials = new AWS.SharedIniFileCredentials({profile: 'personal-account'});
+        AWS.config.credentials = new AWS.SharedIniFileCredentials();
 
         let s3 = new AWS.S3();
         for (f of await util.promisify(glob)("**", {nodir: true, cwd: "dist"})) {
