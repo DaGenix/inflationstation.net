@@ -95,7 +95,7 @@ export default function HomePage(props: HomePageProps) {
                     if (filter === "") {
                         return true;
                     } else {
-                        return item.name.toLowerCase().includes(filter) || item.manufacturer.toLowerCase().includes(filter);
+                        return item.name.toLowerCase().includes(filter.toLowerCase()) || item.manufacturer.toLowerCase().includes(filter.toLowerCase());
                     }
                 })
                 .filter(item => {
