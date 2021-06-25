@@ -163,6 +163,7 @@ export default function HomePage(props: HomePageProps) {
         <>
             <Head>
                 <title>Console prices adjusted for inflation</title>
+                <meta name="description" content="Game console prices adjusted for inflation" />
                 <noscript>
                     <style>
                         {".hide-without-js { display: none !important; }"}
