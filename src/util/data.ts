@@ -33,8 +33,8 @@ interface RawDataType {
 }
 
 const RAW_DATA: RawDataType = {
-    inflation_year: 2020,
-    inflation_month: "Mar",
+    inflation_year: 2021,
+    inflation_month: "May",
     data: [
         {
             type: "home",
