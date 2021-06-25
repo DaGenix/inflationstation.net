@@ -30,7 +30,7 @@ function ConsoleCard(props: ConsoleCardProps) {
                                 ${item.img600Webp} 600w,
                                 ${item.img800Webp} 800w,
                                 ${item.img1600Webp} 1600w
-                                `}
+                                `.replace(/\s+/gs, " ")}
                             sizes="(max-width: 576px) 80vw, 200px"
                             type="image/webp"
                         />
@@ -42,7 +42,7 @@ function ConsoleCard(props: ConsoleCardProps) {
                                  ${item.img600Jpeg} 600w,
                                  ${item.img800Jpeg} 800w,
                                  ${item.img1600Jpeg} 1600w
-                                 `}
+                                 `.replace(/\s+/gs, " ")}
                              sizes="(max-width: 576px) 70vw, 200px"
                              src={item.img200Jpeg}
                         />
