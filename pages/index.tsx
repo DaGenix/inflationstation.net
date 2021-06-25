@@ -59,7 +59,7 @@ function ConsoleCard(props: ConsoleCardProps) {
 }
 
 function setUrl(router, filter, include, orderBy, order) {
-    if (filter === "" && include === "all" && orderBy === "year" && order === "asc") {
+    if (filter === "" && include === "all" && orderBy === "year" && order === "desc") {
         router.replace("/");
     } else {
         const query = new URLSearchParams([
@@ -94,7 +94,7 @@ export default function HomePage(props: HomePageProps) {
     const filter = query.get("filter") || "";
     const include = query.get("include") || "all";
     const orderBy = query.get("orderBy") || "year";
-    const order = query.get("order") || "asc";
+    const order = query.get("order") || "desc";
 
     const [displayFilter, setDisplayFilter] = useState(filter);
 
