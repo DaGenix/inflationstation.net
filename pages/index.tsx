@@ -4,6 +4,7 @@ import {useEffect, useLayoutEffect, useMemo, useState} from "react";
 import Head from "next/head";
 import sleep from "../src/util/sleep";
 import {useRouter} from "next/router";
+import {Box, FormControl, InputLabel, MenuItem, Paper, Select, TextField, useTheme} from "@material-ui/core";
 
 export async function getStaticProps(context) {
     return {
@@ -13,48 +14,47 @@ export async function getStaticProps(context) {
     }
 }
 
-interface ConsoleCardProps {
+type ConsoleCardProps = {
     item: DataItemType,
 }
 
 function ConsoleCard(props: ConsoleCardProps) {
+    const theme = useTheme();
     const {item} = props;
     return (
-        <div className="col-lg-3 col-md-4 col-sm-6 col-xs-12 console-item">
-            <div className="shadow bg-white rounded h-100 console-content">
-                <a href={item.link}>
-                    <picture>
-                        <source srcSet={`
-                                ${item.img200Webp} 200w,
-                                ${item.img400Webp} 400w,
-                                ${item.img600Webp} 600w,
-                                ${item.img800Webp} 800w,
-                                ${item.img1600Webp} 1600w
-                                `.replace(/\s+/gs, " ")}
-                            sizes="(max-width: 576px) 80vw, 200px"
-                            type="image/webp"
-                        />
-                        <img className="console-img"
-                             alt={`Picture of ${item.name}`}
-                             srcSet={`
-                                 ${item.img200Jpeg} 200w,
-                                 ${item.img400Jpeg} 400w,
-                                 ${item.img600Jpeg} 600w,
-                                 ${item.img800Jpeg} 800w,
-                                 ${item.img1600Jpeg} 1600w
-                                 `.replace(/\s+/gs, " ")}
-                             sizes="(max-width: 576px) 70vw, 200px"
-                             src={item.img200Jpeg}
-                        />
-                    </picture>
-                </a>
-                <ul className="list-unstyled">
-                    <li><h1>${item.price}</h1></li>
-                    <li>{item.name} ({item.year})</li>
-                    <li>Original Price: ${item.orig_price}</li>
-                </ul>
-            </div>
-        </div>
+        <Paper sx={{textAlign: "center", p: 1}}>
+            <a href={item.link}>
+                <picture>
+                    <source srcSet={`
+                            ${item.img200Webp} 200w,
+                            ${item.img400Webp} 400w,
+                            ${item.img600Webp} 600w,
+                            ${item.img800Webp} 800w,
+                            ${item.img1600Webp} 1600w
+                            `.replace(/\s+/gs, " ")}
+                        sizes={`(max-width: ${theme.breakpoints.values["sm"]}px) 70vw, 200px`}
+                        type="image/webp"
+                    />
+                    <img
+                         alt={`Picture of ${item.name}`}
+                         srcSet={`
+                             ${item.img200Jpeg} 200w,
+                             ${item.img400Jpeg} 400w,
+                             ${item.img600Jpeg} 600w,
+                             ${item.img800Jpeg} 800w,
+                             ${item.img1600Jpeg} 1600w
+                             `.replace(/\s+/gs, " ")}
+                         sizes={`(max-width: ${theme.breakpoints.values["sm"]}px) 70vw, 200px`}
+                         src={item.img200Jpeg}
+                    />
+                </picture>
+            </a>
+            <Box component="ul" sx={{listStyle: "none", p: 0, m: 0}}>
+                <li><h1>${item.price}</h1></li>
+                <li>{item.name} ({item.year})</li>
+                <li>Original Price: ${item.orig_price}</li>
+            </Box>
+        </Paper>
     );
 }
 
@@ -72,7 +72,28 @@ function setUrl(router, filter, include, orderBy, order) {
     }
 }
 
-interface HomePageProps {
+const FooterLink = (props) => {
+    const {children, ...attribs} = props;
+    return (
+        <Box
+            component="a"
+            sx={{
+                color: "white",
+                textDecoration: "underline",
+                fontWeight: 700,
+                ":hover": {
+                    color: "white",
+                    fontWeight: 700,
+                }
+            }}
+            {...attribs}
+        >
+            {children}
+        </Box>
+    )
+}
+
+type HomePageProps = {
     data: DataType,
 }
 
@@ -162,74 +183,146 @@ export default function HomePage(props: HomePageProps) {
     return (
         <>
             <Head>
-                <title>Console prices adjusted for inflation</title>
+                <title>Console Prices Adjusted for Inflation</title>
                 <meta name="description" content="Game console prices adjusted for inflation" />
                 <noscript>
                     <style>
                         {".hide-without-js { display: none !important; }"}
                     </style>
                 </noscript>
+                <link
+                    rel="stylesheet"
+                    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+                />
             </Head>
 
             <header>
-                <h1>Console prices adjusted for inflation</h1>
+                <Box
+                    sx={{
+                        color: "white",
+                        backgroundColor: "#6c4d70",
+                        textAlign: "center",
+                        py: 2,
+                    }}
+                >
+                    <h1>Console Prices Adjusted for Inflation</h1>
+                </Box>
             </header>
 
-            <main>
-                <div id="filterbar" className="hide-without-js container mt-1">
-                    <div id="filterbar-filter">
-                        <label htmlFor="filter" className="sr-only">Filter</label>
-                        <input type="text" placeholder="Filter" value={displayFilter} onChange={onSetDisplayFilter} />
-                    </div>
+            <Box component="main" sx={{
+                backgroundColor: "#f1f1f1",
+            }}
+            >
+                <Box
+                    className="hide-without-js"
+                    sx={{
+                        pr: 1,
+                        display: "flex",
+                        flexFlow: "row wrap",
+                        justifyContent: "flex-end",
+                        alignItems: "baseline",
+                        gap: 1,
+                    }}
+                >
+                    <TextField
+                        size="small"
+                        margin="dense"
+                        placeholder="Filter"
+                        label="Filter"
+                        value={displayFilter}
+                        onChange={onSetDisplayFilter}
+                    />
+                    <FormControl>
+                        <InputLabel>Type</InputLabel>
+                        <Select
+                            label="Type"
+                            size="small"
+                            margin="dense"
+                            value={include}
+                            onChange={onSetInclude}
+                        >
+                            <MenuItem value="all">All</MenuItem>
+                            <MenuItem value="home">Home</MenuItem>
+                            <MenuItem value="handheld">Handheld</MenuItem>
+                        </Select>
+                    </FormControl>
 
-                    <div id="filterbar-include">
-                        <label htmlFor="filter-type" className="ml-md-1">Include:</label>
-                        <select id="filter-type" value={include} onChange={onSetInclude}>
-                            <option value="all">All</option>
-                            <option value="home">Home</option>
-                            <option value="handheld">Handheld</option>
-                        </select>
-                    </div>
+                    <Box
+                        sx={{
+                            display: "flex",
+                            flexFlow: "row nowrap",
+                            alignItems: "baseline",
+                            gap: 1,
+                        }}
+                    >
+                        <FormControl>
+                            <InputLabel>Sort</InputLabel>
+                            <Select
+                                label="Sort"
+                                size="small"
+                                margin="dense"
+                                value={orderBy}
+                                onChange={onSetOrderBy}
+                            >
+                                <MenuItem value="year">Year</MenuItem>
+                                <MenuItem value="price">Today's Price</MenuItem>
+                                <MenuItem value="orig-price">Original Price</MenuItem>
+                                <MenuItem value="manufacturer">Manufacturer</MenuItem>
+                            </Select>
+                        </FormControl>
 
-                    <div id="filterbar-order">
-                        <label htmlFor="sort-by" className="ml-md-1">Order By:</label>
-                        <select id="sort-by" value={orderBy} onChange={onSetOrderBy}>
-                            <option value="year">Year</option>
-                            <option value="price">Today's Price</option>
-                            <option value="orig-price">Original Price</option>
-                            <option value="manufacturer">Manufacturer</option>
-                        </select>
+                        <FormControl>
+                            <InputLabel>Order</InputLabel>
+                            <Select
+                                label="Order"
+                                size="small"
+                                margin="dense"
+                                value={order}
+                                onChange={onSetAscending}
+                            >
+                                <MenuItem value="asc">Ascending</MenuItem>
+                                <MenuItem value="desc">Descending</MenuItem>
+                            </Select>
+                        </FormControl>
+                    </Box>
+                </Box>
 
-                        <label htmlFor="sort-order" className="sr-only">Sort Order:</label>
-                        <select id="sort-order" value={order} onChange={onSetAscending}>
-                            <option value="asc">Ascending</option>
-                            <option value="desc">Descending</option>
-                        </select>
-                    </div>
-                </div>
+                <Box
+                    sx={{
+                        // width: "100%",
+                        p: 1,
+                        display: "grid",
+                        gridTemplateColumns: {
+                            xs: "1fr",
+                            sm: "repeat(auto-fill, minmax(250px, 1fr))",
+                        },
+                        gap: 1,
+                    }}
+                >
+                    {cards}
+                </Box>
+            </Box>
 
-                <div className="container">
-                    <div id="console-list" className="row console-row">
-                        {cards}
-                    </div>
-                </div>
-            </main>
-
-            <footer>
-                <div className="container">
-                <ul className="list-unstyled">
-                <li>Wii U image by <a href="https://commons.wikimedia.org/w/index.php?curid=23214469">Takimata</a></li>
-                <li>Xbox Series X and Xbox Series S image appear to be stock images, but I'm not sure of the source.</li>
-                <li>PS5 and PS5 Digital Edition images from <a href="https://www.playstation.com/en-us/ps5/">Sony</a></li>
-                <li>All other console images by <a href="https://commons.wikimedia.org/wiki/User:Evan-Amos" title="User:Evan-Amos">Evan-Amos</a></li>
-                <li>PS5 and PS5 Digital Edition prices and release dates from <a href="https://en.wikipedia.org/wiki/PlayStation_5">Wikipedia</a></li>
-                <li>Xbox Series X and Xbox Series S prices and release dates from <a href="https://en.wikipedia.org/wiki/Xbox_Series_X_and_Series_S">Wikipedia</a></li>
-                <li>Steam Deck picture taken (and lightly touched up) from a video on the <a href="https://www.steamdeck.com/">Steam Deck Home Page</a></li>
-                <li>All Other Prices and release dates from <a href="http://vgsales.wikia.com/wiki/Launch_price">Video Game Sales Wiki</a></li>
-                <li>Inflation data from <a href="https://www.bls.gov/data/inflation_calculator.htm">Consumer Price Index inflation calculator</a> and calculated for {data.inflation_month}, {data.inflation_year}</li>
-                </ul>
-                </div>
-            </footer>
+            <Box component="footer" sx={{
+                backgroundColor: "#777777",
+                color: "white",
+            }}>
+                <Box component="ul" sx={{
+                    py: 2,
+                    px: 3,
+                    m: 0,
+                }}>
+                    <li>Wii U image by <FooterLink href="https://commons.wikimedia.org/w/index.php?curid=23214469">Takimata</FooterLink></li>
+                    <li>Xbox Series X and Xbox Series S image appear to be stock images, but I'm not sure of the source.</li>
+                    <li>PS5 and PS5 Digital Edition images from <FooterLink href="https://www.playstation.com/en-us/ps5/">Sony</FooterLink></li>
+                    <li>All other console images by <FooterLink href="https://commons.wikimedia.org/wiki/User:Evan-Amos" title="User:Evan-Amos">Evan-Amos</FooterLink></li>
+                    <li>PS5 and PS5 Digital Edition prices and release dates from <FooterLink href="https://en.wikipedia.org/wiki/PlayStation_5">Wikipedia</FooterLink></li>
+                    <li>Xbox Series X and Xbox Series S prices and release dates from <FooterLink href="https://en.wikipedia.org/wiki/Xbox_Series_X_and_Series_S">Wikipedia</FooterLink></li>
+                    <li>Steam Deck picture taken (and lightly touched up) from a video on the <FooterLink href="https://www.steamdeck.com/">Steam Deck Home Page</FooterLink></li>
+                    <li>All Other Prices and release dates from <FooterLink href="http://vgsales.wikia.com/wiki/Launch_price">Video Game Sales Wiki</FooterLink></li>
+                    <li>Inflation data from <FooterLink href="https://www.bls.gov/data/inflation_calculator.htm">Consumer Price Index inflation calculator</FooterLink> and calculated for {data.inflation_month}, {data.inflation_year}</li>
+                </Box>
+            </Box>
         </>
     );
 }
