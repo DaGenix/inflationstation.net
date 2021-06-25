@@ -1,6 +1,6 @@
 import DATA from '../src/util/data';
 import {DataType, DataItemType} from '../src/util/data';
-import {useEffect, useMemo, useState} from "react";
+import {useEffect, useLayoutEffect, useMemo, useState} from "react";
 import Head from "next/head";
 import sleep from "../src/util/sleep";
 import {useRouter} from "next/router";
@@ -79,14 +79,33 @@ interface HomePageProps {
 export default function HomePage(props: HomePageProps) {
     const {data} = props;
 
-    const [displayFilter, setDisplayFilter] = useState("");
-
     const router = useRouter();
 
-    const filter = (router.query.filter as string | undefined) || "";
-    const include = router.query.include || "all";
-    const orderBy = router.query.orderBy || "year";
-    const order = router.query.order || "asc";
+    const [initialRender, setInitialRender] = useState(true)
+
+    let query;
+    if (initialRender || typeof window === "undefined") {
+        // The server render and the initial render have to match up
+        query = new URLSearchParams();
+    } else {
+        query = new URLSearchParams(window.location.search);
+    }
+
+    const filter = query.get("filter") || "";
+    const include = query.get("include") || "all";
+    const orderBy = query.get("orderBy") || "year";
+    const order = query.get("order") || "asc";
+
+    const [displayFilter, setDisplayFilter] = useState(filter);
+
+    // On the browser, we have to force a re-render so that we can hide
+    // the appropriate console entries depending on URL params.
+    if (typeof window !== "undefined") {
+        useLayoutEffect(() => {
+            setInitialRender(false);
+            setDisplayFilter(new URLSearchParams(window.location.search).get("filter") || "");
+        }, []);
+    }
 
     const items = useMemo(() =>
         {
@@ -122,11 +141,16 @@ export default function HomePage(props: HomePageProps) {
         [data.data, filter, include, orderBy, order]);
 
     useEffect(() => {
+            if (initialRender || displayFilter === filter) {
+                return;
+            }
             const {promise, cancel} = sleep(250);
-            promise.then(() => setUrl(router, displayFilter, include, orderBy, order));
+            promise.then(() => {
+                setUrl(router, displayFilter, include, orderBy, order)
+            });
             return cancel;
         },
-        [displayFilter]);
+        [router, initialRender, displayFilter, filter, include, orderBy, order]);
 
     const onSetDisplayFilter = e => setDisplayFilter(e.target.value);
     const onSetInclude = e => setUrl(router, filter, e.target.value, orderBy, order);
