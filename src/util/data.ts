@@ -461,7 +461,16 @@ const RAW_DATA: RawDataType = {
             year: 2003,
             img: "Nokia-NGage-LL",
             link: "https://en.wikipedia.org/wiki/N-Gage_(device)",
-        }
+        },
+        {
+            type: "handheld",
+            raw_orig_price: 399,
+            name: "Steam Deck",
+            manufacturer: "Valve",
+            year: 2021,
+            img: "Steam-Deck",
+            link: "https://en.wikipedia.org/wiki/Steam_Deck",
+        },
     ],
 }
 

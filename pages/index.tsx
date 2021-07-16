@@ -224,6 +224,7 @@ export default function HomePage(props: HomePageProps) {
                 <li>All other console images by <a href="https://commons.wikimedia.org/wiki/User:Evan-Amos" title="User:Evan-Amos">Evan-Amos</a></li>
                 <li>PS5 and PS5 Digital Edition prices and release dates from <a href="https://en.wikipedia.org/wiki/PlayStation_5">Wikipedia</a></li>
                 <li>Xbox Series X and Xbox Series S prices and release dates from <a href="https://en.wikipedia.org/wiki/Xbox_Series_X_and_Series_S">Wikipedia</a></li>
+                <li>Steam Deck picture taken (and lightly touched up) from a video on the <a href="https://www.steamdeck.com/">Steam Deck Home Page</a></li>
                 <li>All Other Prices and release dates from <a href="http://vgsales.wikia.com/wiki/Launch_price">Video Game Sales Wiki</a></li>
                 <li>Inflation data from <a href="https://www.bls.gov/data/inflation_calculator.htm">Consumer Price Index inflation calculator</a> and calculated for {data.inflation_month}, {data.inflation_year}</li>
                 </ul>
