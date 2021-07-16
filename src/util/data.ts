@@ -13,7 +13,7 @@ const CPIU_DATA = csvParse(readFileSync("cpiu.csv", {encoding: "utf-8"}), {
 );
 
 function inflation(fromYear, ammount, toYear, toMonth) {
-    return ammount / CPIU_DATA[fromYear]["Jan"] * CPIU_DATA[toYear][toMonth];
+    return ammount / CPIU_DATA[fromYear][toMonth] * CPIU_DATA[toYear][toMonth];
 }
 
 interface RawDataItemType {
