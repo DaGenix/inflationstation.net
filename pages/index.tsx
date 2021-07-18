@@ -294,7 +294,7 @@ export default function HomePage(props: HomePageProps) {
                         display: "grid",
                         gridTemplateColumns: {
                             xs: "1fr",
-                            sm: "repeat(auto-fill, minmax(250px, 1fr))",
+                            sm: "repeat(auto-fill, minmax(275px, 1fr))",
                         },
                         gap: 1,
                     }}
