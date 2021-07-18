@@ -50,9 +50,9 @@ function ConsoleCard(props: ConsoleCardProps) {
                 </picture>
             </a>
             <Box component="ul" sx={{listStyle: "none", p: 0, m: 0}}>
-                <li><h1>${item.price}</h1></li>
+                <li><h1>${item.prices.join("/$")}</h1></li>
                 <li>{item.name} ({item.year})</li>
-                <li>Original Price: ${item.orig_price}</li>
+                <li>Original Price(s): ${item.orig_prices.join("/$")}</li>
             </Box>
         </Paper>
     );
@@ -148,8 +148,8 @@ export default function HomePage(props: HomePageProps) {
                 .sort((a, b) => {
                     switch (orderBy) {
                         case "year": return a.year - b.year;
-                        case "price": return a.raw_price - b.raw_price;
-                        case "orig-price": return a.raw_orig_price - b.raw_orig_price;
+                        case "price": return a.raw_prices[0] - b.raw_prices[0];
+                        case "orig-price": return a.raw_orig_prices[0] - b.raw_orig_prices[0];
                         case "manufacturer": return a.manufacturer.localeCompare(b.manufacturer);
                         default: throw new Error(`Unexpected orderBy value: ${orderBy}`);
                     }

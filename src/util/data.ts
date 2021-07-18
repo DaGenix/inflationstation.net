@@ -18,7 +18,7 @@ function inflation(fromYear, ammount, toYear, toMonth) {
 
 interface RawDataItemType {
     type: "home" | "handheld" | "hybrid",
-    raw_orig_price: number,
+    raw_orig_prices: number[],
     name: string,
     manufacturer: string,
     year: number,
@@ -38,7 +38,7 @@ const RAW_DATA: RawDataType = {
     data: [
         {
             type: "home",
-            raw_orig_price: 199,
+            raw_orig_prices: [199],
             name: "NES",
             manufacturer: "Nintendo",
             year: 1985,
@@ -47,7 +47,7 @@ const RAW_DATA: RawDataType = {
         },
         {
             type: "home",
-            raw_orig_price: 199,
+            raw_orig_prices: [199],
             name: "SNES",
             manufacturer: "Nintendo",
             year: 1991,
@@ -56,7 +56,7 @@ const RAW_DATA: RawDataType = {
         },
         {
             type: "home",
-            raw_orig_price: 199,
+            raw_orig_prices: [199],
             name: "Nintendo 64",
             manufacturer: "Nintendo",
             year: 1996,
@@ -65,7 +65,7 @@ const RAW_DATA: RawDataType = {
         },
         {
             type: "home",
-            raw_orig_price: 199,
+            raw_orig_prices: [199],
             name: "GameCube",
             manufacturer: "Nintendo",
             year: 2001,
@@ -74,7 +74,7 @@ const RAW_DATA: RawDataType = {
         },
         {
             type: "home",
-            raw_orig_price: 249,
+            raw_orig_prices: [249],
             name: "Wii",
             manufacturer: "Nintendo",
             year: 2006,
@@ -83,7 +83,7 @@ const RAW_DATA: RawDataType = {
         },
         {
             type: "home",
-            raw_orig_price: 349,
+            raw_orig_prices: [349],
             name: "Wii U",
             manufacturer: "Nintendo",
             year: 2012,
@@ -92,7 +92,7 @@ const RAW_DATA: RawDataType = {
         },
         {
             type: "hybrid",
-            raw_orig_price: 299,
+            raw_orig_prices: [299],
             name: "Switch",
             manufacturer: "Nintendo",
             year: 2017,
@@ -101,7 +101,7 @@ const RAW_DATA: RawDataType = {
         },
         {
             type: "home",
-            raw_orig_price: 299,
+            raw_orig_prices: [299],
             name: "PlayStation",
             manufacturer: "Sony",
             year: 1995,
@@ -110,7 +110,7 @@ const RAW_DATA: RawDataType = {
         },
         {
             type: "home",
-            raw_orig_price: 299,
+            raw_orig_prices: [299],
             name: "PlayStation 2",
             manufacturer: "Sony",
             year: 2000,
@@ -119,7 +119,7 @@ const RAW_DATA: RawDataType = {
         },
         {
             type: "home",
-            raw_orig_price: 499,
+            raw_orig_prices: [499],
             name: "PlayStation 3",
             manufacturer: "Sony",
             year: 2006,
@@ -128,7 +128,7 @@ const RAW_DATA: RawDataType = {
         },
         {
             type: "home",
-            raw_orig_price: 399,
+            raw_orig_prices: [399],
             name: "PlayStation 4",
             manufacturer: "Sony",
             year: 2013,
@@ -137,7 +137,7 @@ const RAW_DATA: RawDataType = {
         },
         {
             type: "home",
-            raw_orig_price: 499,
+            raw_orig_prices: [499],
             name: "PlayStation 5",
             manufacturer: "Sony",
             year: 2020,
@@ -146,7 +146,7 @@ const RAW_DATA: RawDataType = {
         },
         {
             type: "home",
-            raw_orig_price: 399,
+            raw_orig_prices: [399],
             name: "PlayStation 5 Digital Edition",
             manufacturer: "Sony",
             year: 2020,
@@ -155,7 +155,7 @@ const RAW_DATA: RawDataType = {
         },
         {
             type: "home",
-            raw_orig_price: 299,
+            raw_orig_prices: [299],
             name: "Xbox",
             manufacturer: "Microsoft",
             year: 2001,
@@ -164,7 +164,7 @@ const RAW_DATA: RawDataType = {
         },
         {
             type: "home",
-            raw_orig_price: 299,
+            raw_orig_prices: [299],
             name: "Xbox 360",
             manufacturer: "Microsoft",
             year: 2005,
@@ -173,7 +173,7 @@ const RAW_DATA: RawDataType = {
         },
         {
             type: "home",
-            raw_orig_price: 499,
+            raw_orig_prices: [499],
             name: "Xbox One",
             manufacturer: "Microsoft",
             year: 2013,
@@ -182,7 +182,7 @@ const RAW_DATA: RawDataType = {
         },
         {
             type: "home",
-            raw_orig_price: 499,
+            raw_orig_prices: [499],
             name: "Xbox Series X",
             manufacturer: "Microsoft",
             year: 2020,
@@ -191,7 +191,7 @@ const RAW_DATA: RawDataType = {
         },
         {
             type: "home",
-            raw_orig_price: 299,
+            raw_orig_prices: [299],
             name: "Xbox Series S",
             manufacturer: "Microsoft",
             year: 2020,
@@ -200,7 +200,7 @@ const RAW_DATA: RawDataType = {
         },
         {
             type: "home",
-            raw_orig_price: 200,
+            raw_orig_prices: [200],
             name: "Master System",
             manufacturer: "Sega",
             year: 1986,
@@ -209,7 +209,7 @@ const RAW_DATA: RawDataType = {
         },
         {
             type: "home",
-            raw_orig_price: 189,
+            raw_orig_prices: [189],
             name: "Sega Genesis",
             manufacturer: "Sega",
             year: 1989,
@@ -218,7 +218,7 @@ const RAW_DATA: RawDataType = {
         },
         {
             type: "home",
-            raw_orig_price: 399,
+            raw_orig_prices: [399],
             name: "Sega Saturn",
             manufacturer: "Sega",
             year: 1995,
@@ -227,7 +227,7 @@ const RAW_DATA: RawDataType = {
         },
         {
             type: "home",
-            raw_orig_price: 199,
+            raw_orig_prices: [199],
             name: "DreamCast",
             manufacturer: "Sega",
             year: 1999,
@@ -236,7 +236,7 @@ const RAW_DATA: RawDataType = {
         },
         {
             type: "home",
-            raw_orig_price: 199,
+            raw_orig_prices: [199],
             name: "Atari 2600",
             manufacturer: "Atari",
             year: 1977,
@@ -245,7 +245,7 @@ const RAW_DATA: RawDataType = {
         },
         {
             type: "home",
-            raw_orig_price: 269,
+            raw_orig_prices: [269],
             name: "Atari 5200",
             manufacturer: "Atari",
             year: 1982,
@@ -254,7 +254,7 @@ const RAW_DATA: RawDataType = {
         },
         {
             type: "home",
-            raw_orig_price: 139,
+            raw_orig_prices: [139],
             name: "Atari 7800",
             manufacturer: "Atari",
             year: 1986,
@@ -263,7 +263,7 @@ const RAW_DATA: RawDataType = {
         },
         {
             type: "home",
-            raw_orig_price: 249,
+            raw_orig_prices: [249],
             name: "Atari Jaguar",
             manufacturer: "Atari",
             year: 1993,
@@ -272,7 +272,7 @@ const RAW_DATA: RawDataType = {
         },
         {
             type: "home",
-            raw_orig_price: 299,
+            raw_orig_prices: [299],
             name: "Intellivision",
             manufacturer: "Mattel",
             year: 1979,
@@ -281,7 +281,7 @@ const RAW_DATA: RawDataType = {
         },
         {
             type: "home",
-            raw_orig_price: 175,
+            raw_orig_prices: [175],
             name: "ColecoVision",
             manufacturer: "Coleco",
             year: 1982,
@@ -290,7 +290,7 @@ const RAW_DATA: RawDataType = {
         },
         {
             type: "home",
-            raw_orig_price: 199,
+            raw_orig_prices: [199],
             name: "TurboGrafx-16",
             manufacturer: "Hudson Soft & Nec Home Electronics",
             year: 1989,
@@ -299,7 +299,7 @@ const RAW_DATA: RawDataType = {
         },
         {
             type: "home",
-            raw_orig_price: 649,
+            raw_orig_prices: [649],
             name: "Neo Geo",
             manufacturer: "SNK",
             year: 1990,
@@ -308,7 +308,7 @@ const RAW_DATA: RawDataType = {
         },
         {
             type: "home",
-            raw_orig_price: 699,
+            raw_orig_prices: [699],
             name: "3DO",
             manufacturer: "3DO",
             year: 1993,
@@ -317,7 +317,7 @@ const RAW_DATA: RawDataType = {
         },
         {
             type: "handheld",
-            raw_orig_price: 89,
+            raw_orig_prices: [89],
             name: "Game Boy",
             manufacturer: "Nintendo",
             year: 1989,
@@ -326,7 +326,7 @@ const RAW_DATA: RawDataType = {
         },
         {
             type: "handheld",
-            raw_orig_price: 179,
+            raw_orig_prices: [179],
             name: "Virtual Boy",
             manufacturer: "Nintendo",
             year: 1995,
@@ -335,7 +335,7 @@ const RAW_DATA: RawDataType = {
         },
         {
             type: "handheld",
-            raw_orig_price: 69,
+            raw_orig_prices: [69],
             name: "Game Boy Color",
             manufacturer: "Nintendo",
             year: 1998,
@@ -344,7 +344,7 @@ const RAW_DATA: RawDataType = {
         },
         {
             type: "handheld",
-            raw_orig_price: 99,
+            raw_orig_prices: [99],
             name: "Game Boy Advance",
             manufacturer: "Nintendo",
             year: 2001,
@@ -353,7 +353,7 @@ const RAW_DATA: RawDataType = {
         },
         {
             type: "handheld",
-            raw_orig_price: 149,
+            raw_orig_prices: [149],
             name: "Nintendo DS",
             manufacturer: "Nintendo",
             year: 2004,
@@ -362,7 +362,7 @@ const RAW_DATA: RawDataType = {
         },
         {
             type: "handheld",
-            raw_orig_price: 249,
+            raw_orig_prices: [249],
             name: "Nintendo 3DS",
             manufacturer: "Nintendo",
             year: 2011,
@@ -371,7 +371,7 @@ const RAW_DATA: RawDataType = {
         },
         {
             type: "handheld",
-            raw_orig_price: 249,
+            raw_orig_prices: [249],
             name: "PSP",
             manufacturer: "Sony",
             year: 2005,
@@ -380,7 +380,7 @@ const RAW_DATA: RawDataType = {
         },
         {
             type: "handheld",
-            raw_orig_price: 249,
+            raw_orig_prices: [249],
             name: "Playstation Vita",
             manufacturer: "Sony",
             year: 2012,
@@ -389,7 +389,7 @@ const RAW_DATA: RawDataType = {
         },
         {
             type: "handheld",
-            raw_orig_price: 179,
+            raw_orig_prices: [179],
             name: "Atari Lynx",
             manufacturer: "Atari",
             year: 1989,
@@ -398,7 +398,7 @@ const RAW_DATA: RawDataType = {
         },
         {
             type: "handheld",
-            raw_orig_price: 149,
+            raw_orig_prices: [149],
             name: "Sega Game Gear",
             manufacturer: "Sega",
             year: 1991,
@@ -407,7 +407,7 @@ const RAW_DATA: RawDataType = {
         },
         {
             type: "handheld",
-            raw_orig_price: 180,
+            raw_orig_prices: [180],
             name: "Sega Nomad",
             manufacturer: "Sega",
             year: 1995,
@@ -416,7 +416,7 @@ const RAW_DATA: RawDataType = {
         },
         {
             type: "handheld",
-            raw_orig_price: 249,
+            raw_orig_prices: [249],
             name: "TurboExpress",
             manufacturer: "NEC",
             year: 1990,
@@ -425,7 +425,7 @@ const RAW_DATA: RawDataType = {
         },
         {
             type: "handheld",
-            raw_orig_price: 69,
+            raw_orig_prices: [69],
             name: "Game.com",
             manufacturer: "Tiger",
             year: 1997,
@@ -434,7 +434,7 @@ const RAW_DATA: RawDataType = {
         },
         {
             type: "handheld",
-            raw_orig_price: 69,
+            raw_orig_prices: [69],
             name: "Neo Geo Pocket",
             manufacturer: "SNK",
             year: 1999,
@@ -445,7 +445,7 @@ const RAW_DATA: RawDataType = {
         Appears to have been Japan only
         {
             type: "handheld",
-            raw_orig_price: ???,
+            raw_orig_prices: [???],
             name: "WonderSwan",
             manufacturer: "Bandai",
             year: 1999,
@@ -455,7 +455,7 @@ const RAW_DATA: RawDataType = {
         */
         {
             type: "handheld",
-            raw_orig_price: 299,
+            raw_orig_prices: [299],
             name: "N-Gage",
             manufacturer: "Nokia",
             year: 2003,
@@ -464,7 +464,7 @@ const RAW_DATA: RawDataType = {
         },
         {
             type: "handheld",
-            raw_orig_price: 399,
+            raw_orig_prices: [399, 529, 649],
             name: "Steam Deck",
             manufacturer: "Valve",
             year: 2021,
@@ -484,15 +484,15 @@ RAW_DATA.data.sort((a, b) => {
 
 export interface DataItemType {
     type: "home" | "handheld" | "hybrid",
-    raw_orig_price: number,
+    raw_orig_prices: number[],
     name: string,
     manufacturer: string,
     year: number,
     img: string,
     link: string,
-    raw_price: number,
-    price: string,
-    orig_price: string,
+    raw_prices: number[],
+    prices: string[],
+    orig_prices: string[],
     img200Webp: string,
     img400Webp: string,
     img600Webp: string,
@@ -514,13 +514,14 @@ export interface DataType {
 const DATA: DataType = {
     ...RAW_DATA,
     data: RAW_DATA.data.map(data => {
-        const raw_price = Math.round(inflation(data.year, data.raw_orig_price, RAW_DATA.inflation_year, RAW_DATA.inflation_month));
+        const raw_prices = data.raw_orig_prices.map(raw_orig_price =>
+            Math.round(inflation(data.year, raw_orig_price, RAW_DATA.inflation_year, RAW_DATA.inflation_month)));
         return {
             ...data,
 
-            raw_price,
-            price: raw_price.toLocaleString(),
-            orig_price: data.raw_orig_price.toLocaleString(),
+            raw_prices,
+            prices: raw_prices.map(p => p.toLocaleString()),
+            orig_prices: data.raw_orig_prices.map(p => p.toLocaleString()),
 
             img200Webp: "/" + glob.sync(`img/${data.img}*-200.webp`, {cwd: "public"})[0],
             img400Webp: "/" + glob.sync(`img/${data.img}*-400.webp`, {cwd: "public"})[0],
