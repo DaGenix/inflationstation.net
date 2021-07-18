@@ -471,6 +471,24 @@ const RAW_DATA: RawDataType = {
             img: "Steam-Deck",
             link: "https://en.wikipedia.org/wiki/Steam_Deck",
         },
+        {
+            type: "hybrid",
+            raw_orig_prices: [349],
+            name: "Switch (OLED)",
+            manufacturer: "Nintendo",
+            year: 2021,
+            img: "Nintendo-Switch-wJoyCons-BlRd-Standing-FL",
+            link: "https://en.wikipedia.org/wiki/Nintendo_Switch#OLED_model",
+        },
+        {
+            type: "hybrid",
+            raw_orig_prices: [199],
+            name: "Switch Lite",
+            manufacturer: "Nintendo",
+            year: 2019,
+            img: "Nintendo_Switch_Lite_representation",
+            link: "https://en.wikipedia.org/wiki/Nintendo_Switch_Lite",
+        },
     ],
 }
 
