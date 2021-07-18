@@ -315,11 +315,11 @@ export default function HomePage(props: HomePageProps) {
                     <li>Wii U image by <FooterLink href="https://commons.wikimedia.org/w/index.php?curid=23214469">Takimata</FooterLink></li>
                     <li>Xbox Series X and Xbox Series S image appear to be stock images, but I'm not sure of the source.</li>
                     <li>PS5 and PS5 Digital Edition images from <FooterLink href="https://www.playstation.com/en-us/ps5/">Sony</FooterLink></li>
-                    <li>All other console images by <FooterLink href="https://commons.wikimedia.org/wiki/User:Evan-Amos" title="User:Evan-Amos">Evan-Amos</FooterLink></li>
                     <li>PS5 and PS5 Digital Edition prices and release dates from <FooterLink href="https://en.wikipedia.org/wiki/PlayStation_5">Wikipedia</FooterLink></li>
                     <li>Xbox Series X and Xbox Series S prices and release dates from <FooterLink href="https://en.wikipedia.org/wiki/Xbox_Series_X_and_Series_S">Wikipedia</FooterLink></li>
                     <li>Steam Deck picture taken (and lightly touched up) from a video on the <FooterLink href="https://www.steamdeck.com/">Steam Deck Home Page</FooterLink></li>
-                    <li>All Other Prices and release dates from <FooterLink href="http://vgsales.wikia.com/wiki/Launch_price">Video Game Sales Wiki</FooterLink></li>
+                    <li>All other console images by <FooterLink href="https://commons.wikimedia.org/wiki/User:Evan-Amos" title="User:Evan-Amos">Evan-Amos</FooterLink></li>
+                    <li>All other prices and release dates from <FooterLink href="http://vgsales.wikia.com/wiki/Launch_price">Video Game Sales Wiki</FooterLink></li>
                     <li>Inflation data from <FooterLink href="https://www.bls.gov/data/inflation_calculator.htm">Consumer Price Index inflation calculator</FooterLink> and calculated for {data.inflation_month}, {data.inflation_year}</li>
                 </Box>
             </Box>
