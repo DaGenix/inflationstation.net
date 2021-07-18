@@ -289,7 +289,6 @@ export default function HomePage(props: HomePageProps) {
 
                 <Box
                     sx={{
-                        // width: "100%",
                         p: 1,
                         display: "grid",
                         gridTemplateColumns: {
