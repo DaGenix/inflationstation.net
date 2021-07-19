@@ -32,10 +32,6 @@ export default function HomePage(props: HomePageProps) {
                         {".hide-without-js { display: none !important; }"}
                     </style>
                 </noscript>
-                <link
-                    rel="stylesheet"
-                    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-                />
             </Head>
 
             <Header/>
