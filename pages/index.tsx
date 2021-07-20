@@ -4,6 +4,7 @@ import Footer from "../src/components/Footer";
 import Header from "../src/components/Header";
 import Content from "../src/components/Content";
 import useUrlSearchParams from "../src/util/useUrlSearchParams";
+import theme from "../src/theme";
 
 export async function getStaticProps(context) {
     return {
@@ -27,6 +28,8 @@ export default function HomePage(props: HomePageProps) {
             <Head>
                 <title>Console Prices Adjusted for Inflation</title>
                 <meta name="description" content="Game console prices adjusted for inflation"/>
+                <meta name="theme-color" content={theme.palette.primary.main} />
+                <meta name="viewport" content="initial-scale=1, width=device-width" />
                 <noscript>
                     <style>
                         {".hide-without-js { display: none !important; }"}
