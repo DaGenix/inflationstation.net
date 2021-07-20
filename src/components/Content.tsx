@@ -4,6 +4,7 @@ import {DataItemType, DataType} from "../util/data";
 import {useMemo} from "react";
 import {IncludeType, makeUrlSearchParams, parseUrlSearchParams} from "../util/urlUtil";
 import FilterBar from "./FilterBar";
+import NoResults from "./NoResults";
 
 const filterMatches = (item: DataItemType, filter: string): boolean => {
     if (filter === "") {
@@ -64,6 +65,10 @@ export default function Content(props: ContentProps) {
         },
         [data.data, filter, include, orderBy, order]);
 
+    const hasCards = useMemo(
+        () => !!items.find(([, enabled]) => enabled),
+        [items]);
+
     const cards = items.map(([item, enabled]) => <ConsoleCard
         key={item.name}
         item={item}
@@ -98,6 +103,8 @@ export default function Content(props: ContentProps) {
             >
                 {cards}
             </Box>
+
+            {!hasCards && <NoResults />}
         </Box>
     );
 }
