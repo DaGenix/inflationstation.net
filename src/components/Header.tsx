@@ -6,7 +6,7 @@ type HeaderProps = {
 }
 
 export default function Header({data}: HeaderProps) {
-    const switchItem = data.data.find(i => i.name === "Switch");
+    const switchItem = data.data.find(i => i.names[0] === "Nintendo Switch");
     if (!switchItem) {
         throw new Error("Couldn't find item for Switch");
     }

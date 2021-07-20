@@ -19,7 +19,7 @@ function inflation(fromYear, ammount, toYear, toMonth) {
 interface RawDataItemType {
     type: "home" | "handheld" | "hybrid",
     raw_orig_prices: number[],
-    name: string,
+    names: string[],
     manufacturer: string,
     year: number,
     img: string,
@@ -39,7 +39,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "home",
             raw_orig_prices: [199],
-            name: "NES",
+            names: ["NES", "Nintendo Entertainment System"],
             manufacturer: "Nintendo",
             year: 1985,
             img: "NES-Console-Set",
@@ -48,7 +48,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "home",
             raw_orig_prices: [199],
-            name: "SNES",
+            names: ["Super Nintendo Entertainment System", "SNES", "Super Nintendo", "Super NES"],
             manufacturer: "Nintendo",
             year: 1991,
             img: "SNES-Mod1-Console-Set",
@@ -57,7 +57,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "home",
             raw_orig_prices: [199],
-            name: "Nintendo 64",
+            names: ["Nintendo 64", "N64"],
             manufacturer: "Nintendo",
             year: 1996,
             img: "Nintendo-64-wController-L",
@@ -66,7 +66,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "home",
             raw_orig_prices: [199],
-            name: "GameCube",
+            names: ["GameCube"],
             manufacturer: "Nintendo",
             year: 2001,
             img: "GameCube-Set",
@@ -75,7 +75,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "home",
             raw_orig_prices: [249],
-            name: "Wii",
+            names: ["Wii"],
             manufacturer: "Nintendo",
             year: 2006,
             img: "Wii-console",
@@ -84,7 +84,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "home",
             raw_orig_prices: [349],
-            name: "Wii U",
+            names: ["Wii U"],
             manufacturer: "Nintendo",
             year: 2012,
             img: "Wii_U_Console_and_Gamepad",
@@ -93,7 +93,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "hybrid",
             raw_orig_prices: [299],
-            name: "Switch",
+            names: ["Nintendo Switch"],
             manufacturer: "Nintendo",
             year: 2017,
             img: "Nintendo-Switch-wJoyCons-BlRd-Standing-FL",
@@ -102,7 +102,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "home",
             raw_orig_prices: [299],
-            name: "PlayStation",
+            names: ["PlayStation"],
             manufacturer: "Sony",
             year: 1995,
             img: "PSX-Console-wController",
@@ -111,7 +111,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "home",
             raw_orig_prices: [299],
-            name: "PlayStation 2",
+            names: ["PlayStation 2"],
             manufacturer: "Sony",
             year: 2000,
             img: "Sony-PlayStation-2-30001-Console-FL",
@@ -120,7 +120,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "home",
             raw_orig_prices: [499],
-            name: "PlayStation 3",
+            names: ["PlayStation 3"],
             manufacturer: "Sony",
             year: 2006,
             img: "Sony-PlayStation-3-CECHA01-wController-L",
@@ -129,7 +129,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "home",
             raw_orig_prices: [399],
-            name: "PlayStation 4",
+            names: ["PlayStation 4"],
             manufacturer: "Sony",
             year: 2013,
             img: "Sony-PlayStation-4-wController",
@@ -138,7 +138,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "home",
             raw_orig_prices: [499],
-            name: "PlayStation 5",
+            names: ["PlayStation 5"],
             manufacturer: "Sony",
             year: 2020,
             img: "playstation-5-with-dualsense-front-product-shot-01-ps5-en-30jul20",
@@ -147,7 +147,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "home",
             raw_orig_prices: [399],
-            name: "PlayStation 5 Digital Edition",
+            names: ["PlayStation 5 Digital Edition"],
             manufacturer: "Sony",
             year: 2020,
             img: "playstation-5-digital-edition-with-dualsense-front-product-shot-01-ps5-en-30jul20",
@@ -156,7 +156,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "home",
             raw_orig_prices: [299],
-            name: "Xbox",
+            names: ["Xbox"],
             manufacturer: "Microsoft",
             year: 2001,
             img: "Xbox-Console-wDuke-L",
@@ -165,7 +165,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "home",
             raw_orig_prices: [299],
-            name: "Xbox 360",
+            names: ["Xbox 360"],
             manufacturer: "Microsoft",
             year: 2005,
             img: "Microsoft-Xbox-360-Pro-Flat-wController-L",
@@ -174,7 +174,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "home",
             raw_orig_prices: [499],
-            name: "Xbox One",
+            names: ["Xbox One"],
             manufacturer: "Microsoft",
             year: 2013,
             img: "Xbox-One-Console-wController-FL",
@@ -183,7 +183,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "home",
             raw_orig_prices: [499],
-            name: "Xbox Series X",
+            names: ["Xbox Series X"],
             manufacturer: "Microsoft",
             year: 2020,
             img: "xbox_series_x",
@@ -192,7 +192,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "home",
             raw_orig_prices: [299],
-            name: "Xbox Series S",
+            names: ["Xbox Series S"],
             manufacturer: "Microsoft",
             year: 2020,
             img: "xbox_series_s",
@@ -201,7 +201,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "home",
             raw_orig_prices: [200],
-            name: "Master System",
+            names: ["Master System"],
             manufacturer: "Sega",
             year: 1986,
             img: "Sega-Master-System-Set",
@@ -210,7 +210,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "home",
             raw_orig_prices: [189],
-            name: "Sega Genesis",
+            names: ["Sega Genesis"],
             manufacturer: "Sega",
             year: 1989,
             img: "Sega-Genesis-Mk2-6button",
@@ -219,7 +219,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "home",
             raw_orig_prices: [399],
-            name: "Sega Saturn",
+            names: ["Sega Saturn"],
             manufacturer: "Sega",
             year: 1995,
             img: "Sega-Saturn-Console-Set-Mk1",
@@ -228,7 +228,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "home",
             raw_orig_prices: [199],
-            name: "DreamCast",
+            names: ["DreamCast"],
             manufacturer: "Sega",
             year: 1999,
             img: "Dreamcast-Console-Set",
@@ -237,7 +237,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "home",
             raw_orig_prices: [199],
-            name: "Atari 2600",
+            names: ["Atari 2600"],
             manufacturer: "Atari",
             year: 1977,
             img: "Atari-2600-Wood-4Sw-Set",
@@ -246,7 +246,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "home",
             raw_orig_prices: [269],
-            name: "Atari 5200",
+            names: ["Atari 5200"],
             manufacturer: "Atari",
             year: 1982,
             img: "Atari-5200-4-Port-wController-L",
@@ -255,7 +255,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "home",
             raw_orig_prices: [139],
-            name: "Atari 7800",
+            names: ["Atari 7800"],
             manufacturer: "Atari",
             year: 1986,
             img: "Atari-7800-Console-Set",
@@ -264,7 +264,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "home",
             raw_orig_prices: [249],
-            name: "Atari Jaguar",
+            names: ["Atari Jaguar"],
             manufacturer: "Atari",
             year: 1993,
             img: "Atari-Jaguar-Console-Set",
@@ -273,7 +273,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "home",
             raw_orig_prices: [299],
-            name: "Intellivision",
+            names: ["Intellivision"],
             manufacturer: "Mattel",
             year: 1979,
             img: "Intellivision-Console-Set",
@@ -282,7 +282,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "home",
             raw_orig_prices: [175],
-            name: "ColecoVision",
+            names: ["ColecoVision"],
             manufacturer: "Coleco",
             year: 1982,
             img: "ColecoVision-wController-L",
@@ -291,7 +291,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "home",
             raw_orig_prices: [199],
-            name: "TurboGrafx-16",
+            names: ["TurboGrafx-16"],
             manufacturer: "Hudson Soft & Nec Home Electronics",
             year: 1989,
             img: "TurboGrafx16-Console-Set",
@@ -300,7 +300,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "home",
             raw_orig_prices: [649],
-            name: "Neo Geo",
+            names: ["Neo Geo"],
             manufacturer: "SNK",
             year: 1990,
             img: "Neo-Geo-AES-Console-Set",
@@ -309,7 +309,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "home",
             raw_orig_prices: [699],
-            name: "3DO",
+            names: ["3DO Interactive Multiplayer"],
             manufacturer: "3DO",
             year: 1993,
             img: "3DO-FZ1-Console-Set",
@@ -318,7 +318,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "handheld",
             raw_orig_prices: [89],
-            name: "Game Boy",
+            names: ["Game Boy"],
             manufacturer: "Nintendo",
             year: 1989,
             img: "Game-Boy-FL",
@@ -327,7 +327,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "handheld",
             raw_orig_prices: [179],
-            name: "Virtual Boy",
+            names: ["Virtual Boy"],
             manufacturer: "Nintendo",
             year: 1995,
             img: "Virtual-Boy-Set",
@@ -336,7 +336,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "handheld",
             raw_orig_prices: [69],
-            name: "Game Boy Color",
+            names: ["Game Boy Color"],
             manufacturer: "Nintendo",
             year: 1998,
             img: "Nintendo-Game-Boy-Color-FL",
@@ -345,7 +345,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "handheld",
             raw_orig_prices: [99],
-            name: "Game Boy Advance",
+            names: ["Game Boy Advance"],
             manufacturer: "Nintendo",
             year: 2001,
             img: "Nintendo-Game-Boy-Advance-Purple-FL",
@@ -354,7 +354,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "handheld",
             raw_orig_prices: [149],
-            name: "Nintendo DS",
+            names: ["Nintendo DS"],
             manufacturer: "Nintendo",
             year: 2004,
             img: "Nintendo-DS-Lite-Black-Open",
@@ -363,7 +363,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "handheld",
             raw_orig_prices: [249],
-            name: "Nintendo 3DS",
+            names: ["Nintendo 3DS"],
             manufacturer: "Nintendo",
             year: 2011,
             img: "Nintendo-3DS-AquaOpen",
@@ -372,7 +372,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "handheld",
             raw_orig_prices: [249],
-            name: "PSP",
+            names: ["PlayStation Portable", "PSP"],
             manufacturer: "Sony",
             year: 2005,
             img: "Psp-1000",
@@ -381,7 +381,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "handheld",
             raw_orig_prices: [249],
-            name: "Playstation Vita",
+            names: ["PlayStation Vita"],
             manufacturer: "Sony",
             year: 2012,
             img: "PlayStation-Vita-1101-FL",
@@ -390,7 +390,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "handheld",
             raw_orig_prices: [179],
-            name: "Atari Lynx",
+            names: ["Atari Lynx"],
             manufacturer: "Atari",
             year: 1989,
             img: "Atari-Lynx-Handheld-Angled",
@@ -399,7 +399,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "handheld",
             raw_orig_prices: [149],
-            name: "Sega Game Gear",
+            names: ["Game Gear"],
             manufacturer: "Sega",
             year: 1991,
             img: "Game-Gear-Handheld",
@@ -408,7 +408,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "handheld",
             raw_orig_prices: [180],
-            name: "Sega Nomad",
+            names: ["Sega Nomad"],
             manufacturer: "Sega",
             year: 1995,
             img: "Sega-Nomad-Front",
@@ -417,7 +417,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "handheld",
             raw_orig_prices: [249],
-            name: "TurboExpress",
+            names: ["TurboExpress"],
             manufacturer: "NEC",
             year: 1990,
             img: "NEC-TurboExpress-Upright-FL",
@@ -426,7 +426,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "handheld",
             raw_orig_prices: [69],
-            name: "Game.com",
+            names: ["Game.com"],
             manufacturer: "Tiger",
             year: 1997,
             img: "Tiger-Game-Com-FL",
@@ -435,18 +435,18 @@ const RAW_DATA: RawDataType = {
         {
             type: "handheld",
             raw_orig_prices: [69],
-            name: "Neo Geo Pocket",
+            names: ["Neo Geo Pocket"],
             manufacturer: "SNK",
             year: 1999,
             img: "Neo-Geo-Pocket-Anthra-Left",
-            link: "https://en.wikipedia.org/wiki/NeoGeo_Pocket",
+            link: "https://en.wikipedia.org/wiki/Neo_Geo_Pocket",
         },
         /*
         Appears to have been Japan only
         {
             type: "handheld",
             raw_orig_prices: [???],
-            name: "WonderSwan",
+            names: ["WonderSwan"],
             manufacturer: "Bandai",
             year: 1999,
             img: "",
@@ -456,7 +456,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "handheld",
             raw_orig_prices: [299],
-            name: "N-Gage",
+            names: ["N-Gage"],
             manufacturer: "Nokia",
             year: 2003,
             img: "Nokia-NGage-LL",
@@ -465,7 +465,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "handheld",
             raw_orig_prices: [399, 529, 649],
-            name: "Steam Deck",
+            names: ["Steam Deck"],
             manufacturer: "Valve",
             year: 2021,
             img: "Steam-Deck",
@@ -474,7 +474,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "hybrid",
             raw_orig_prices: [349],
-            name: "Switch (OLED)",
+            names: ["Nintendo Switch (OLED)"],
             manufacturer: "Nintendo",
             year: 2021,
             img: "Nintendo-Switch-wJoyCons-BlRd-Standing-FL",
@@ -483,7 +483,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "hybrid",
             raw_orig_prices: [199],
-            name: "Switch Lite",
+            names: ["Nintendo Switch Lite"],
             manufacturer: "Nintendo",
             year: 2019,
             img: "Nintendo_Switch_Lite_representation",
@@ -496,14 +496,14 @@ RAW_DATA.data.sort((a, b) => {
     if (a.year != b.year) {
         return a.year - b.year;
     } else {
-        return a.name.localeCompare(b.name);
+        return a.names[0].localeCompare(b.names[0]);
     }
 });
 
 export interface DataItemType {
     type: "home" | "handheld" | "hybrid",
     raw_orig_prices: number[],
-    name: string,
+    names: string[],
     manufacturer: string,
     year: number,
     img: string,

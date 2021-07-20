@@ -10,7 +10,9 @@ const filterMatches = (item: DataItemType, filter: string): boolean => {
     if (filter === "") {
         return true;
     } else {
-        return item.name.toLowerCase().includes(filter.toLowerCase()) || item.manufacturer.toLowerCase().includes(filter.toLowerCase());
+        const lowerCaseFilter = filter.toLowerCase();
+        return !!item.names.find(name => name.toLowerCase().includes(lowerCaseFilter)) ||
+            item.manufacturer.toLowerCase().includes(lowerCaseFilter);
     }
 };
 
@@ -70,7 +72,7 @@ export default function Content(props: ContentProps) {
         [items]);
 
     const cards = items.map(([item, enabled]) => <ConsoleCard
-        key={item.name}
+        key={item.names[0]}
         item={item}
         enabled={enabled}
     />);

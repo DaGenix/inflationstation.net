@@ -15,7 +15,7 @@ export default function ConsoleCard(props: ConsoleCardProps) {
             textAlign:"center",
             p: 1,
         }}>
-            <h3>{item.name}</h3>
+            <h3>{item.names[0]}</h3>
             <a href={item.link}>
                 <picture>
                     <source srcSet={`
@@ -29,7 +29,7 @@ export default function ConsoleCard(props: ConsoleCardProps) {
                             type="image/webp"
                     />
                     <img
-                        alt={`Picture of ${item.name}`}
+                        alt={`Picture of ${item.names[0]}`}
                         srcSet={`
                              ${item.img200Jpeg} 200w,
                              ${item.img400Jpeg} 400w,
