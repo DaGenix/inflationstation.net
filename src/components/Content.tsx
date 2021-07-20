@@ -10,7 +10,7 @@ const filterMatches = (item: DataItemType, filter: string): boolean => {
     if (filter === "") {
         return true;
     } else {
-        const lowerCaseFilter = filter.toLowerCase();
+        const lowerCaseFilter = filter.replace(/\s+/g, " ").trim().toLowerCase();
         return !!item.names.find(name => name.toLowerCase().includes(lowerCaseFilter)) ||
             item.manufacturer.toLowerCase().includes(lowerCaseFilter);
     }
