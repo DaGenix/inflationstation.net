@@ -44,6 +44,7 @@ export default function ConsoleCard(props: ConsoleCardProps) {
             <Box component="ul" sx={{listStyle: "none", p: 0, m: 0}}>
                 <li><h1>${item.prices.join("/$")}</h1></li>
                 <li>{item.name} ({item.year})</li>
+                <li>{item.manufacturer}</li>
                 <li>Original Price(s): ${item.orig_prices.join("/$")}</li>
             </Box>
         </Paper>
