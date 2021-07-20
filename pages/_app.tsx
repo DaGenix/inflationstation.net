@@ -5,6 +5,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from '../src/theme';
 import {CacheProvider} from "@emotion/react";
 import createEmotionCache from "../src/util/createEmotionCache";
+import '../src/css/base.css';
 
 export default function MyApp(props) {
   const { Component, disableEmotionCache = false, pageProps } = props;

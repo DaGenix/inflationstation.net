@@ -76,10 +76,7 @@ export default function Content(props: ContentProps) {
     />);
 
     return (
-        <Box component="main" sx={{
-            backgroundColor: "#f1f1f1",
-        }}
-        >
+        <Box component="main">
             <FilterBar
                 filter={filter}
                 setFilter={setFilter}
