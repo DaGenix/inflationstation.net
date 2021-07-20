@@ -21,7 +21,7 @@ type HomePageProps = {
 export default function HomePage(props: HomePageProps) {
     const {data} = props;
 
-    const [firstRender, urlSearchParams, setUrlSearchParams] = useUrlSearchParams();
+    const [componentKey, urlSearchParams, setUrlSearchParams] = useUrlSearchParams();
 
     return (
         <>
@@ -40,7 +40,7 @@ export default function HomePage(props: HomePageProps) {
             <Header/>
 
             <Content
-                key={firstRender ? "first" : "subsequent"}
+                key={componentKey}
                 data={data}
                 urlSearchParams={urlSearchParams}
                 setUrlSearchParams={setUrlSearchParams}
