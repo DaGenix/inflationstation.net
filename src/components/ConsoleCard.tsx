@@ -3,13 +3,18 @@ import {Box, Paper, useTheme} from "@material-ui/core";
 
 type ConsoleCardProps = {
     item: DataItemType,
+    enabled: boolean,
 }
 
 export default function ConsoleCard(props: ConsoleCardProps) {
     const theme = useTheme();
-    const {item} = props;
+    const {item, enabled} = props;
     return (
-        <Paper sx={{textAlign: "center", p: 1}}>
+        <Paper sx={{
+            display: (!enabled) ? "none" : undefined,
+            textAlign:"center",
+            p: 1,
+        }}>
             <a href={item.link}>
                 <picture>
                     <source srcSet={`

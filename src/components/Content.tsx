@@ -1,9 +1,25 @@
 import {Box} from "@material-ui/core";
 import ConsoleCard from './ConsoleCard';
-import {DataType} from "../util/data";
+import {DataItemType, DataType} from "../util/data";
 import {useMemo} from "react";
-import {makeUrlSearchParams, parseUrlSearchParams} from "../util/urlUtil";
+import {IncludeType, makeUrlSearchParams, parseUrlSearchParams} from "../util/urlUtil";
 import FilterBar from "./FilterBar";
+
+const filterMatches = (item: DataItemType, filter: string): boolean => {
+    if (filter === "") {
+        return true;
+    } else {
+        return item.name.toLowerCase().includes(filter.toLowerCase()) || item.manufacturer.toLowerCase().includes(filter.toLowerCase());
+    }
+};
+
+const includeMatches = (item: DataItemType, include: IncludeType): boolean => {
+    if (include === "all") {
+        return true;
+    } else {
+        return item.type === "hybrid" || item.type === include;
+    }
+}
 
 type ContentProps = {
     data: DataType,
@@ -23,20 +39,6 @@ export default function Content(props: ContentProps) {
 
     const items = useMemo(() => {
             const items = data.data
-                .filter(item => {
-                    if (filter === "") {
-                        return true;
-                    } else {
-                        return item.name.toLowerCase().includes(filter.toLowerCase()) || item.manufacturer.toLowerCase().includes(filter.toLowerCase());
-                    }
-                })
-                .filter(item => {
-                    if (include === "all") {
-                        return true;
-                    } else {
-                        return item.type === "hybrid" || item.type === include;
-                    }
-                })
                 .sort((a, b) => {
                     switch (orderBy) {
                         case "year":
@@ -50,6 +52,10 @@ export default function Content(props: ContentProps) {
                         default:
                             throw new Error(`Unexpected orderBy value: ${orderBy}`);
                     }
+                })
+                .map((item): [DataItemType, boolean] => {
+                    const enabled = filterMatches(item, filter) && includeMatches(item, include);
+                    return [item, enabled];
                 });
             if (order === "desc") {
                 items.reverse();
@@ -58,7 +64,11 @@ export default function Content(props: ContentProps) {
         },
         [data.data, filter, include, orderBy, order]);
 
-    const cards = items.map(item => <ConsoleCard key={item.name} item={item}/>);
+    const cards = items.map(([item, enabled]) => <ConsoleCard
+        key={item.name}
+        item={item}
+        enabled={enabled}
+    />);
 
     return (
         <Box component="main" sx={{
