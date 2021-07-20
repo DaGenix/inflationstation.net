@@ -27,7 +27,7 @@ export default function Header({data}: HeaderProps) {
             >
                 <h1>Console Prices Adjusted for Inflation</h1>
                 <p>
-                    Prices show have been adjusted for inflation since the consoles
+                    Prices shown have been adjusted for inflation since the consoles
                     were initially released. Some consoles are still available at the same price
                     they were released at. Due to inflation, these consoles have effectively
                     become cheaper even though their price hasn't changed. For example, the
