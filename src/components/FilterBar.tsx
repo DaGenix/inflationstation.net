@@ -46,6 +46,7 @@ export default function FilterBar(props: FilterBarProps) {
         <Box
             className="hide-without-js"
             sx={{
+                pt: 1,
                 pr: 1,
                 display: "flex",
                 flexFlow: "row wrap",
