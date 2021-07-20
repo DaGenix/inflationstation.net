@@ -45,7 +45,7 @@ export default function ConsoleCard(props: ConsoleCardProps) {
             <Box component="ul" sx={{listStyle: "none", p: 0, m: 0}}>
                 <h1>${item.prices.join("/$")}</h1>
                 <div>{item.manufacturer} - {item.year}</div>
-                <div>Original Price(s): ${item.orig_prices.join("/$")}</div>
+                <div>Original Price{item.orig_prices.length > 1 ? "s" : ""}: ${item.orig_prices.join("/$")}</div>
             </Box>
         </Paper>
     );
