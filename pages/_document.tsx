@@ -9,7 +9,7 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head />
-        <body>
+        <body style={{backgroundColor: "#f1f1f1"}}>
           <Main />
           <NextScript />
         </body>
