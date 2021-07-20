@@ -37,7 +37,7 @@ export default function HomePage(props: HomePageProps) {
                 </noscript>
             </Head>
 
-            <Header/>
+            <Header data={data} />
 
             <Content
                 key={componentKey}
