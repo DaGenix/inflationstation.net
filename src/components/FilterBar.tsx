@@ -1,7 +1,7 @@
 import {Box, FormControl, InputLabel, MenuItem, Select, TextField} from "@material-ui/core";
 import {IncludeType, OrderByType, OrderType, validateIncludeOrDefault, validateOrderByOrDefault} from "../util/urlUtil";
 import {useEffect, useState} from "react";
-import useDelayedValue from "../util/useDelayedValue";
+import sleep from "../util/sleep";
 
 type FilterBarProps = {
     filter: string,
@@ -27,14 +27,15 @@ export default function FilterBar(props: FilterBarProps) {
     } = props;
 
     const [displayFilter, setDisplayFilter] = useState(filter);
-    const saveFilter = useDelayedValue(displayFilter, 250);
 
     useEffect(() => {
-            if (filter !== saveFilter) {
-                setFilter(saveFilter);
+            if (filter !== displayFilter) {
+                const {promise, cancel} = sleep(250);
+                promise.then(() => setFilter(displayFilter));
+                return cancel;
             }
         },
-        [filter, saveFilter]);
+        [filter, displayFilter]);
 
     const onSetFilter = (e) => setDisplayFilter(e.target.value);
     const onSetInclude = (e) => setInclude(validateIncludeOrDefault(e.target.value));
