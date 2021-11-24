@@ -1,4 +1,4 @@
-import {Box, FormControl, InputLabel, MenuItem, Select, TextField} from "@material-ui/core";
+import {Box, FormControl, InputLabel, MenuItem, Select, TextField} from "@mui/material";
 import {IncludeType, OrderByType, OrderType, validateIncludeOrDefault, validateOrderByOrDefault} from "../util/urlUtil";
 import {useEffect, useState} from "react";
 import sleep from "../util/sleep";

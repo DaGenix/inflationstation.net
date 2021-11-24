@@ -1,5 +1,5 @@
 import {DataItemType} from "../util/data";
-import {Box, Paper, useTheme} from "@material-ui/core";
+import {Box, Paper, useTheme} from "@mui/material";
 
 type ConsoleCardProps = {
     item: DataItemType,

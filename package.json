@@ -17,7 +17,7 @@
     "@emotion/react": "^11.4.0",
     "@emotion/server": "^11.4.0",
     "@emotion/styled": "^11.3.0",
-    "@material-ui/core": "^5.0.0-alpha.38",
+    "@mui/material": "^5.1.0",
     "aws-sdk": "^2.291.0",
     "csv-parse": "^4.8.9",
     "glob": "^7.1.2",

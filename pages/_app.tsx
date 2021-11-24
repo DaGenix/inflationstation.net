@@ -1,7 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { ThemeProvider } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import { ThemeProvider, CssBaseline } from '@mui/material';
 import theme from '../src/theme';
 import {CacheProvider} from "@emotion/react";
 import createEmotionCache from "../src/util/createEmotionCache";
