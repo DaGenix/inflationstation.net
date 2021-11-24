@@ -44,6 +44,7 @@ export default function ConsoleCard(props: ConsoleCardProps) {
             </a>
             <Box component="ul" sx={{listStyle: "none", p: 0, m: 0}}>
                 <h1>${item.prices.join("/$")}</h1>
+                {item.affiliateLink && <a target="blank" rel="noopener" href={item.affiliateLink}>Buy</a>}
                 <div>{item.manufacturer} - {item.year}</div>
                 <div>Original Price{item.orig_prices.length > 1 ? "s" : ""}: ${item.orig_prices.join("/$")}</div>
             </Box>

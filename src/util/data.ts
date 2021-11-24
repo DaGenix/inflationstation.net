@@ -24,6 +24,7 @@ interface RawDataItemType {
     year: number,
     img: string,
     link: string,
+    affiliateLink?: string,
 }
 
 interface RawDataType {
@@ -98,6 +99,7 @@ const RAW_DATA: RawDataType = {
             year: 2017,
             img: "Nintendo-Switch-wJoyCons-BlRd-Standing-FL",
             link: "https://en.wikipedia.org/wiki/Nintendo_Switch",
+            affiliateLink: "https://www.amazon.com/Nintendo-Switch-Neon-Blue-Joy%E2%80%91/dp/B07VGRJDFY?th=1&psc=1&linkCode=ll1&tag=inflationstation-20&linkId=40f15625583b82ab9f7cfc7919e1e2a2&language=en_US&ref_=as_li_ss_tl",
         },
         {
             type: "home",
@@ -134,6 +136,7 @@ const RAW_DATA: RawDataType = {
             year: 2013,
             img: "Sony-PlayStation-4-wController",
             link: "https://en.wikipedia.org/wiki/PlayStation_4",
+            affiliateLink: "https://www.amazon.com/PlayStation-Console-Light-System-Greatest-4/dp/B077QT6K94?pd_rd_w=0awnv&pf_rd_p=8000bc8c-c3b0-4816-9f00-5038ff54385c&pf_rd_r=YAGS23AHDSMT30EQ8JBR&pd_rd_r=fd7d6ea1-6875-4aa6-9a56-2528e2af38ec&pd_rd_wg=nJ662&pd_rd_i=B077QT6K94&linkCode=ll1&tag=inflationstation-20&linkId=c94d8f5eac6f638c11d30e146baf5e31&language=en_US&ref_=as_li_ss_tl",
         },
         {
             type: "home",
@@ -143,6 +146,7 @@ const RAW_DATA: RawDataType = {
             year: 2020,
             img: "playstation-5-with-dualsense-front-product-shot-01-ps5-en-30jul20",
             link: "https://en.wikipedia.org/wiki/PlayStation_5",
+            affiliateLink: "https://www.amazon.com/PlayStation-5-Digital/dp/B09DFHJTF5?&linkCode=ll1&tag=inflationstation-20&linkId=743e59b41d1b621bf4621e98864dbe5b&language=en_US&ref_=as_li_ss_tl",
         },
         {
             type: "home",
@@ -152,6 +156,7 @@ const RAW_DATA: RawDataType = {
             year: 2020,
             img: "playstation-5-digital-edition-with-dualsense-front-product-shot-01-ps5-en-30jul20",
             link: "https://en.wikipedia.org/wiki/PlayStation_5",
+            affiliateLink: "",
         },
         {
             type: "home",
@@ -179,6 +184,7 @@ const RAW_DATA: RawDataType = {
             year: 2013,
             img: "Xbox-One-Console-wController-FL",
             link: "https://en.wikipedia.org/wiki/Xbox_One",
+            affiliateLink: "https://www.amazon.com/Xbox-One-1TB-Console-Previous-Generation/dp/B089M5L82M?th=1&linkCode=ll1&tag=inflationstation-20&linkId=6ac798e08cbf0044fe9f7b6828d4dd73&language=en_US&ref_=as_li_ss_tl",
         },
         {
             type: "home",
@@ -188,6 +194,7 @@ const RAW_DATA: RawDataType = {
             year: 2020,
             img: "xbox_series_x",
             link: "https://en.wikipedia.org/wiki/Xbox_Series_X_and_Series_S",
+            affiliateLink: "https://www.amazon.com/Xbox-X/dp/B08H75RTZ8?brr=1&pd_rd_r=29c5976d-3641-4cad-a43d-6b3220943f39&pd_rd_w=hnnbQ&pd_rd_wg=zy0Va&qid=1637781679&qsid=140-7325183-0404943&rd=1&s=videogames&sr=1-4&sres=B087VM5XC6%2CB09M94WS14%2CB09MC1VCPQ%2CB08H75RTZ8%2CB08VWQ74JZ%2CB093PPX7SY%2CB09MCQ4J78%2CB08NCFB34H%2CB08XX73P3N%2CB098D55397%2CB08P3YX827%2CB093RRXDFJ%2CB0921N4HVP%2CB091CYFL3C%2CB08NC5LQJ6%2CB099M4DB5R&linkCode=ll1&tag=inflationstation-20&linkId=be2d45ed5b30c58afd5612a630cc717f&language=en_US&ref_=as_li_ss_tl",
         },
         {
             type: "home",
@@ -197,6 +204,7 @@ const RAW_DATA: RawDataType = {
             year: 2020,
             img: "xbox_series_s",
             link: "https://en.wikipedia.org/wiki/Xbox_Series_X_and_Series_S",
+            affiliateLink: "https://www.amazon.com/Xbox-S/dp/B08G9J44ZN?brr=1&pd_rd_r=29c5976d-3641-4cad-a43d-6b3220943f39&pd_rd_w=hnnbQ&pd_rd_wg=zy0Va&qid=1637781679&qsid=140-7325183-0404943&rd=1&s=videogames&sr=1-4&sres=B087VM5XC6%2CB09M94WS14%2CB09MC1VCPQ%2CB08H75RTZ8%2CB08VWQ74JZ%2CB093PPX7SY%2CB09MCQ4J78%2CB08NCFB34H%2CB08XX73P3N%2CB098D55397%2CB08P3YX827%2CB093RRXDFJ%2CB0921N4HVP%2CB091CYFL3C%2CB08NC5LQJ6%2CB099M4DB5R&linkCode=ll1&tag=inflationstation-20&linkId=d4bec2b97a4803a614c6f23d8eb75dfc&language=en_US&ref_=as_li_ss_tl",
         },
         {
             type: "home",
@@ -479,6 +487,7 @@ const RAW_DATA: RawDataType = {
             year: 2021,
             img: "Nintendo-Switch-wJoyCons-BlRd-Standing-FL",
             link: "https://en.wikipedia.org/wiki/Nintendo_Switch#OLED_model",
+            affiliateLink: "https://www.amazon.com/gp/product/B098RKWHHZ/ref=as_li_qf_asin_il_tl?ie=UTF8&tag=inflationstation-20&creative=9325&linkCode=as2&creativeASIN=B098RKWHHZ&linkId=552853e8a3e14d8633e6ec58244230f4",
         },
         {
             type: "hybrid",
@@ -488,6 +497,7 @@ const RAW_DATA: RawDataType = {
             year: 2019,
             img: "Nintendo_Switch_Lite_representation",
             link: "https://en.wikipedia.org/wiki/Nintendo_Switch_Lite",
+            affiliateLink: "https://www.amazon.com/Nintendo-Switch-Lite-Yellow/dp/B092VT1JGD?th=1&linkCode=ll1&tag=inflationstation-20&linkId=df354b37163cf5f11f3046eca1bdd3ac&language=en_US&ref_=as_li_ss_tl",
         },
     ],
 }
@@ -521,6 +531,7 @@ export interface DataItemType {
     img600Jpeg: string,
     img800Jpeg: string,
     img1600Jpeg: string,
+    affiliateLink: string | null,
 }
 
 export interface DataType {
@@ -540,6 +551,7 @@ const DATA: DataType = {
             raw_prices,
             prices: raw_prices.map(p => p.toLocaleString()),
             orig_prices: data.raw_orig_prices.map(p => p.toLocaleString()),
+            affiliateLink: data.affiliateLink || null,
 
             img200Webp: "/" + glob.sync(`img/${data.img}*-200.webp`, {cwd: "public"})[0],
             img400Webp: "/" + glob.sync(`img/${data.img}*-400.webp`, {cwd: "public"})[0],
