@@ -146,7 +146,7 @@ const RAW_DATA: RawDataType = {
             year: 2020,
             img: "playstation-5-with-dualsense-front-product-shot-01-ps5-en-30jul20",
             link: "https://en.wikipedia.org/wiki/PlayStation_5",
-            affiliateLink: "https://www.amazon.com/PlayStation-5-Digital/dp/B09DFHJTF5?&linkCode=ll1&tag=inflationstation-20&linkId=743e59b41d1b621bf4621e98864dbe5b&language=en_US&ref_=as_li_ss_tl",
+            affiliateLink: "https://www.amazon.com/PlayStation-5-Console/dp/B09DFCB66S?&linkCode=ll1&tag=inflationstation-20&linkId=a4e36a4170b6071252dabb53421c4b94&language=en_US&ref_=as_li_ss_tl",
         },
         {
             type: "home",
@@ -156,7 +156,7 @@ const RAW_DATA: RawDataType = {
             year: 2020,
             img: "playstation-5-digital-edition-with-dualsense-front-product-shot-01-ps5-en-30jul20",
             link: "https://en.wikipedia.org/wiki/PlayStation_5",
-            affiliateLink: "",
+            affiliateLink: "https://www.amazon.com/PlayStation-5-Digital/dp/B09DFHJTF5?&linkCode=ll1&tag=inflationstation-20&linkId=743e59b41d1b621bf4621e98864dbe5b&language=en_US&ref_=as_li_ss_tl",
         },
         {
             type: "home",
