@@ -5,6 +5,7 @@ import Header from "../src/components/Header";
 import Content from "../src/components/Content";
 import useUrlSearchParams from "../src/util/useUrlSearchParams";
 import theme from "../src/theme";
+import {Box} from "@mui/material";
 
 export async function getStaticProps(context) {
     return {
@@ -35,18 +36,35 @@ export default function HomePage(props: HomePageProps) {
                         {".hide-without-js { display: none !important; }"}
                     </style>
                 </noscript>
+                <style>
+                    {`
+                    html, body, #__next { height: 100% }
+                    body {
+                        background-color: #f3e8ff;
+                    }
+                    `}
+                </style>
             </Head>
 
-            <Header data={data} />
+            <Box
+                sx={{
+                    minHeight: "100%",
+                    display: "flex",
+                    flexFlow: "column nowrap",
+                    justifyItems: "flex-end",
+                }}
+            >
+                <Header data={data} />
 
-            <Content
-                key={componentKey}
-                data={data}
-                urlSearchParams={urlSearchParams}
-                setUrlSearchParams={setUrlSearchParams}
-            />
+                <Content
+                    key={componentKey}
+                    data={data}
+                    urlSearchParams={urlSearchParams}
+                    setUrlSearchParams={setUrlSearchParams}
+                />
 
-            <Footer data={data}/>
+                <Footer data={data}/>
+            </Box>
         </>
     );
 }

@@ -30,7 +30,8 @@ export default function Footer(props: FooterProps) {
     const {data} = props;
     return (
         <Box component="footer" sx={{
-            backgroundColor: "#777777",
+            background: "linear-gradient(45deg, #2c0659, #4A148C)",
+            boxShadow: "0 0 8px black",
             color: "white",
         }}>
             <Box component="ul" sx={{

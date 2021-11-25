@@ -78,7 +78,12 @@ export default function Content(props: ContentProps) {
     />);
 
     return (
-        <Box component="main">
+        <Box
+            component="main"
+            sx={{
+                flexGrow: "1",
+            }}
+        >
             <FilterBar
                 filter={filter}
                 setFilter={setFilter}
