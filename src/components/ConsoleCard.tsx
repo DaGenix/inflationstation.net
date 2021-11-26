@@ -1,64 +1,104 @@
 import {DataItemType} from "../util/data";
-import {Box, Paper, useTheme} from "@mui/material";
+import React from "react";
+import {styled} from "linaria/react";
+import {css} from "linaria";
 
-type ConsoleCardProps = {
+const Paper = styled.div`
+    background-color: white;
+    border-radius: 4px;
+    text-align: center;
+    height: 100%;
+    padding: 8px;
+    display: flex;
+    flex-flow: column nowrap;
+    box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+`;
+
+const Spacer = styled.div`
+    flex-grow: 1;
+`
+
+const imgAspect = css`
+    aspect-ratio: 2 / 1;
+`;
+
+type ConsoleCardInnerProps = {
     item: DataItemType,
-    enabled: boolean,
 }
 
-export default function ConsoleCard(props: ConsoleCardProps) {
-    const theme = useTheme();
-    const {item, enabled} = props;
+const ConsoleCardInner = React.memo(function ConsoleCardInner(props: ConsoleCardInnerProps) {
+    const {item} = props;
     return (
-        <Paper sx={{
-            display: (!enabled) ? "none" : "flex",
-            flexFlow: "column nowrap",
-            textAlign:"center",
-            p: 1,
-        }}>
+        <Paper>
             <h3>{item.names[0]}</h3>
             <a href={item.link}>
                 <picture>
                     <source srcSet={`
-                            ${item.img200Webp} 200w,
-                            ${item.img400Webp} 400w,
-                            ${item.img600Webp} 600w,
-                            ${item.img800Webp} 800w,
-                            ${item.img1600Webp} 1600w
-                            `.replace(/\s+/gs, " ")}
-                            sizes={`(max-width: ${theme.breakpoints.values["sm"]}px) 70vw, 200px`}
+                                ${item.img200Webp} 200w,
+                                ${item.img400Webp} 400w,
+                                ${item.img600Webp} 600w,
+                                ${item.img800Webp} 800w,
+                                ${item.img1600Webp} 1600w
+                                `.replace(/\s+/gs, " ")}
                             type="image/webp"
                     />
                     <img
                         alt={`Picture of ${item.names[0]}`}
                         srcSet={`
-                             ${item.img200Jpeg} 200w,
-                             ${item.img400Jpeg} 400w,
-                             ${item.img600Jpeg} 600w,
-                             ${item.img800Jpeg} 800w,
-                             ${item.img1600Jpeg} 1600w
-                             `.replace(/\s+/gs, " ")}
-                        sizes={`(max-width: ${theme.breakpoints.values["sm"]}px) 70vw, 200px`}
+                                 ${item.img200Jpeg} 200w,
+                                 ${item.img400Jpeg} 400w,
+                                 ${item.img600Jpeg} 600w,
+                                 ${item.img800Jpeg} 800w,
+                                 ${item.img1600Jpeg} 1600w
+                                 `.replace(/\s+/gs, " ")}
                         src={item.img200Jpeg}
+                        className={imgAspect}
                     />
                 </picture>
             </a>
             <h1>${item.prices.join("/$")}</h1>
-            <Box sx={{flexGrow: 1}} />
-            {item.affiliateLink && <Box
-                component="a"
+            <Spacer />
+            {item.affiliateLink && <a
                 target="blank"
                 rel="noopener"
                 href={item.affiliateLink}
             >
                 Buy
-            </Box>}
-            <Box>
+            </a>}
+            <div>
                 {item.manufacturer} - {item.year}
-            </Box>
-            <Box>
+            </div>
+            <div>
                 Original Price{item.orig_prices.length > 1 ? "s" : ""}: ${item.orig_prices.join("/$")}
-            </Box>
+            </div>
         </Paper>
-    );
+    )
+});
+
+type WrapperProps = {
+    index: number,
+    enabled: boolean,
 }
+
+const Wrapper = styled.div<WrapperProps>`
+    flex: 1 0 275px;
+    order: ${(props: {index: number}) => props.index};
+    display: ${(props: {enabled: boolean}) => props.enabled ? "block" : "none"};
+`;
+
+type ConsoleCardProps = {
+    item: DataItemType,
+    enabled: boolean,
+    order: number,
+}
+
+const ConsoleCard = React.memo(function ConsoleCard(props: ConsoleCardProps) {
+    const {item} = props;
+    return (
+        <Wrapper enabled={props.enabled} index={props.order}>
+            <ConsoleCardInner item={item} />
+        </Wrapper>
+    );
+});
+
+export default ConsoleCard;

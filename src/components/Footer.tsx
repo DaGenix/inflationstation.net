@@ -1,26 +1,24 @@
-import {Box} from "@mui/material";
 import {DataType} from "../util/data";
+import React from "react";
+import {styled} from "linaria/react";
 
-const FooterLink = (props) => {
-    const {children, ...attribs} = props;
-    return (
-        <Box
-            component="a"
-            sx={{
-                color: "white",
-                textDecoration: "underline",
-                fontWeight: 700,
-                ":hover": {
-                    color: "white",
-                    fontWeight: 700,
-                }
-            }}
-            {...attribs}
-        >
-            {children}
-        </Box>
-    )
-}
+const FooterLink = styled.a`
+    color: white;
+    text-decoration: underline;
+    font-weight: 700;
+    
+    &:hover {
+        color: white;
+        font-weight: 700;
+    }
+`;
+
+const FooterBackground = styled.footer`
+    background: linear-gradient(45deg, #2c0659, #4A148C);
+    box-shadow: 0 0 8px black;
+    color: white;
+    padding: 16px 16px 16px 0;
+`;
 
 type FooterProps = {
     data: DataType,
@@ -29,16 +27,8 @@ type FooterProps = {
 export default function Footer(props: FooterProps) {
     const {data} = props;
     return (
-        <Box component="footer" sx={{
-            background: "linear-gradient(45deg, #2c0659, #4A148C)",
-            boxShadow: "0 0 8px black",
-            color: "white",
-        }}>
-            <Box component="ul" sx={{
-                py: 2,
-                px: 3,
-                m: 0,
-            }}>
+        <FooterBackground>
+            <ul>
                 <li>Wii U image by <FooterLink
                     href="https://commons.wikimedia.org/w/index.php?curid=23214469">Takimata</FooterLink></li>
                 <li>Xbox Series X and Xbox Series S image appear to be stock images, but I'm not sure of the source.
@@ -61,7 +51,7 @@ export default function Footer(props: FooterProps) {
                 <li>Inflation data from <FooterLink href="https://www.bls.gov/data/inflation_calculator.htm">Consumer
                     Price Index inflation calculator</FooterLink> and calculated
                     for {data.inflation_month}, {data.inflation_year}</li>
-            </Box>
-        </Box>
+            </ul>
+        </FooterBackground>
     );
-}
+};
