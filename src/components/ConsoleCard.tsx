@@ -11,7 +11,8 @@ export default function ConsoleCard(props: ConsoleCardProps) {
     const {item, enabled} = props;
     return (
         <Paper sx={{
-            display: (!enabled) ? "none" : undefined,
+            display: (!enabled) ? "none" : "flex",
+            flexFlow: "column nowrap",
             textAlign:"center",
             p: 1,
         }}>
@@ -42,11 +43,21 @@ export default function ConsoleCard(props: ConsoleCardProps) {
                     />
                 </picture>
             </a>
-            <Box component="ul" sx={{listStyle: "none", p: 0, m: 0}}>
-                <h1>${item.prices.join("/$")}</h1>
-                {item.affiliateLink && <a target="blank" rel="noopener" href={item.affiliateLink}>Buy</a>}
-                <div>{item.manufacturer} - {item.year}</div>
-                <div>Original Price{item.orig_prices.length > 1 ? "s" : ""}: ${item.orig_prices.join("/$")}</div>
+            <h1>${item.prices.join("/$")}</h1>
+            <Box sx={{flexGrow: 1}} />
+            {item.affiliateLink && <Box
+                component="a"
+                target="blank"
+                rel="noopener"
+                href={item.affiliateLink}
+            >
+                Buy
+            </Box>}
+            <Box>
+                {item.manufacturer} - {item.year}
+            </Box>
+            <Box>
+                Original Price{item.orig_prices.length > 1 ? "s" : ""}: ${item.orig_prices.join("/$")}
             </Box>
         </Paper>
     );
