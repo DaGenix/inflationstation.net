@@ -40,7 +40,10 @@ export default function HomePage(props: HomePageProps) {
                     {`
                     html, body, #__next { height: 100% }
                     body {
-                        background-color: #f3e8ff;
+                        background-color: #f1edf5;
+                    }
+                    * {
+                        margin: 0;
                     }
                     `}
                 </style>
