@@ -24,6 +24,7 @@ const imgClass = css`
 
 type ConsoleCardInnerProps = {
     item: DataItemType,
+    lazyLoad: boolean,
 }
 
 const ConsoleCardInner = React.memo(function ConsoleCardInner(props: ConsoleCardInnerProps) {
@@ -55,6 +56,7 @@ const ConsoleCardInner = React.memo(function ConsoleCardInner(props: ConsoleCard
                         width="300"
                         height="150"
                         className={imgClass}
+                        loading={props.lazyLoad ? "lazy" : undefined}
                     />
                 </picture>
             </a>
@@ -98,7 +100,7 @@ const ConsoleCard = React.memo(function ConsoleCard(props: ConsoleCardProps) {
     const {item} = props;
     return (
         <Wrapper enabled={props.enabled} index={props.order}>
-            <ConsoleCardInner item={item} />
+            <ConsoleCardInner item={item} lazyLoad={props.order >= 12} />
         </Wrapper>
     );
 });
