@@ -30,8 +30,8 @@ const Container = styled.div`
     gap: 8px;
     
     grid-template-columns: 1fr;
-    @media (min-width: 600px) {
-        grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+    @media (min-width: 700px) {
+        grid-template-columns: repeat(auto-fill, minmax(325px, 1fr));
     }
 `;
 

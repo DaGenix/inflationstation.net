@@ -18,8 +18,8 @@ const Spacer = styled.div`
     flex-grow: 1;
 `
 
-const imgAspect = css`
-    aspect-ratio: 2 / 1;
+const imgClass = css`
+    margin: auto;
 `;
 
 type ConsoleCardInnerProps = {
@@ -34,25 +34,27 @@ const ConsoleCardInner = React.memo(function ConsoleCardInner(props: ConsoleCard
             <a href={item.link}>
                 <picture>
                     <source srcSet={`
-                                ${item.img200Webp} 200w,
-                                ${item.img400Webp} 400w,
-                                ${item.img600Webp} 600w,
-                                ${item.img800Webp} 800w,
-                                ${item.img1600Webp} 1600w
+                                ${item.img300Webp} 1x,
+                                ${item.img600Webp} 2x,
+                                ${item.img900Webp} 3x,
+                                ${item.img1200Webp} 4x,
+                                ${item.img1800Webp} 6x
                                 `.replace(/\s+/gs, " ")}
                             type="image/webp"
                     />
                     <img
                         alt={`Picture of ${item.names[0]}`}
                         srcSet={`
-                                 ${item.img200Jpeg} 200w,
-                                 ${item.img400Jpeg} 400w,
-                                 ${item.img600Jpeg} 600w,
-                                 ${item.img800Jpeg} 800w,
-                                 ${item.img1600Jpeg} 1600w
+                                 ${item.img300Jpeg} 1x,
+                                 ${item.img600Jpeg} 2x,
+                                 ${item.img900Jpeg} 3x,
+                                 ${item.img1200Jpeg} 4x,
+                                 ${item.img1800Jpeg} 6x
                                  `.replace(/\s+/gs, " ")}
-                        src={item.img200Jpeg}
-                        className={imgAspect}
+                        src={item.img300Jpeg}
+                        width="300"
+                        height="150"
+                        className={imgClass}
                     />
                 </picture>
             </a>
