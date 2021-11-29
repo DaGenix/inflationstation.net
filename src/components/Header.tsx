@@ -38,7 +38,8 @@ export default function Header(props: HeaderProps) {
     return (
         <FooterBackground>
             <h1>Console Prices Adjusted for Inflation</h1>
-            {isOpen &&
+            {
+                isOpen &&
                 <p>
                     Prices shown have been adjusted for inflation since the consoles
                     were initially released. Some consoles are still available at the same price
@@ -58,18 +59,19 @@ export default function Header(props: HeaderProps) {
                     </Expand>
                 </p>
             }
-            {!isOpen &&
-            <p>
-                Prices shown have been adjusted for inflation since the consoles
-                were initially released...&nbsp;
-                <Expand
-                    onClick={(e) => {
-                        setOpen(true);
-                    }}
-                >
-                    More
-                </Expand>
-            </p>
+            {
+                !isOpen &&
+                <p>
+                    Prices shown have been adjusted for inflation since the consoles
+                    were initially released...&nbsp;
+                    <Expand
+                        onClick={(e) => {
+                            setOpen(true);
+                        }}
+                    >
+                        More
+                    </Expand>
+                </p>
             }
         </FooterBackground>
     );
