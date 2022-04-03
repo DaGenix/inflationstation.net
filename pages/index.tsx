@@ -6,6 +6,7 @@ import Content from "../src/components/Content";
 import useFilterState from "../src/util/useFilterState";
 import useFilterStateSyncer from "../src/util/useFilterStateSyncer";
 import DATA, {DataType} from "../src/util/data";
+import {css} from "linaria";
 
 export async function getStaticProps(context) {
     return {
@@ -14,6 +15,49 @@ export async function getStaticProps(context) {
         },
     }
 }
+
+export const GLOBALS = css`
+    :global() {
+        /*
+          Josh's Custom CSS Reset
+          https://www.joshwcomeau.com/css/custom-css-reset/
+        */
+        *, *::before, *::after {
+          box-sizing: border-box;
+        }
+        * {
+          margin: 0;
+        }
+        html, body, #__next {
+          height: 100%;
+        }
+        body {
+          line-height: 1.5;
+          -webkit-font-smoothing: antialiased;
+        }
+        img, picture, video, canvas, svg {
+          display: block;
+          max-width: 100%;
+        }
+        input, button, textarea, select {
+          font: inherit;
+        }
+        p, h1, h2, h3, h4, h5, h6 {
+          overflow-wrap: break-word;
+        }
+        #root, #__next {
+          isolation: isolate;
+        }
+
+        /* My stuff */
+        html {
+            background-color: #f1edf5;
+        }
+        html {
+            font-family: sans-serif;
+        }
+    }
+`;
 
 type ContentWrapperProps = {
     data: DataType,
@@ -50,48 +94,6 @@ export default function HomePage(props) {
                         {".hide-without-js { display: none !important; }"}
                     </style>
                 </noscript>
-                <style>
-                    {`
-                    /*
-                      Josh's Custom CSS Reset
-                      https://www.joshwcomeau.com/css/custom-css-reset/
-                    */
-                    *, *::before, *::after {
-                      box-sizing: border-box;
-                    }
-                    * {
-                      margin: 0;
-                    }
-                    html, body, #__next {
-                      height: 100%;
-                    }
-                    body {
-                      line-height: 1.5;
-                      -webkit-font-smoothing: antialiased;
-                    }
-                    img, picture, video, canvas, svg {
-                      display: block;
-                      max-width: 100%;
-                    }
-                    input, button, textarea, select {
-                      font: inherit;
-                    }
-                    p, h1, h2, h3, h4, h5, h6 {
-                      overflow-wrap: break-word;
-                    }
-                    #root, #__next {
-                      isolation: isolate;
-                    }
-                   
-                    /* My stuff */ 
-                    html {
-                        background-color: #f1edf5;
-                    }
-                    html {
-                        font-family: sans-serif;
-                    }
-                    `}
-                </style>
             </Head>
 
             <Container>
