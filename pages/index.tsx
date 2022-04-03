@@ -54,7 +54,7 @@ export const GLOBALS = css`
             background-color: #f1edf5;
         }
         html {
-            font-family: sans-serif;
+            font-family: 'Manrope', sans-serif;
         }
     }
 `;
