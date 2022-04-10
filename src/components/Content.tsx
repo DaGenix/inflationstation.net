@@ -3,6 +3,7 @@ import FilterBar from "./FilterBar/FilterBar";
 import {FilterState, UpdateFilterState} from "../util/useFilterState";
 import CardContainer from "./CardContainer";
 import {DataType} from "../util/data";
+import Divider from "./Divider";
 
 const Main = styled.main`
     flex-grow: 1;
@@ -20,6 +21,7 @@ export default function Content(props: ContentProps) {
     return (
         <Main>
             <FilterBar filterState={filterState} updateFilterState={updateFilterState} />
+            <Divider />
             <CardContainer data={data} filterState={filterState} updateFilterState={updateFilterState} />
         </Main>
     );

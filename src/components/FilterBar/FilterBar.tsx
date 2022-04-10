@@ -6,7 +6,7 @@ import SelectOrder from "./SelectOrder";
 import SelectOrderBy from "./SelectOrderBy";
 
 const Bar = styled.div`
-    padding: 8px 8px 0 0;
+    margin: 8px 0;
     display: flex;
     flex-flow: row wrap;
     justify-content: flex-end;
@@ -18,6 +18,11 @@ const SortOptionsGroup = styled.div`
     display: flex;
     flex-flow: row nowrap;
     gap: 8px;
+               
+    width: 100%; 
+    @media (min-width: 600px) {
+        width: unset;
+    }
 `;
 
 type FilterBarProps = {
@@ -28,15 +33,17 @@ type FilterBarProps = {
 export default function FilterBar(props: FilterBarProps) {
     const {filterState, updateFilterState} = props;
     return (
-        <Bar
-            className="hide-without-js"
-        >
-            <FilterInput filter={filterState.filter} updateFilterState={updateFilterState} />
-            <SelectInclude include={filterState.include} updateFilterState={updateFilterState} />
-            <SortOptionsGroup>
-                <SelectOrderBy orderBy={filterState.orderBy} updateFilterState={updateFilterState} />
-                <SelectOrder order={filterState.order} updateFilterState={updateFilterState} />
-            </SortOptionsGroup>
-        </Bar>
+        <>
+            <Bar
+                className="hide-without-js"
+            >
+                <FilterInput filter={filterState.filter} updateFilterState={updateFilterState} />
+                <SelectInclude include={filterState.include} updateFilterState={updateFilterState} />
+                <SortOptionsGroup>
+                    <SelectOrderBy orderBy={filterState.orderBy} updateFilterState={updateFilterState} />
+                    <SelectOrder order={filterState.order} updateFilterState={updateFilterState} />
+                </SortOptionsGroup>
+            </Bar>
+        </>
     );
 }

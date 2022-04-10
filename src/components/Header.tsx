@@ -14,10 +14,7 @@ const Expand = styled.button`
 
 const FooterBackground = styled.header`
     color: white;
-    background: linear-gradient(45deg, #4A148C, #6A1B9A);
-    box-shadow: 0 0 8px black;
     text-align: center;
-    padding: 16px 8px;
 `;
 
 type HeaderProps = {

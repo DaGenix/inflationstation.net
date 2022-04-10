@@ -1,6 +1,10 @@
 import {DataType} from "../util/data";
-import React from "react";
 import {styled} from "linaria/react";
+import Divider from "./Divider";
+
+const FooterArea = styled.footer`
+    color: white;
+`;
 
 const FooterLink = styled.a`
     color: white;
@@ -13,11 +17,9 @@ const FooterLink = styled.a`
     }
 `;
 
-const FooterBackground = styled.footer`
-    background: linear-gradient(45deg, #2c0659, #4A148C);
-    box-shadow: 0 0 8px black;
-    color: white;
-    padding: 16px 16px 16px 0;
+const List = styled.ul`
+    padding: 0;
+    margin: 0px 16px;
 `;
 
 type FooterProps = {
@@ -27,8 +29,9 @@ type FooterProps = {
 export default function Footer(props: FooterProps) {
     const {data} = props;
     return (
-        <FooterBackground>
-            <ul>
+        <FooterArea>
+            <Divider/>
+            <List>
                 <li>Wii U image by <FooterLink
                     href="https://commons.wikimedia.org/w/index.php?curid=23214469">Takimata</FooterLink></li>
                 <li>Xbox Series X and Xbox Series S image appear to be stock images, but I'm not sure of the source.
@@ -51,7 +54,7 @@ export default function Footer(props: FooterProps) {
                 <li>Inflation data from <FooterLink href="https://www.bls.gov/data/inflation_calculator.htm">Consumer
                     Price Index inflation calculator</FooterLink> and calculated
                     for {data.inflation_month}, {data.inflation_year}</li>
-            </ul>
-        </FooterBackground>
+            </List>
+        </FooterArea>
     );
 };

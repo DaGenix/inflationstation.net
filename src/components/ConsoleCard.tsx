@@ -85,7 +85,7 @@ type WrapperProps = {
 }
 
 const Wrapper = styled.div<WrapperProps>`
-    flex: 1 0 275px;
+    // flex: 1 0 275px;
     order: ${(props: {index: number}) => props.index};
     display: ${(props: {enabled: boolean}) => props.enabled ? "block" : "none"};
 `;

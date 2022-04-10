@@ -28,10 +28,11 @@ const Container = styled.div`
     padding: 8px;
     display: grid;
     gap: 8px;
-    
-    grid-template-columns: 1fr;
+   
+    justify-content: center; 
+    grid-template-columns: 325px;
     @media (min-width: 700px) {
-        grid-template-columns: repeat(auto-fill, minmax(325px, 1fr));
+        grid-template-columns: repeat(auto-fill, 325px);
     }
 `;
 
