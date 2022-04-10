@@ -7,6 +7,7 @@ import useFilterState from "../src/util/useFilterState";
 import useFilterStateSyncer from "../src/util/useFilterStateSyncer";
 import DATA, {DataType} from "../src/util/data";
 import {css} from "linaria";
+import {theme} from "../src/components/theme";
 
 export async function getStaticProps(context) {
     return {
@@ -23,38 +24,54 @@ export const GLOBALS = css`
           https://www.joshwcomeau.com/css/custom-css-reset/
         */
         *, *::before, *::after {
-          box-sizing: border-box;
+            box-sizing: border-box;
         }
         * {
-          margin: 0;
-        }
-        html, body, #__next {
-          height: 100%;
+            margin: 0;
         }
         body {
-          line-height: 1.5;
-          -webkit-font-smoothing: antialiased;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
         }
         img, picture, video, canvas, svg {
-          display: block;
-          max-width: 100%;
+            display: block;
+            max-width: 100%;
         }
         input, button, textarea, select {
-          font: inherit;
+            font: inherit;
         }
         p, h1, h2, h3, h4, h5, h6 {
-          overflow-wrap: break-word;
+            overflow-wrap: break-word;
         }
-        #root, #__next {
-          isolation: isolate;
+        #__next {
+            isolation: isolate;
         }
 
         /* My stuff */
-        html {
-            background-color: #f1edf5;
+        html, body, #__next {
+          min-height: 100vh;
         }
         html {
             font-family: 'Manrope', sans-serif;
+        }
+        html {
+            background-color: ${theme.colors.background};
+        }
+        h1 {
+            font-size: 32px;
+            @media (min-width: 700px) {
+                font-size: 64px;
+            }
+        }
+        h2 {
+            font-size: 24px;
+        }
+        a {
+            color: ${theme.colors.linkText};
+            font-weight: 700;
+        }
+        a:hover {
+            text-decoration-thickness: 3px;
         }
     }
 `;
@@ -67,11 +84,11 @@ function ContentWrapper(props: ContentWrapperProps) {
     const {data} = props;
     const [filterState, updateFilterState] = useFilterState();
     useFilterStateSyncer(filterState, updateFilterState);
-    return <Content data={data} filterState={filterState} updateFilterState={updateFilterState} />;
+    return <Content data={data} filterState={filterState} updateFilterState={updateFilterState}/>;
 }
 
-const Container = styled.header`
-    min-height: 100%;
+const Container = styled.main`
+    min-height: 100vh;
     display: flex;
     flex-flow: column nowrap;
 `;
@@ -87,19 +104,14 @@ export default function HomePage(props) {
             <Head>
                 <title>Console Prices Adjusted for Inflation</title>
                 <meta name="description" content="Game console prices adjusted for inflation"/>
-                <meta name="theme-color" content="#6A1B9A" />
-                <meta name="viewport" content="initial-scale=1, width=device-width" />
-                <noscript>
-                    <style>
-                        {".hide-without-js { display: none !important; }"}
-                    </style>
-                </noscript>
+                <meta name="theme-color" content="#6A1B9A"/>
+                <meta name="viewport" content="initial-scale=1, width=device-width"/>
             </Head>
 
             <Container>
-                <Header data={data} />
-                <ContentWrapper data={data} />
-                <Footer data={data} />
+                <Header data={data}/>
+                <ContentWrapper data={data}/>
+                <Footer data={data}/>
             </Container>
         </>
     );

@@ -5,6 +5,8 @@ import {IncludeType} from "../util/urlUtil";
 import {useMemo} from "react";
 import ConsoleCard from "./ConsoleCard";
 import NoResults from "./NoResults";
+import FilterBar from "./FilterBar/FilterBar";
+import {theme} from "./theme";
 
 const filterMatches = (item: DataItemType, filter: string): boolean => {
     if (filter === "") {
@@ -25,13 +27,14 @@ const includeMatches = (item: DataItemType, include: IncludeType): boolean => {
 }
 
 const Container = styled.div`
-    padding: 8px;
     display: grid;
-    gap: 8px;
-    
-    grid-template-columns: 1fr;
-    @media (min-width: 700px) {
-        grid-template-columns: repeat(auto-fill, minmax(325px, 1fr));
+    gap: ${theme.gap}px;
+    padding: ${theme.gap}px 0px;
+
+    justify-content: center;
+    grid-template-columns: [start] 325px [end];
+    @media (min-width: ${theme.breakpoint}) {
+        grid-template-columns: [start] repeat(auto-fill, 325px) [end];
     }
 `;
 
@@ -105,6 +108,7 @@ export default function CardContainer(props: CardContainerProps) {
     return (
         <>
             <Container>
+                <FilterBar filterState={filterState} updateFilterState={updateFilterState} />
                 {cards}
             </Container>
 
