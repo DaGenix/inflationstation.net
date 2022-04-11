@@ -1,6 +1,8 @@
 import {DataType} from "../util/data";
 import React, {useState} from "react";
 import {styled} from "linaria/react";
+import ShowIfJs from "./ShowIfJs";
+import {theme} from "./theme";
 
 const Expand = styled.button`
     color: white;
@@ -10,12 +12,23 @@ const Expand = styled.button`
     font-weight: 700;
     text-decoration: underline;
     cursor: pointer;
+
+    &:hover {
+        text-decoration-thickness: 3px;
+    }
 `;
 
-const FooterBackground = styled.header`
+const HeaderArea = styled.header`
     color: white;
     text-align: center;
+    background-color: ${theme.colors.primary};
+    padding: ${2 * theme.gap}px 0;
 `;
+
+const TextArea = styled.p`
+    width: calc(min(100% - ${2 * theme.gap}px, ${theme.breakpoint}));
+    margin: auto;
+`
 
 type HeaderProps = {
     data: DataType,
@@ -33,11 +46,11 @@ export default function Header(props: HeaderProps) {
     const todaysSwitchPrice = switchItem.prices[0];
     const switchDiscount = (switchItem.raw_prices[0] - switchItem.raw_orig_prices[0]).toLocaleString();
     return (
-        <FooterBackground>
+        <HeaderArea>
             <h1>Console Prices Adjusted for Inflation</h1>
             {
                 isOpen &&
-                <p>
+                <TextArea>
                     Prices shown have been adjusted for inflation since the consoles
                     were initially released. Some consoles are still available at the same price
                     they were released at. Due to inflation, these consoles have effectively
@@ -54,22 +67,24 @@ export default function Header(props: HeaderProps) {
                     >
                         Less
                     </Expand>
-                </p>
+                </TextArea>
             }
             {
                 !isOpen &&
-                <p>
-                    Prices shown have been adjusted for inflation since the consoles
-                    were initially released...&nbsp;
-                    <Expand
-                        onClick={(e) => {
-                            setOpen(true);
-                        }}
-                    >
-                        More
-                    </Expand>
-                </p>
+                <TextArea>
+                    Prices shown have been adjusted for inflation.
+                    <ShowIfJs component="span">
+                        ..&nbsp;
+                        <Expand
+                            onClick={(e) => {
+                                setOpen(true);
+                            }}
+                        >
+                            More
+                        </Expand>
+                    </ShowIfJs>
+                </TextArea>
             }
-        </FooterBackground>
+        </HeaderArea>
     );
 };

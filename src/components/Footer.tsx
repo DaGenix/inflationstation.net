@@ -1,16 +1,17 @@
 import {DataType} from "../util/data";
 import {styled} from "linaria/react";
-import Divider from "./Divider";
+import {theme} from "./theme";
 
 const FooterArea = styled.footer`
     color: white;
+    background-color: ${theme.colors.primary}
 `;
 
 const FooterLink = styled.a`
     color: white;
     text-decoration: underline;
     font-weight: 700;
-    
+
     &:hover {
         color: white;
         font-weight: 700;
@@ -18,8 +19,8 @@ const FooterLink = styled.a`
 `;
 
 const List = styled.ul`
-    padding: 0;
-    margin: 0px 16px;
+    padding: ${theme.gap}px;
+    margin: 0px ${2 * theme.gap}px;
 `;
 
 type FooterProps = {
@@ -30,7 +31,6 @@ export default function Footer(props: FooterProps) {
     const {data} = props;
     return (
         <FooterArea>
-            <Divider/>
             <List>
                 <li>Wii U image by <FooterLink
                     href="https://commons.wikimedia.org/w/index.php?curid=23214469">Takimata</FooterLink></li>

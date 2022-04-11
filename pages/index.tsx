@@ -51,9 +51,21 @@ export const GLOBALS = css`
           min-height: 100vh;
         }
         html {
-            padding: 8px;
+            // padding: 8px;
             font-family: 'Manrope', sans-serif;
-            background: linear-gradient(45deg, #8A1B9A, #4A148C);
+            // background: linear-gradient(45deg, #8A1B9A, #4A148C);
+        }
+        h1 {
+            font-size: 32px;
+            @media (min-width: 700px) {
+                font-size: 64px;
+            }
+        }
+        h2 {
+            font-size: 24px;
+        }
+        a:hover {
+            text-decoration-thickness: 3px;
         }
     }
 `;

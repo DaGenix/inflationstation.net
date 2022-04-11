@@ -1,7 +1,6 @@
 import {styled} from "linaria/react";
 
 const Container = styled.div`
-    color: white;
     text-align: center;
     padding: 0 8px 24px 8px;
 `;

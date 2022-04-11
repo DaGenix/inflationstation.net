@@ -1,12 +1,12 @@
 import {styled} from "linaria/react";
-import FilterBar from "./FilterBar/FilterBar";
 import {FilterState, UpdateFilterState} from "../util/useFilterState";
 import CardContainer from "./CardContainer";
 import {DataType} from "../util/data";
-import Divider from "./Divider";
+import {theme} from "./theme";
 
 const Main = styled.main`
     flex-grow: 1;
+    padding: 0 ${theme.gap}px 0 ${theme.gap}px;
 `;
 
 type ContentProps = {
@@ -20,8 +20,6 @@ export default function Content(props: ContentProps) {
 
     return (
         <Main>
-            <FilterBar filterState={filterState} updateFilterState={updateFilterState} />
-            <Divider />
             <CardContainer data={data} filterState={filterState} updateFilterState={updateFilterState} />
         </Main>
     );

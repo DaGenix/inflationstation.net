@@ -2,16 +2,16 @@ import {DataItemType} from "../util/data";
 import React from "react";
 import {styled} from "linaria/react";
 import {css} from "linaria";
+import {theme} from "./theme";
 
 const Paper = styled.div`
-    background-color: white;
-    border-radius: 4px;
-    text-align: center;
     height: 100%;
-    padding: 8px;
+    padding: ${theme.gap}px;
     display: flex;
     flex-flow: column nowrap;
-    box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+    align-items: center;
+    border: 1px solid black;
+    border-radius: ${theme.borderRadius};
 `;
 
 const Spacer = styled.div`
@@ -31,7 +31,7 @@ const ConsoleCardInner = React.memo(function ConsoleCardInner(props: ConsoleCard
     const {item} = props;
     return (
         <Paper>
-            <h3>{item.names[0]}</h3>
+            <h2>{item.names[0]}</h2>
             <a href={item.link}>
                 <picture>
                     <source srcSet={`
@@ -60,7 +60,7 @@ const ConsoleCardInner = React.memo(function ConsoleCardInner(props: ConsoleCard
                     />
                 </picture>
             </a>
-            <h1>${item.prices.join("/$")}</h1>
+            <h2>${item.prices.join("/$")}</h2>
             <Spacer />
             {item.affiliateLink && <a
                 target="blank"
@@ -85,7 +85,6 @@ type WrapperProps = {
 }
 
 const Wrapper = styled.div<WrapperProps>`
-    // flex: 1 0 275px;
     order: ${(props: {index: number}) => props.index};
     display: ${(props: {enabled: boolean}) => props.enabled ? "block" : "none"};
 `;

@@ -2,9 +2,16 @@ import {UpdateFilterState} from "../../util/useFilterState";
 import React, {useCallback} from "react";
 import {styled} from "linaria/react";
 import {css} from "linaria";
+import {theme} from "../theme";
 
 const Input = styled.input`
     height: 2rem;
+    border: 1px solid black;
+    border-radius: ${theme.borderRadius};
+
+    &:focus-visible {
+        outline: ${theme.focusOutlineSize} solid ${theme.colors.primary};
+    }
 `
 
 type FilterInputProps = {
@@ -22,10 +29,9 @@ const FilterInput = React.memo(function FilterInput(props: FilterInputProps) {
             className={css`
                 display: flex;
                 flex-flow: column nowrap;
-                color: white;
                
                 width: 100%; 
-                @media (min-width: 600px) {
+                @media (min-width: 700px) {
                     width: unset;
                 }
             `}

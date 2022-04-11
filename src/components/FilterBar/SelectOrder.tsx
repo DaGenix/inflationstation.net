@@ -3,9 +3,17 @@ import {UpdateFilterState} from "../../util/useFilterState";
 import React, {useCallback} from "react";
 import {styled} from "linaria/react";
 import {css} from "linaria";
+import {theme} from "../theme";
 
 const Select = styled.select`
     height: 2rem;
+    border: 1px solid black;
+    border-radius: ${theme.borderRadius};
+    background-color: unset;
+
+    &:focus-visible {
+        outline: ${theme.focusOutlineSize} solid ${theme.colors.primary};
+    }
 `
 
 type SelectOrderProps = {
@@ -23,7 +31,6 @@ const SelectOrder = React.memo(function SelectOrder(props: SelectOrderProps) {
             className={css`
                 display: flex;
                 flex-flow: column nowrap;
-                color: white;
             
                 flex: 1;
             `}

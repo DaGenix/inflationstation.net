@@ -17,14 +17,19 @@ export default class MyDocument extends Document {
                 gtag('config', 'G-6JK3H6KGR0');
                 `
             }} />
+            <style>
+                {".show-if-js{display:contents}"}
+                {".show-no-js{display:none}"}
+            </style>
             <noscript>
                 <style>
-                    {".hide-without-js { display: none !important; }"}
+                    {".show-if-js{display:none}"}
+                    {".show-no-js{display:contents}"}
                 </style>
             </noscript>
             <link rel="preconnect" href="https://fonts.googleapis.com" />
             <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
-            <link href="https://fonts.googleapis.com/css2?family=Manrope&display=swap" rel="stylesheet" />
+            <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap" rel="stylesheet" />
         </Head>
         <body>
           <Main />
