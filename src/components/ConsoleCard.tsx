@@ -7,6 +7,7 @@ import {theme} from "./theme";
 const Paper = styled.div`
     height: 100%;
     padding: ${theme.gap}px;
+    text-align: center;
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
