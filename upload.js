@@ -30,7 +30,7 @@ async function main() {
         let cacheControl;
         if (f.endsWith("html")) {
             contentType = "text/html";
-            cacheControl = "max-age=600";
+            cacheControl = "public, max-age=300";
             meta = {
                 "X-Content-Type-Options": "nosniff",
                 "X-Frame-Options": "DENY",
