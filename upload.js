@@ -38,27 +38,27 @@ async function main() {
             };
         } else if (f.endsWith(".ico")) {
             contentType = "image/vnd.microsoft.icon";
-            cacheControl = "max-age=86400";
+            cacheControl = "public, max-age=86400";
             meta = {};
         } else if (f.endsWith(".jpg")) {
             contentType = "image/jpeg";
-            cacheControl = "max-age=31536000";
+            cacheControl = "public, max-age=31536000, immutable";
             meta = {};
         } else if (f.endsWith(".webp")) {
             contentType = "image/webp";
-            cacheControl = "max-age=31536000";
+            cacheControl = "public, max-age=31536000, immutable";
             meta = {};
         } else if (f.endsWith(".js")) {
             contentType = "application/javascript";
-            cacheControl = "max-age=31536000";
+            cacheControl = "public, max-age=31536000, immutable";
             meta = {};
         } else if (f.endsWith(".css")) {
             contentType = "text/css";
-            cacheControl = "max-age=31536000";
+            cacheControl = "public, max-age=31536000, immutable";
             meta = {};
         } else if (f.endsWith(".json")) {
             contentType = "application/json";
-            cacheControl = "max-age=31536000";
+            cacheControl = "public, max-age=31536000, immutable";
             meta = {};
         } else {
             throw new Error(`Can't figure out content type or cache-control for: ${f}`);
