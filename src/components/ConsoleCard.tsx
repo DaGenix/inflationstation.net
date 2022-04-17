@@ -33,6 +33,13 @@ const ConsoleCardInner = React.memo(function ConsoleCardInner(props: ConsoleCard
     return (
         <Paper>
             <h2>{item.names[0]}</h2>
+            {item.affiliateLink && <a
+                target="blank"
+                rel="noopener"
+                href={item.affiliateLink}
+            >
+                Buy
+            </a>}
             <Spacer />
             <a href={item.link}>
                 <picture>
@@ -63,13 +70,6 @@ const ConsoleCardInner = React.memo(function ConsoleCardInner(props: ConsoleCard
                 </picture>
             </a>
             <h2>${item.prices.join("/$")}</h2>
-            {item.affiliateLink && <a
-                target="blank"
-                rel="noopener"
-                href={item.affiliateLink}
-            >
-                Buy
-            </a>}
             <div>
                 {item.manufacturer} - {item.year}
             </div>
