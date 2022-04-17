@@ -1,20 +1,8 @@
 import {IncludeType, validateIncludeOrDefault} from "../../util/urlUtil";
 import {UpdateFilterState} from "../../util/useFilterState";
 import React, {useCallback} from "react";
-import {styled} from "linaria/react";
 import {css} from "linaria";
-import {theme} from "../theme";
-
-const Select = styled.select`
-    height: 2rem;
-    border: 1px solid ${theme.colors.primary};
-    border-radius: ${theme.borderRadius};
-    background-color: unset;
-
-    &:focus-visible {
-        outline: ${theme.focusOutlineSize} solid ${theme.colors.secondary};
-    }
-`
+import Select from "./Select";
 
 type SelectIncludeProps = {
     include: IncludeType,
@@ -34,7 +22,7 @@ const SelectInclude = React.memo(function SelectInclude(props: SelectIncludeProp
 
                 width: 100%;
                 @media (min-width: 700px) {
-                    width: unset;
+                    width: 100px;
                 }
             `}
         >

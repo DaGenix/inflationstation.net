@@ -23,7 +23,7 @@ const SortOptionsGroup = styled.div`
 
     width: 100%;
     @media (min-width: ${theme.breakpoint}) {
-        width: unset;
+        width: 250px;
     }
 `;
 
