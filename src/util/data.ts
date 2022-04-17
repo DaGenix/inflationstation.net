@@ -40,7 +40,7 @@ const RAW_DATA: RawDataType = {
         {
             type: "home",
             raw_orig_prices: [199],
-            names: ["NES", "Nintendo Entertainment System"],
+            names: ["Nintendo Entertainment System", "NES"],
             manufacturer: "Nintendo",
             year: 1985,
             img: "NES-Console-Set",
