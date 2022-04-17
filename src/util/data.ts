@@ -136,7 +136,6 @@ const RAW_DATA: RawDataType = {
             year: 2013,
             img: "Sony-PlayStation-4-wController",
             link: "https://en.wikipedia.org/wiki/PlayStation_4",
-            affiliateLink: "https://www.amazon.com/PlayStation-Console-Light-System-Greatest-4/dp/B077QT6K94?pd_rd_w=0awnv&pf_rd_p=8000bc8c-c3b0-4816-9f00-5038ff54385c&pf_rd_r=YAGS23AHDSMT30EQ8JBR&pd_rd_r=fd7d6ea1-6875-4aa6-9a56-2528e2af38ec&pd_rd_wg=nJ662&pd_rd_i=B077QT6K94&linkCode=ll1&tag=inflationstation-20&linkId=c94d8f5eac6f638c11d30e146baf5e31&language=en_US&ref_=as_li_ss_tl",
         },
         {
             type: "home",
@@ -184,7 +183,6 @@ const RAW_DATA: RawDataType = {
             year: 2013,
             img: "Xbox-One-Console-wController-FL",
             link: "https://en.wikipedia.org/wiki/Xbox_One",
-            affiliateLink: "https://www.amazon.com/Xbox-One-1TB-Console-Previous-Generation/dp/B089M5L82M?th=1&linkCode=ll1&tag=inflationstation-20&linkId=6ac798e08cbf0044fe9f7b6828d4dd73&language=en_US&ref_=as_li_ss_tl",
         },
         {
             type: "home",
