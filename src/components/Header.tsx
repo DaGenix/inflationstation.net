@@ -51,7 +51,7 @@ export default function Header(props: HeaderProps) {
             {
                 isOpen &&
                 <TextArea>
-                    Prices shown have been adjusted for inflation since the consoles
+                    Prices have been adjusted for inflation since the consoles
                     were initially released. Some consoles are still available at the same price
                     they were released at. Due to inflation, these consoles have effectively
                     become cheaper even though their price hasn't changed. For example, the
@@ -72,7 +72,7 @@ export default function Header(props: HeaderProps) {
             {
                 !isOpen &&
                 <TextArea>
-                    Prices shown have been adjusted for inflation
+                    Prices have been adjusted for inflation
                     <ShowIfJs component="span">
                         ...&nbsp;
                         <Expand
