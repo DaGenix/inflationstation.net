@@ -104,7 +104,7 @@ export default function HomePage(props) {
             <Head>
                 <title>Console Prices Adjusted for Inflation</title>
                 <meta name="description" content="Game console prices adjusted for inflation"/>
-                <meta name="theme-color" content="#6A1B9A"/>
+                <meta name="theme-color" content={theme.colors.primary}/>
                 <meta name="viewport" content="initial-scale=1, width=device-width"/>
             </Head>
 
