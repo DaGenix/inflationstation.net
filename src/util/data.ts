@@ -486,6 +486,18 @@ const RAW_DATA: RawDataType = {
         {
             type: "handheld",
             raw_orig_prices: [69],
+            names: ["Neo Geo Pocket Color"],
+            manufacturer: "SNK",
+            year: 1999,
+            month: "Aug",
+            img: "Neo-Geo-Pocket-Color-Blue-Left",
+            link: "https://en.wikipedia.org/wiki/Neo_Geo_Pocket_Color",
+        },
+        /*
+        Appears to have been Japan only
+        {
+            type: "handheld",
+            raw_orig_prices: [69],
             names: ["Neo Geo Pocket"],
             manufacturer: "SNK",
             year: 1999,
@@ -493,6 +505,7 @@ const RAW_DATA: RawDataType = {
             img: "Neo-Geo-Pocket-Anthra-Left",
             link: "https://en.wikipedia.org/wiki/Neo_Geo_Pocket",
         },
+        */
         /*
         Appears to have been Japan only
         {
