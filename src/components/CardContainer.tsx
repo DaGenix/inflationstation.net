@@ -7,6 +7,7 @@ import ConsoleCard from "./ConsoleCard";
 import NoResults from "./NoResults";
 import FilterBar from "./FilterBar/FilterBar";
 import {theme} from "./theme";
+import {compareYearMonth} from "../util/yearMonth";
 
 const filterMatches = (item: DataItemType, filter: string): boolean => {
     if (filter === "") {
@@ -58,7 +59,7 @@ export default function CardContainer(props: CardContainerProps) {
             reorderedItems.sort(({item: a}, {item: b}) => {
                 switch (orderBy) {
                     case "year":
-                        return a.year - b.year;
+                        return compareYearMonth(a.release_year_month, b.release_year_month)
                     case "price":
                         return a.raw_prices[0] - b.raw_prices[0];
                     case "orig-price":

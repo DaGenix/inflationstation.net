@@ -53,7 +53,7 @@ export default function Footer(props: FooterProps) {
                     href="http://vgsales.wikia.com/wiki/Launch_price">Video Game Sales Wiki</FooterLink></li>
                 <li>Inflation data from <FooterLink href="https://www.bls.gov/data/inflation_calculator.htm">Consumer
                     Price Index inflation calculator</FooterLink> and calculated
-                    for {data.inflation_month_name}, {data.inflation_year}</li>
+                    for {data.inflation_month_name}, {data.inflation_year_month.year}</li>
             </List>
         </FooterArea>
     );

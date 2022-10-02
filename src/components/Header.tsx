@@ -41,7 +41,7 @@ export default function Header(props: HeaderProps) {
     if (!switchItem) {
         throw new Error("Couldn't find item for Switch");
     }
-    const switchYear = switchItem.year;
+    const switchYear = switchItem.release_year_month.year;
     const origSwitchPrice = switchItem.orig_prices[0];
     const todaysSwitchPrice = switchItem.prices[0];
     const switchDiscount = (switchItem.raw_prices[0] - switchItem.raw_orig_prices[0]).toLocaleString();
