@@ -71,7 +71,7 @@ const ConsoleCardInner = React.memo(function ConsoleCardInner(props: ConsoleCard
             </a>
             <h2>${item.prices.join("/$")}</h2>
             <div>
-                {item.manufacturer} - {item.year}
+                {item.manufacturer} - {item.release_year_month.year}
             </div>
             <div>
                 Original Price{item.orig_prices.length > 1 ? "s" : ""}: ${item.orig_prices.join("/$")}
