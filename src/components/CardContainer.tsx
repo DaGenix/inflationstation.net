@@ -1,13 +1,12 @@
-import {FilterState, UpdateFilterState} from "../util/useFilterState";
 import {styled} from "linaria/react";
 import {DataItemType, DataType} from "../util/data";
-import {IncludeType} from "../util/urlUtil";
 import {useMemo} from "react";
 import ConsoleCard from "./ConsoleCard";
 import NoResults from "./NoResults";
 import FilterBar from "./FilterBar/FilterBar";
 import {theme} from "./theme";
 import {compareYearMonth} from "../util/yearMonth";
+import {FilterState, IncludeType} from "../util/filterState";
 
 const filterMatches = (item: DataItemType, filter: string): boolean => {
     if (filter === "") {
@@ -42,11 +41,11 @@ const Container = styled.div`
 type CardContainerProps = {
     data: DataType,
     filterState: FilterState,
-    updateFilterState: UpdateFilterState,
+    setFilterState: (FilterState) => void,
 }
 
 export default function CardContainer(props: CardContainerProps) {
-    const {data, filterState, updateFilterState} = props;
+    const {data, filterState, setFilterState} = props;
     const {filter, include, orderBy, order} = filterState;
 
     const itemsWithOrder = useMemo(
@@ -109,7 +108,7 @@ export default function CardContainer(props: CardContainerProps) {
     return (
         <>
             <Container>
-                <FilterBar filterState={filterState} updateFilterState={updateFilterState} />
+                <FilterBar filterState={filterState} setFilterState={setFilterState} />
                 {cards}
             </Container>
 

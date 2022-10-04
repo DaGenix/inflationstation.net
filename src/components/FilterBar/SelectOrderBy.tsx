@@ -1,18 +1,17 @@
-import {OrderByType, validateOrderByOrDefault} from "../../util/urlUtil";
-import {UpdateFilterState} from "../../util/useFilterState";
 import React, {useCallback} from "react";
 import {css} from "linaria";
 import Select from "./Select";
+import {FilterState, validateOrderByOrDefault} from "../../util/filterState";
 
 type SelectOrderByProps = {
-    orderBy: OrderByType,
-    updateFilterState: UpdateFilterState,
+    filterState: FilterState,
+    setFilterState: (FilterState) => void,
 }
 
 const SelectOrderBy = React.memo(function SelectOrderBy(props: SelectOrderByProps) {
-    const {orderBy, updateFilterState} = props;
+    const {filterState, setFilterState} = props;
 
-    const onSetOrderBy = useCallback(e => updateFilterState({orderBy: validateOrderByOrDefault(e.target.value)}), []);
+    const onSetOrderBy = useCallback(e => setFilterState({...filterState, orderBy: validateOrderByOrDefault(e.target.value)}), [filterState, setFilterState]);
 
     return (
         <div
@@ -26,7 +25,7 @@ const SelectOrderBy = React.memo(function SelectOrderBy(props: SelectOrderByProp
             <label htmlFor="orderby">Order by</label>
             <Select
                 id="orderby"
-                value={orderBy}
+                value={filterState.orderBy}
                 onChange={onSetOrderBy}
             >
                 <option value="year">Year</option>

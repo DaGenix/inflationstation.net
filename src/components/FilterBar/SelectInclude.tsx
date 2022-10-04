@@ -1,18 +1,17 @@
-import {IncludeType, validateIncludeOrDefault} from "../../util/urlUtil";
-import {UpdateFilterState} from "../../util/useFilterState";
 import React, {useCallback} from "react";
 import {css} from "linaria";
 import Select from "./Select";
+import {FilterState, validateIncludeOrDefault} from "../../util/filterState";
 
 type SelectIncludeProps = {
-    include: IncludeType,
-    updateFilterState: UpdateFilterState,
+    filterState: FilterState,
+    setFilterState: (FilterState) => void,
 }
 
 const SelectInclude = React.memo(function SelectInclude(props: SelectIncludeProps) {
-    const {include, updateFilterState} = props;
+    const {filterState, setFilterState} = props;
 
-    const onSetInclude = useCallback(e => updateFilterState({include: validateIncludeOrDefault(e.target.value)}), []);
+    const onSetInclude = useCallback(e => setFilterState({...filterState, include: validateIncludeOrDefault(e.target.value)}), [filterState, setFilterState]);
 
     return (
         <div
@@ -29,7 +28,7 @@ const SelectInclude = React.memo(function SelectInclude(props: SelectIncludeProp
             <label htmlFor="include">Include</label>
             <Select
                 id="include"
-                value={include}
+                value={filterState.include}
                 onChange={onSetInclude}
             >
                 <option value="all">All</option>

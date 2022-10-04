@@ -1,18 +1,17 @@
-import {OrderType} from "../../util/urlUtil";
-import {UpdateFilterState} from "../../util/useFilterState";
 import React, {useCallback} from "react";
 import {css} from "linaria";
 import Select from "./Select";
+import {FilterState} from "../../util/filterState";
 
 type SelectOrderProps = {
-    order: OrderType,
-    updateFilterState: UpdateFilterState,
+    filterState: FilterState,
+    setFilterState: (FilterState) => void,
 }
 
 const SelectOrder = React.memo(function SelectOrder(props: SelectOrderProps) {
-    const {order, updateFilterState} = props;
+    const {filterState, setFilterState} = props;
 
-    const onSetAscending = useCallback(e => updateFilterState({order: e.target.value === "asc" ? "asc" : "desc"}), []);
+    const onSetAscending = useCallback(e => setFilterState({...filterState, order: e.target.value === "asc" ? "asc" : "desc"}), [filterState, setFilterState]);
 
     return (
         <div
@@ -26,7 +25,7 @@ const SelectOrder = React.memo(function SelectOrder(props: SelectOrderProps) {
             <label htmlFor="order">Direction</label>
             <Select
                 id="order"
-                value={order}
+                value={filterState.order}
                 onChange={onSetAscending}
             >
                 <option value="asc">Ascending</option>
