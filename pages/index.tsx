@@ -3,11 +3,11 @@ import {styled} from "linaria/react";
 import Footer from "../src/components/Footer";
 import Header from "../src/components/Header";
 import Content from "../src/components/Content";
-import useFilterState from "../src/util/useFilterState";
-import useFilterStateSyncer from "../src/util/useFilterStateSyncer";
 import DATA, {DataType} from "../src/util/data";
 import {css} from "linaria";
 import {theme} from "../src/components/theme";
+import useUrlState from "../src/util/useUrlState";
+import {DEFAULT_FILTER_STATE, deserializeUrlSearchParams, serializeUrlSearchParams} from "../src/util/filterState";
 
 export async function getStaticProps(context) {
     return {
@@ -82,9 +82,12 @@ type ContentWrapperProps = {
 
 function ContentWrapper(props: ContentWrapperProps) {
     const {data} = props;
-    const [filterState, updateFilterState] = useFilterState();
-    useFilterStateSyncer(filterState, updateFilterState);
-    return <Content data={data} filterState={filterState} updateFilterState={updateFilterState}/>;
+    const [filterState, setFilterState] = useUrlState(
+        DEFAULT_FILTER_STATE,
+        deserializeUrlSearchParams,
+        serializeUrlSearchParams,
+    );
+    return <Content data={data} filterState={filterState} setFilterState={setFilterState}/>;
 }
 
 const Container = styled.main`

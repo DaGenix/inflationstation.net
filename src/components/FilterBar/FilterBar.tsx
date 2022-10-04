@@ -1,11 +1,11 @@
 import {styled} from "linaria/react";
-import {FilterState, UpdateFilterState} from "../../util/useFilterState";
 import FilterInput from "./FilterInput";
 import SelectInclude from "./SelectInclude";
 import SelectOrder from "./SelectOrder";
 import SelectOrderBy from "./SelectOrderBy";
 import ShowIfJs from "../ShowIfJs";
 import {theme} from "../theme";
+import {FilterState} from "../../util/filterState";
 
 const Bar = styled.div`
     display: flex;
@@ -29,20 +29,20 @@ const SortOptionsGroup = styled.div`
 
 type FilterBarProps = {
     filterState: FilterState,
-    updateFilterState: UpdateFilterState,
+    setFilterState: (FilterState) => void,
 }
 
 export default function FilterBar(props: FilterBarProps) {
-    const {filterState, updateFilterState} = props;
+    const {filterState, setFilterState} = props;
     return (
         <>
             <ShowIfJs>
                 <Bar>
-                    <FilterInput filter={filterState.filter} updateFilterState={updateFilterState} />
-                    <SelectInclude include={filterState.include} updateFilterState={updateFilterState} />
+                    <FilterInput filterState={filterState} setFilterState={setFilterState} />
+                    <SelectInclude filterState={filterState} setFilterState={setFilterState} />
                     <SortOptionsGroup>
-                        <SelectOrderBy orderBy={filterState.orderBy} updateFilterState={updateFilterState} />
-                        <SelectOrder order={filterState.order} updateFilterState={updateFilterState} />
+                        <SelectOrderBy filterState={filterState} setFilterState={setFilterState} />
+                        <SelectOrder filterState={filterState} setFilterState={setFilterState} />
                     </SortOptionsGroup>
                 </Bar>
             </ShowIfJs>

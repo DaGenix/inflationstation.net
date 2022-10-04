@@ -1,8 +1,8 @@
-import {UpdateFilterState} from "../../util/useFilterState";
 import React, {useCallback} from "react";
 import {styled} from "linaria/react";
 import {css} from "linaria";
 import {theme} from "../theme";
+import {FilterState} from "../../util/filterState";
 
 const Input = styled.input`
     height: 2rem;
@@ -15,14 +15,14 @@ const Input = styled.input`
 `
 
 type FilterInputProps = {
-    filter: string,
-    updateFilterState: UpdateFilterState,
+    filterState: FilterState,
+    setFilterState: (FilterState) => void,
 }
 
 const FilterInput = React.memo(function FilterInput(props: FilterInputProps) {
-    const {filter, updateFilterState} = props;
+    const {filterState, setFilterState} = props;
 
-    const onSetFilter = useCallback(e => updateFilterState({filter: e.target.value}), []);
+    const onSetFilter = useCallback(e => setFilterState({...filterState, filter: e.target.value}), [filterState, setFilterState]);
 
     return (
         <div
@@ -39,7 +39,7 @@ const FilterInput = React.memo(function FilterInput(props: FilterInputProps) {
             <label htmlFor="filter">Filter</label>
             <Input
                 id="filter"
-                value={filter}
+                value={filterState.filter}
                 onChange={onSetFilter}
             />
         </div>
