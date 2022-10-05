@@ -8,7 +8,7 @@ type SelectOrderByProps = {
     setFilterState: (FilterState) => void,
 }
 
-const SelectOrderBy = React.memo(function SelectOrderBy(props: SelectOrderByProps) {
+const SelectOrderBy = (props: SelectOrderByProps): JSX.Element => {
     const {filterState, setFilterState} = props;
 
     const onSetOrderBy = useCallback(e => setFilterState({...filterState, orderBy: validateOrderByOrDefault(e.target.value)}), [filterState, setFilterState]);
@@ -35,6 +35,6 @@ const SelectOrderBy = React.memo(function SelectOrderBy(props: SelectOrderByProp
             </Select>
         </div>
     )
-});
+};
 
 export default SelectOrderBy;

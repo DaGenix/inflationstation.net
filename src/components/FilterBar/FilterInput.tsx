@@ -19,7 +19,7 @@ type FilterInputProps = {
     setFilterState: (FilterState) => void,
 }
 
-const FilterInput = React.memo(function FilterInput(props: FilterInputProps) {
+const FilterInput = (props: FilterInputProps): JSX.Element => {
     const {filterState, setFilterState} = props;
 
     const onSetFilter = useCallback(e => setFilterState({...filterState, filter: e.target.value}), [filterState, setFilterState]);
@@ -44,6 +44,6 @@ const FilterInput = React.memo(function FilterInput(props: FilterInputProps) {
             />
         </div>
     )
-});
+};
 
 export default FilterInput;

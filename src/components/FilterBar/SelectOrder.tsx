@@ -8,7 +8,7 @@ type SelectOrderProps = {
     setFilterState: (FilterState) => void,
 }
 
-const SelectOrder = React.memo(function SelectOrder(props: SelectOrderProps) {
+const SelectOrder = (props: SelectOrderProps): JSX.Element => {
     const {filterState, setFilterState} = props;
 
     const onSetAscending = useCallback(e => setFilterState({...filterState, order: e.target.value === "asc" ? "asc" : "desc"}), [filterState, setFilterState]);
@@ -33,6 +33,6 @@ const SelectOrder = React.memo(function SelectOrder(props: SelectOrderProps) {
             </Select>
         </div>
     )
-});
+};
 
 export default SelectOrder;

@@ -8,7 +8,7 @@ type SelectIncludeProps = {
     setFilterState: (FilterState) => void,
 }
 
-const SelectInclude = React.memo(function SelectInclude(props: SelectIncludeProps) {
+const SelectInclude = (props: SelectIncludeProps): JSX.Element => {
     const {filterState, setFilterState} = props;
 
     const onSetInclude = useCallback(e => setFilterState({...filterState, include: validateIncludeOrDefault(e.target.value)}), [filterState, setFilterState]);
@@ -37,6 +37,6 @@ const SelectInclude = React.memo(function SelectInclude(props: SelectIncludeProp
             </Select>
         </div>
     )
-});
+};
 
 export default SelectInclude;
