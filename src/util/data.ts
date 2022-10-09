@@ -39,7 +39,7 @@ interface RawDataItemType {
     names: string[],
     manufacturer: string,
     year: number,
-    month: number | null,
+    month: number,
     img: string,
     link: string,
     affiliateLink?: string,
@@ -325,8 +325,10 @@ const RAW_DATA: RawDataType = {
             raw_orig_prices: [299],
             names: ["Intellivision"],
             manufacturer: "Mattel",
-            year: 1979,
-            month: null,
+            year: 1980,
+            // source: https://www.atariarchive.org/mattel-intellivision-game-release-dates/
+            // I picked February 1980 since that is when national advertising stared.
+            month: 2,
             img: "Intellivision-Console-Set",
             link: "https://en.wikipedia.org/wiki/Intellivision",
         },
