@@ -50,6 +50,8 @@ export default function CardContainer(props: CardContainerProps) {
     const {filter, include, orderBy, order} = filterState;
     const {data, inflationData} = useData();
 
+    const asOf = filterState.asOf === "mostRecent" ? data.inflation_year_month : filterState.asOf;
+
     const itemsWithOrder = useMemo(
         () => {
             // Re-order all of the items into the desired order. Along with the
@@ -62,7 +64,7 @@ export default function CardContainer(props: CardContainerProps) {
                     case "year":
                         return compareYearMonth(a.release_year_month, b.release_year_month)
                     case "price":
-                        return priceAfterInflation(inflationData, a, data.inflation_year_month)[0] - priceAfterInflation(inflationData, b, data.inflation_year_month)[0];
+                        return priceAfterInflation(inflationData, a, asOf)[0] - priceAfterInflation(inflationData, b, asOf)[0];
                     case "orig-price":
                         return a.orig_prices[0] - b.orig_prices[0];
                     case "manufacturer":
@@ -93,7 +95,7 @@ export default function CardContainer(props: CardContainerProps) {
         () => itemsWithOrder.map(({item, index, enabled}) => {
             return {item, index, enabled: enabled && filterMatches(item, filter)}
         }),
-        [itemsWithOrder, filter]
+        [itemsWithOrder, filter, asOf]
     );
 
     const hasCards = useMemo(
@@ -105,6 +107,7 @@ export default function CardContainer(props: CardContainerProps) {
         order={index}
         item={item}
         enabled={enabled}
+        asOf={asOf}
     />);
 
     return (

@@ -3,11 +3,15 @@ import React from "react";
 import {styled} from "linaria/react";
 import {css} from "linaria";
 import {theme} from "./theme";
-import {YearMonth} from "../util/yearMonth";
+import {greaterThanOrEqual, YearMonth} from "../util/yearMonth";
 import {useData} from "../util/useData";
 import {DataItemType} from "../util/loadData";
 
-const Paper = styled.div`
+type PaperProps = {
+    current: boolean,
+}
+
+const Paper = styled.div<PaperProps>`
     height: 100%;
     padding: ${theme.gap}px;
     text-align: center;
@@ -16,6 +20,7 @@ const Paper = styled.div`
     align-items: center;
     border: 1px solid ${theme.colors.primary};
     border-radius: ${theme.borderRadius};
+    opacity: ${(props: {current: boolean}) => props.current ? "1" : "0.5"};
 `;
 
 const Spacer = styled.div`
@@ -29,13 +34,21 @@ const imgClass = css`
 type ConsoleCardInnerProps = {
     item: DataItemType,
     lazyLoad: boolean,
+    asOf: YearMonth,
 }
 
 const ConsoleCardInner = React.memo(function ConsoleCardInner(props: ConsoleCardInnerProps) {
-    const {item} = props;
-    const {data, inflationData} = useData();
+    const {item, asOf} = props;
+    const {inflationData} = useData();
+    const current = greaterThanOrEqual(asOf, item.release_year_month);
+    let price: string;
+    if (current) {
+        price = "$" + priceAfterInflation(inflationData, item, asOf).map(s => s.toLocaleString()).join("/$");
+    } else {
+        price = "Not Released";
+    }
     return (
-        <Paper>
+        <Paper current={current}>
             <h2>{item.names[0]}</h2>
             {item.affiliateLink && <a
                 target="blank"
@@ -73,7 +86,7 @@ const ConsoleCardInner = React.memo(function ConsoleCardInner(props: ConsoleCard
                     />
                 </picture>
             </a>
-            <h2>${priceAfterInflation(inflationData, item, data.inflation_year_month).map(s => s.toLocaleString()).join("/$")}</h2>
+            <h2>{price}</h2>
             <div>
                 {item.manufacturer} - {item.release_year_month.year}
             </div>
@@ -98,13 +111,14 @@ type ConsoleCardProps = {
     item: DataItemType,
     enabled: boolean,
     order: number,
+    asOf: YearMonth,
 }
 
 const ConsoleCard = React.memo(function ConsoleCard(props: ConsoleCardProps) {
-    const {item} = props;
+    const {item, asOf} = props;
     return (
         <Wrapper enabled={props.enabled} index={props.order}>
-            <ConsoleCardInner item={item} lazyLoad={props.order >= 12} />
+            <ConsoleCardInner item={item} lazyLoad={props.order >= 12} asOf={asOf} />
         </Wrapper>
     );
 });

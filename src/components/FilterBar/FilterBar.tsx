@@ -6,6 +6,7 @@ import SelectOrderBy from "./SelectOrderBy";
 import ShowIfJs from "../ShowIfJs";
 import {theme} from "../theme";
 import {FilterState} from "../../util/filterState";
+import AsOf from "./AsOf";
 
 const Bar = styled.div`
     display: flex;
@@ -38,6 +39,7 @@ export default function FilterBar(props: FilterBarProps) {
         <>
             <ShowIfJs>
                 <Bar>
+                    <AsOf filterState={filterState} setFilterState={setFilterState} />
                     <FilterInput filterState={filterState} setFilterState={setFilterState} />
                     <SelectInclude filterState={filterState} setFilterState={setFilterState} />
                     <SortOptionsGroup>
