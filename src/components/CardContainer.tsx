@@ -1,5 +1,5 @@
 import {styled} from "linaria/react";
-import {DataItemType, DataType} from "../util/data";
+import {priceAfterInflation} from "../util/data";
 import {useMemo} from "react";
 import ConsoleCard from "./ConsoleCard";
 import NoResults from "./NoResults";
@@ -7,6 +7,8 @@ import FilterBar from "./FilterBar/FilterBar";
 import {theme} from "./theme";
 import {compareYearMonth} from "../util/yearMonth";
 import {FilterState, IncludeType} from "../util/filterState";
+import {useData} from "../util/useData";
+import {DataItemType} from "../util/loadData";
 
 const filterMatches = (item: DataItemType, filter: string): boolean => {
     if (filter === "") {
@@ -39,14 +41,14 @@ const Container = styled.div`
 `;
 
 type CardContainerProps = {
-    data: DataType,
     filterState: FilterState,
     setFilterState: (FilterState) => void,
 }
 
 export default function CardContainer(props: CardContainerProps) {
-    const {data, filterState, setFilterState} = props;
+    const {filterState, setFilterState} = props;
     const {filter, include, orderBy, order} = filterState;
+    const {data, inflationData} = useData();
 
     const itemsWithOrder = useMemo(
         () => {
@@ -60,9 +62,9 @@ export default function CardContainer(props: CardContainerProps) {
                     case "year":
                         return compareYearMonth(a.release_year_month, b.release_year_month)
                     case "price":
-                        return a.raw_prices[0] - b.raw_prices[0];
+                        return priceAfterInflation(inflationData, a, data.inflation_year_month)[0] - priceAfterInflation(inflationData, b, data.inflation_year_month)[0];
                     case "orig-price":
-                        return a.raw_orig_prices[0] - b.raw_orig_prices[0];
+                        return a.orig_prices[0] - b.orig_prices[0];
                     case "manufacturer":
                         return a.manufacturer.localeCompare(b.manufacturer);
                     default:
@@ -79,7 +81,8 @@ export default function CardContainer(props: CardContainerProps) {
             // doesn't change often or quickly.
             const itemsWithOrder: {item: DataItemType, index: number, enabled: boolean}[] = [];
             reorderedItems.forEach(({item, originalIndex}, index) => {
-                itemsWithOrder[originalIndex] = {item, index, enabled: includeMatches(item, include)}
+                const enabled = includeMatches(item, include);
+                itemsWithOrder[originalIndex] = {item, index, enabled}
             })
 
             return itemsWithOrder;

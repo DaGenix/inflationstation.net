@@ -1,8 +1,11 @@
-import {DataItemType} from "../util/data";
+import {priceAfterInflation} from "../util/data";
 import React from "react";
 import {styled} from "linaria/react";
 import {css} from "linaria";
 import {theme} from "./theme";
+import {YearMonth} from "../util/yearMonth";
+import {useData} from "../util/useData";
+import {DataItemType} from "../util/loadData";
 
 const Paper = styled.div`
     height: 100%;
@@ -30,6 +33,7 @@ type ConsoleCardInnerProps = {
 
 const ConsoleCardInner = React.memo(function ConsoleCardInner(props: ConsoleCardInnerProps) {
     const {item} = props;
+    const {data, inflationData} = useData();
     return (
         <Paper>
             <h2>{item.names[0]}</h2>
@@ -69,12 +73,12 @@ const ConsoleCardInner = React.memo(function ConsoleCardInner(props: ConsoleCard
                     />
                 </picture>
             </a>
-            <h2>${item.prices.join("/$")}</h2>
+            <h2>${priceAfterInflation(inflationData, item, data.inflation_year_month).map(s => s.toLocaleString()).join("/$")}</h2>
             <div>
                 {item.manufacturer} - {item.release_year_month.year}
             </div>
             <div>
-                Original Price{item.orig_prices.length > 1 ? "s" : ""}: ${item.orig_prices.join("/$")}
+                Original Price{item.orig_prices.length > 1 ? "s" : ""}: ${item.orig_prices.map(s => s.toLocaleString()).join("/$")}
             </div>
         </Paper>
     )

@@ -1,6 +1,5 @@
 import {styled} from "linaria/react";
 import CardContainer from "./CardContainer";
-import {DataType} from "../util/data";
 import {theme} from "./theme";
 import {FilterState} from "../util/filterState";
 
@@ -10,17 +9,16 @@ const Main = styled.main`
 `;
 
 type ContentProps = {
-    data: DataType,
     filterState: FilterState,
     setFilterState: (FilterState) => void,
 }
 
 export default function Content(props: ContentProps) {
-    const {data, filterState, setFilterState} = props;
+    const {filterState, setFilterState} = props;
 
     return (
         <Main>
-            <CardContainer data={data} filterState={filterState} setFilterState={setFilterState} />
+            <CardContainer filterState={filterState} setFilterState={setFilterState} />
         </Main>
     );
 }
