@@ -3,16 +3,18 @@ import {styled} from "linaria/react";
 import Footer from "../src/components/Footer";
 import Header from "../src/components/Header";
 import Content from "../src/components/Content";
-import DATA, {DataType} from "../src/util/data";
 import {css} from "linaria";
 import {theme} from "../src/components/theme";
 import useUrlState from "../src/util/useUrlState";
 import {DEFAULT_FILTER_STATE, deserializeUrlSearchParams, serializeUrlSearchParams} from "../src/util/filterState";
+import {WithDataContext} from "../src/util/useData";
+import {DataType, InflationData, loadData, loadInflationData} from "../src/util/loadData";
 
 export async function getStaticProps(context) {
     return {
         props: {
-            data: DATA
+            data: loadData(),
+            inflationData: loadInflationData(),
         },
     }
 }
@@ -76,20 +78,6 @@ export const GLOBALS = css`
     }
 `;
 
-type ContentWrapperProps = {
-    data: DataType,
-}
-
-function ContentWrapper(props: ContentWrapperProps) {
-    const {data} = props;
-    const [filterState, setFilterState] = useUrlState(
-        DEFAULT_FILTER_STATE,
-        deserializeUrlSearchParams,
-        serializeUrlSearchParams,
-    );
-    return <Content data={data} filterState={filterState} setFilterState={setFilterState}/>;
-}
-
 const Container = styled.main`
     min-height: 100vh;
     display: flex;
@@ -98,10 +86,16 @@ const Container = styled.main`
 
 type HomePageProps = {
     data: DataType,
+    inflationData: InflationData,
 }
 
-export default function HomePage(props) {
-    const {data} = props;
+export default function HomePage(props: HomePageProps) {
+    const {data, inflationData} = props;
+    const [filterState, setFilterState] = useUrlState(
+        DEFAULT_FILTER_STATE,
+        deserializeUrlSearchParams,
+        serializeUrlSearchParams,
+    );
     return (
         <>
             <Head>
@@ -112,9 +106,11 @@ export default function HomePage(props) {
             </Head>
 
             <Container>
-                <Header data={data}/>
-                <ContentWrapper data={data}/>
-                <Footer data={data}/>
+                <WithDataContext data={data} inflationData={inflationData}>
+                    <Header/>
+                    <Content filterState={filterState} setFilterState={setFilterState}/>
+                    <Footer/>
+                </WithDataContext>
             </Container>
         </>
     );

@@ -1,8 +1,9 @@
-import {DataType} from "../util/data";
+import {priceAfterInflation} from "../util/data";
 import React, {useState} from "react";
 import {styled} from "linaria/react";
 import ShowIfJs from "./ShowIfJs";
 import {theme} from "./theme";
+import {useData} from "../util/useData";
 
 const Expand = styled.button`
     color: white;
@@ -30,21 +31,17 @@ const TextArea = styled.p`
     margin: auto;
 `
 
-type HeaderProps = {
-    data: DataType,
-}
-
-export default function Header(props: HeaderProps) {
-    const {data} = props;
+export default function Header() {
     const [isOpen, setOpen] = useState(false);
+    const {data, inflationData} = useData();
     const switchItem = data.data.find(i => i.names[0] === "Nintendo Switch");
     if (!switchItem) {
         throw new Error("Couldn't find item for Switch");
     }
     const switchYear = switchItem.release_year_month.year;
     const origSwitchPrice = switchItem.orig_prices[0];
-    const todaysSwitchPrice = switchItem.prices[0];
-    const switchDiscount = (switchItem.raw_prices[0] - switchItem.raw_orig_prices[0]).toLocaleString();
+    const todaysSwitchPrice = priceAfterInflation(inflationData, switchItem, data.inflation_year_month)[0];
+    const switchDiscount = (todaysSwitchPrice - origSwitchPrice).toLocaleString();
     return (
         <HeaderArea>
             <h1>Console Prices Adjusted for Inflation</h1>
@@ -55,9 +52,9 @@ export default function Header(props: HeaderProps) {
                     were initially released. Some consoles are still available at the same price
                     they were released at. Due to inflation, these consoles have effectively
                     become cheaper even though their price hasn't changed. For example, the
-                    Switch was released in {switchYear} for ${origSwitchPrice}.
-                    Due to inflation, ${origSwitchPrice} of goods in {switchYear} would now
-                    cost ${todaysSwitchPrice}. Since the Switch's price hasn't changed,
+                    Switch was released in {switchYear} for ${origSwitchPrice.toLocaleString()}.
+                    Due to inflation, ${origSwitchPrice.toLocaleString()} of goods in {switchYear} would now
+                    cost ${todaysSwitchPrice.toLocaleString()}. Since the Switch's price hasn't changed,
                     its effectively become ${switchDiscount} cheaper than it was when
                     it was released.&nbsp;
                     <Expand
