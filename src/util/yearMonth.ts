@@ -35,3 +35,42 @@ export const formatYearMonth = (yearMonth: YearMonth): string => {
     const monthString = `${yearMonth.month}`.padStart(2, "0");
     return `${yearMonth.year}-${monthString}`;
 }
+
+export const yearMonthsEqual = (a: YearMonth, b: YearMonth): boolean => {
+    return a.year === b.year && a.month === b.month;
+}
+
+export const greaterThanOrEqual = (left: YearMonth, right: YearMonth): boolean => {
+    if (left.year > right.year) {
+        return true;
+    } else if (left.year === right.year && left.month >= right.month) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+export const monthsBetween = (from: YearMonth, to: YearMonth): number => {
+    // Examples:
+    // 2020-01 => 2022-10 === 34
+    // 2020-10 => 2022-01 === 16
+    const years = to.year - from.year;
+    const months = to.month - from.month;
+    if (months >= 0) {
+        return years * 12 + months;
+    } else {
+        return (years - 1) * 12 + (months + 12);
+    }
+}
+
+export const addMonths = (from: YearMonth, months: number): YearMonth => {
+    const addYears = Math.floor(months / 12);
+    const addMonths = months % 12;
+    const year = from.year + addYears;
+    const month = from.month + addMonths;
+    if (month <= 12) {
+        return {year, month}
+    } else {
+        return {year: year + 1, month: month - 12}
+    }
+}
