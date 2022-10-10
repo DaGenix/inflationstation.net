@@ -5,10 +5,39 @@ import ConsoleCard from "./ConsoleCard";
 import NoResults from "./NoResults";
 import FilterBar from "./FilterBar/FilterBar";
 import {theme} from "./theme";
-import {compareYearMonth} from "../util/yearMonth";
-import {FilterState, IncludeType} from "../util/filterState";
+import {compareYearMonth, YearMonth} from "../util/yearMonth";
+import {FilterState, IncludeType, OrderByType, OrderType} from "../util/filterState";
 import {useData} from "../util/useData";
-import {DataItemType} from "../util/loadData";
+import {DataItemType, InflationData} from "../util/loadData";
+
+const calculateSortedPositions = (inflationData: InflationData, items: DataItemType[], asOf: YearMonth, orderBy: OrderByType, order: OrderType): number[] => {
+    // Create two lists - significantly, the _items_ in each list are the same.
+    // The first list we leave unsorted while the second list is sorted.
+    // After we sort the second list, we record the position of every item in that list.
+    // Then, we can iterate through the unsorted items in the first list in order to create a
+    // mapping of the unsorted position to the sorted position.
+    const unsortedItemsWithIndices: [DataItemType, number][] = items.map(item => [item, -1]);
+    const sortedItemsWithIndices = [...unsortedItemsWithIndices];
+    sortedItemsWithIndices.sort(([a, ], [b, ]) => {
+        switch (orderBy) {
+            case "year":
+                return compareYearMonth(a.release_year_month, b.release_year_month)
+            case "price":
+                return priceAfterInflation(inflationData, a, asOf)[0] - priceAfterInflation(inflationData, b, asOf)[0];
+            case "orig-price":
+                return a.orig_prices[0] - b.orig_prices[0];
+            case "manufacturer":
+                return a.manufacturer.localeCompare(b.manufacturer);
+            default:
+                throw new Error(`Unexpected orderBy value: ${orderBy}`);
+        }
+    });
+    if (order === "desc") {
+        sortedItemsWithIndices.reverse();
+    }
+    sortedItemsWithIndices.forEach((entry, index) => entry[1] = index);
+    return unsortedItemsWithIndices.map(([_, index]) => index);
+}
 
 const filterMatches = (item: DataItemType, filter: string): boolean => {
     if (filter === "") {
@@ -26,6 +55,12 @@ const includeMatches = (item: DataItemType, include: IncludeType): boolean => {
     } else {
         return item.type === "hybrid" || item.type === include;
     }
+}
+
+const calculateEnabledItems = (items: DataItemType[], filter: string, include: IncludeType): boolean[] => {
+    return items.map(item => {
+        return filterMatches(item, filter) && includeMatches(item, include);
+    })
 }
 
 const Container = styled.div`
@@ -52,63 +87,31 @@ export default function CardContainer(props: CardContainerProps) {
 
     const asOf = filterState.asOf === "mostRecent" ? data.inflation_year_month : filterState.asOf;
 
-    const itemsWithOrder = useMemo(
-        () => {
-            // Re-order all of the items into the desired order. Along with the
-            // item, we also store the items _original_ position.
-            const reorderedItems: {item: DataItemType, originalIndex: number}[] = data.data.map((item, originalIndex) => {
-                return {item, originalIndex}
-            })
-            reorderedItems.sort(({item: a}, {item: b}) => {
-                switch (orderBy) {
-                    case "year":
-                        return compareYearMonth(a.release_year_month, b.release_year_month)
-                    case "price":
-                        return priceAfterInflation(inflationData, a, asOf)[0] - priceAfterInflation(inflationData, b, asOf)[0];
-                    case "orig-price":
-                        return a.orig_prices[0] - b.orig_prices[0];
-                    case "manufacturer":
-                        return a.manufacturer.localeCompare(b.manufacturer);
-                    default:
-                        throw new Error(`Unexpected orderBy value: ${orderBy}`);
-                }
-            });
-            if (order === "desc") {
-                reorderedItems.reverse();
-            }
+    const sortedPositions = useMemo(
+        () => calculateSortedPositions(inflationData, data.data, asOf, orderBy, order),
+        [inflationData, data.data, asOf, orderBy, order]);
 
-            // Create a new list - where all of the items are put back into their original
-            // positions - but also now include their reordered index as well. We also
-            // calculate the "enabled" flag based on the includes value here since it
-            // doesn't change often or quickly.
-            const itemsWithOrder: {item: DataItemType, index: number, enabled: boolean}[] = [];
-            reorderedItems.forEach(({item, originalIndex}, index) => {
-                itemsWithOrder[originalIndex] = {item, index, enabled: includeMatches(item, include)}
-            })
-
-            return itemsWithOrder;
-        },
-        [data, orderBy, order, include]
-    );
-
-    const items: {item: DataItemType, index: number, enabled: boolean}[] = useMemo(
-        () => itemsWithOrder.map(({item, index, enabled}) => {
-            return {item, index, enabled: enabled && filterMatches(item, filter)}
-        }),
-        [itemsWithOrder, filter, asOf]
-    );
+    const enabledItems = useMemo(
+        () => calculateEnabledItems(data.data, filter, include),
+        [data.data, filter, include]);
 
     const hasCards = useMemo(
-        () => !!items.find(({enabled}) => enabled),
-        [items]);
+        () => !!enabledItems.find(enabled => enabled === true),
+        [enabledItems]);
 
-    const cards = items.map(({item, index, enabled}) => <ConsoleCard
-        key={item.names[0]}
-        order={index}
-        item={item}
-        enabled={enabled}
-        asOf={asOf}
-    />);
+    const cards = data.data.map((item, index) => {
+        const position = sortedPositions[index];
+        const enabled = enabledItems[index];
+        return (
+            <ConsoleCard
+                key={index}
+                order={position}
+                item={item}
+                enabled={enabled}
+                asOf={asOf}
+            />
+        )
+    })
 
     return (
         <>
