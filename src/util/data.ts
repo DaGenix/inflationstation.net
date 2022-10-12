@@ -240,7 +240,7 @@ export const RAW_DATA: RawDataType = {
         {
             type: "home",
             orig_prices: [199],
-            names: ["DreamCast"],
+            names: ["Dreamcast"],
             manufacturer: "Sega",
             release_year_month: {year: 1999, month: 9},
             img: "Dreamcast-Console-Set",
