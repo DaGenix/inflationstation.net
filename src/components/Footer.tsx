@@ -1,34 +1,29 @@
-import {styled} from "linaria/react";
-import {theme} from "./theme";
 import {useData} from "../util/useData";
 import monthNumberToName from "../util/monthNumberToName";
+import style from "./Footer.module.scss";
+import {ReactNode} from "react";
 
-const FooterArea = styled.footer`
-    color: white;
-    background-color: ${theme.colors.primary}
-`;
+type FooterLinkProps = {
+    children: ReactNode,
+    href: string,
+    title?: string,
+}
 
-const FooterLink = styled.a`
-    color: white;
-    text-decoration: underline;
-    font-weight: 700;
+const FooterLink: React.FC<FooterLinkProps> = (props) => {
+    return (
+        <a className={style.footerLink} href={props.href} title={props.title}>
+            {props.children}
+        </a>
+    )
+}
 
-    &:hover {
-        color: white;
-        font-weight: 700;
-    }
-`;
 
-const List = styled.ul`
-    padding: ${theme.gap}px;
-    margin: 0px ${2 * theme.gap}px;
-`;
 
 export default function Footer() {
     const {data} = useData();
     return (
-        <FooterArea>
-            <List>
+        <footer className={style.footerArea}>
+            <ul className={style.list}>
                 <li>Wii U image by <FooterLink
                     href="https://commons.wikimedia.org/w/index.php?curid=23214469">Takimata</FooterLink></li>
                 <li>Xbox Series X and Xbox Series S image appear to be stock images, but I'm not sure of the source
@@ -51,7 +46,7 @@ export default function Footer() {
                 <li>Inflation data from <FooterLink href="https://www.bls.gov/data/inflation_calculator.htm">Consumer
                     Price Index inflation calculator</FooterLink> and calculated
                     for {monthNumberToName(data.inflation_year_month.month)}, {data.inflation_year_month.year}</li>
-            </List>
-        </FooterArea>
+            </ul>
+        </footer>
     );
 };

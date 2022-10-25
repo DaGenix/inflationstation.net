@@ -1,32 +1,11 @@
-import {styled} from "linaria/react";
 import FilterInput from "./FilterInput";
 import SelectInclude from "./SelectInclude";
 import SelectOrder from "./SelectOrder";
 import SelectOrderBy from "./SelectOrderBy";
 import ShowIfJs from "../ShowIfJs";
-import {theme} from "../theme";
 import {FilterState} from "../../util/filterState";
 import AsOf from "./AsOf";
-
-const Bar = styled.div`
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: flex-end;
-    align-content: stretch;
-    gap: ${theme.gap}px;
-    grid-column: start / end;
-`;
-
-const SortOptionsGroup = styled.div`
-    display: flex;
-    flex-flow: row nowrap;
-    gap: ${theme.gap}px;
-
-    width: 100%;
-    @media (min-width: ${theme.breakpoint}) {
-        width: 250px;
-    }
-`;
+import style from "./FilterBar.module.scss";
 
 type FilterBarProps = {
     filterState: FilterState,
@@ -38,15 +17,15 @@ export default function FilterBar(props: FilterBarProps) {
     return (
         <>
             <ShowIfJs>
-                <Bar>
+                <div className={style.bar}>
                     <AsOf filterState={filterState} setFilterState={setFilterState} />
                     <FilterInput filterState={filterState} setFilterState={setFilterState} />
                     <SelectInclude filterState={filterState} setFilterState={setFilterState} />
-                    <SortOptionsGroup>
+                    <div className={style.sortOptionsGroup}>
                         <SelectOrderBy filterState={filterState} setFilterState={setFilterState} />
                         <SelectOrder filterState={filterState} setFilterState={setFilterState} />
-                    </SortOptionsGroup>
-                </Bar>
+                    </div>
+                </div>
             </ShowIfJs>
         </>
     );

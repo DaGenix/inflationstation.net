@@ -1,7 +1,7 @@
 import React, {useCallback} from "react";
-import {css} from "linaria";
 import Select from "./Select";
 import {FilterState, validateOrderByOrDefault} from "../../util/filterState";
+import style from "./SelectOrder.module.scss";
 
 type SelectOrderByProps = {
     filterState: FilterState,
@@ -14,14 +14,7 @@ const SelectOrderBy = (props: SelectOrderByProps): JSX.Element => {
     const onSetOrderBy = useCallback(e => setFilterState({...filterState, orderBy: validateOrderByOrDefault(e.target.value)}), [filterState, setFilterState]);
 
     return (
-        <div
-            className={css`
-                display: flex;
-                flex-flow: column nowrap;
-
-                flex: 1;
-            `}
-        >
+        <div className={style.wrapper}>
             <label htmlFor="orderby">Order by</label>
             <Select
                 id="orderby"

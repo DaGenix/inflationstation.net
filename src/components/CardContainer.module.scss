@@ -1,0 +1,13 @@
+@use "../../app/common";
+
+.container {
+  display: grid;
+  gap: common.$spacingGap;
+  padding: common.$spacingGap 0px;
+
+  justify-content: center;
+  grid-template-columns: [start] 325px [end];
+  @media (min-width: common.$spacingBreakpoint) {
+    grid-template-columns: [start] repeat(auto-fill, 325px) [end];
+  }
+}

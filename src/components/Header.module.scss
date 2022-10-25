@@ -1,0 +1,29 @@
+@use "../../app/common";
+
+.expand {
+  color: white;
+  background-color: unset;
+  padding: 0;
+  border: 0;
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration-thickness: 3px;
+  }
+}
+
+.headerArea {
+  color: white;
+  text-align: center;
+  background-color: common.$colorPrimary;
+  padding: calc(2 * #{common.$spacingGap}) 0;
+}
+
+.textArea {
+  width: calc(100% - 16px);
+  // TODO: FIXME
+  //width: calc(min(calc(100% - 2 * #{common.$spacingGap}), common.$spacingBreakpoint));
+  margin: auto;
+}

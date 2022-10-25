@@ -1,0 +1,9 @@
+.wrapper {
+  display: flex;
+  flex-flow: column nowrap;
+
+  width: 100%;
+  @media (min-width: 700px) {
+    width: 100px;
+  }
+}

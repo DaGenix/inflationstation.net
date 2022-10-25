@@ -1,0 +1,21 @@
+@use "../../../app/common";
+
+.bar {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-end;
+  align-content: stretch;
+  gap: common.$spacingGap;
+  grid-column: start / end;
+}
+
+.sortOptionsGroup {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: common.$spacingGap;
+
+  width: 100%;
+  @media (min-width: common.$spacingBreakpoint) {
+    width: 250px;
+  }
+}
