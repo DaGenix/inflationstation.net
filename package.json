@@ -23,7 +23,7 @@
     "@types/react": "^18.0.0",
     "aws-sdk": "^2.291.0",
     "glob": "^7.1.2",
-    "linaria": "^2.1.1",
+    "linaria": "^4.1.10",
     "next-linaria": "^0.11.0",
     "typescript": "^4.3.4"
   }
