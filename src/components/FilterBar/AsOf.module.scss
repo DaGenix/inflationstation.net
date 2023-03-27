@@ -1,0 +1,14 @@
+.asOf {
+    display: flex;
+    flex-flow: column nowrap;
+
+    width: 100%;
+
+    @media (min-width: 700px) {
+        width: 12rem;
+    }
+}
+
+.input {
+    height: 2rem;
+}

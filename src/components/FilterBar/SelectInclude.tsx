@@ -1,7 +1,7 @@
 import React, {useCallback} from "react";
-import {css} from "linaria";
 import Select from "./Select";
 import {FilterState, validateIncludeOrDefault} from "../../util/filterState";
+import style from "./SelectInclude.module.scss";
 
 type SelectIncludeProps = {
     filterState: FilterState,
@@ -14,17 +14,7 @@ const SelectInclude = (props: SelectIncludeProps): JSX.Element => {
     const onSetInclude = useCallback(e => setFilterState({...filterState, include: validateIncludeOrDefault(e.target.value)}), [filterState, setFilterState]);
 
     return (
-        <div
-            className={css`
-                display: flex;
-                flex-flow: column nowrap;
-
-                width: 100%;
-                @media (min-width: 700px) {
-                    width: 100px;
-                }
-            `}
-        >
+        <div className={style.wrapper}>
             <label htmlFor="include">Include</label>
             <Select
                 id="include"

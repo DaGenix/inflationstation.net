@@ -1,0 +1,29 @@
+@use "../../app/common";
+
+.paper {
+  height: 100%;
+  padding: common.$spacingGap;
+  text-align: center;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  border: 1px solid common.$colorPrimary;
+  border-radius: common.$spacingBorderRadius;
+  //opacity: ${(props: {current: boolean}) => props.current ? "1" : "0.5"};
+  opacity: var(--opacity);
+}
+
+.spacer {
+  flex-grow: 1;
+}
+
+.imgClass {
+  margin: auto;
+}
+
+.wrapper {
+  order: var(--order);
+  display: var(--display);
+  //order: ${(props: {index: number}) => props.index};
+  //display: ${(props: {enabled: boolean}) => props.enabled ? "block" : "none"};
+}

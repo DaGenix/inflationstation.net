@@ -1,14 +1,13 @@
-import {styled} from "linaria/react";
 import {priceAfterInflation} from "../util/data";
 import {useMemo} from "react";
 import ConsoleCard from "./ConsoleCard";
 import NoResults from "./NoResults";
 import FilterBar from "./FilterBar/FilterBar";
-import {theme} from "./theme";
 import {compareYearMonth, YearMonth} from "../util/yearMonth";
 import {FilterState, IncludeType, OrderByType, OrderType} from "../util/filterState";
 import {useData} from "../util/useData";
 import {DataItemType, InflationData} from "../util/loadData";
+import style from "./CardContainer.module.scss";
 
 const calculateSortedPositions = (inflationData: InflationData, items: DataItemType[], asOf: YearMonth, orderBy: OrderByType, order: OrderType): number[] => {
     // Create two lists - significantly, the _items_ in each list are the same.
@@ -63,18 +62,6 @@ const calculateEnabledItems = (items: DataItemType[], filter: string, include: I
     })
 }
 
-const Container = styled.div`
-    display: grid;
-    gap: ${theme.gap}px;
-    padding: ${theme.gap}px 0px;
-
-    justify-content: center;
-    grid-template-columns: [start] 325px [end];
-    @media (min-width: ${theme.breakpoint}) {
-        grid-template-columns: [start] repeat(auto-fill, 325px) [end];
-    }
-`;
-
 type CardContainerProps = {
     filterState: FilterState,
     setFilterState: (FilterState) => void,
@@ -115,10 +102,10 @@ export default function CardContainer(props: CardContainerProps) {
 
     return (
         <>
-            <Container>
+            <div className={style.container}>
                 <FilterBar filterState={filterState} setFilterState={setFilterState} />
                 {cards}
-            </Container>
+            </div>
 
             {!hasCards && <NoResults />}
         </>

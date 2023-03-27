@@ -1,7 +1,7 @@
 import React, {useCallback} from "react";
-import {css} from "linaria";
 import Select from "./Select";
 import {FilterState} from "../../util/filterState";
+import style from "./SelectOrder.module.scss";
 
 type SelectOrderProps = {
     filterState: FilterState,
@@ -14,14 +14,7 @@ const SelectOrder = (props: SelectOrderProps): JSX.Element => {
     const onSetAscending = useCallback(e => setFilterState({...filterState, order: e.target.value === "asc" ? "asc" : "desc"}), [filterState, setFilterState]);
 
     return (
-        <div
-            className={css`
-                display: flex;
-                flex-flow: column nowrap;
-
-                flex: 1;
-            `}
-        >
+        <div className={style.wrapper}>
             <label htmlFor="order">Direction</label>
             <Select
                 id="order"

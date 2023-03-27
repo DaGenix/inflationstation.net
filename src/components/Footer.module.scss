@@ -1,0 +1,22 @@
+@use "../../app/common";
+
+.footerArea {
+  color: white;
+  background-color: common.$colorPrimary;
+}
+
+.footerLink {
+  color: white;
+  text-decoration: underline;
+  font-weight: 700;
+
+  &:hover {
+    color: white;
+    font-weight: 700;
+  }
+}
+
+.list {
+  padding: common.$spacingGap;
+  margin: 0px calc(2 * #{common.$spacingGap});
+}

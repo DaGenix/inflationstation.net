@@ -1,35 +1,8 @@
 import {priceAfterInflation} from "../util/data";
 import React, {useState} from "react";
-import {styled} from "linaria/react";
 import ShowIfJs from "./ShowIfJs";
-import {theme} from "./theme";
 import {useData} from "../util/useData";
-
-const Expand = styled.button`
-    color: white;
-    background-color: unset;
-    padding: 0;
-    border: 0;
-    font-weight: 700;
-    text-decoration: underline;
-    cursor: pointer;
-
-    &:hover {
-        text-decoration-thickness: 3px;
-    }
-`;
-
-const HeaderArea = styled.header`
-    color: white;
-    text-align: center;
-    background-color: ${theme.colors.primary};
-    padding: ${2 * theme.gap}px 0;
-`;
-
-const TextArea = styled.p`
-    width: calc(min(100% - ${2 * theme.gap}px, ${theme.breakpoint}));
-    margin: auto;
-`
+import style from "./Header.module.scss";
 
 export default function Header() {
     const [isOpen, setOpen] = useState(false);
@@ -43,11 +16,11 @@ export default function Header() {
     const todaysSwitchPrice = priceAfterInflation(inflationData, switchItem, data.inflation_year_month)[0];
     const switchDiscount = (todaysSwitchPrice - origSwitchPrice).toLocaleString();
     return (
-        <HeaderArea>
+        <header className={style.headerArea}>
             <h1>Console Prices Adjusted for Inflation</h1>
             {
                 isOpen &&
-                <TextArea>
+                <p className={style.textArea}>
                     Prices have been adjusted for inflation since the consoles
                     were initially released. Some consoles are still available at the same price
                     they were released at. Due to inflation, these consoles have effectively
@@ -57,31 +30,31 @@ export default function Header() {
                     cost ${todaysSwitchPrice.toLocaleString()}. Since the Switch's price hasn't changed,
                     its effectively become ${switchDiscount} cheaper than it was when
                     it was released.&nbsp;
-                    <Expand
+                    <button className={style.expand}
                         onClick={(e) => {
                             setOpen(false);
                         }}
                     >
                         Less
-                    </Expand>
-                </TextArea>
+                    </button>
+                </p>
             }
             {
                 !isOpen &&
-                <TextArea>
+                <p className={style.textArea}>
                     Prices have been adjusted for inflation
                     <ShowIfJs component="span">
                         ...&nbsp;
-                        <Expand
+                        <button className={style.expand}
                             onClick={(e) => {
                                 setOpen(true);
                             }}
                         >
                             More
-                        </Expand>
+                        </button>
                     </ShowIfJs>
-                </TextArea>
+                </p>
             }
-        </HeaderArea>
+        </header>
     );
 };

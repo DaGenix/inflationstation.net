@@ -1,12 +1,6 @@
-import {styled} from "linaria/react";
 import CardContainer from "./CardContainer";
-import {theme} from "./theme";
 import {FilterState} from "../util/filterState";
-
-const Main = styled.main`
-    flex-grow: 1;
-    padding: 0 ${theme.gap}px 0 ${theme.gap}px;
-`;
+import style from "./Content.module.scss";
 
 type ContentProps = {
     filterState: FilterState,
@@ -17,8 +11,8 @@ export default function Content(props: ContentProps) {
     const {filterState, setFilterState} = props;
 
     return (
-        <Main>
+        <main className={style.main}>
             <CardContainer filterState={filterState} setFilterState={setFilterState} />
-        </Main>
+        </main>
     );
 }

@@ -1,15 +1,9 @@
 import React, {useCallback} from "react";
-import {styled} from "linaria/react";
-import {css} from "linaria";
-import {theme} from "../theme";
 import {FilterState} from "../../util/filterState";
 import {addMonths, monthsBetween, yearMonthsEqual} from "../../util/yearMonth";
 import {useData} from "../../util/useData";
 import monthNumberToName from "../../util/monthNumberToName";
-
-const Input = styled.input`
-    height: 2rem;
-`
+import style from "./AsOf.module.scss";
 
 type AsOfProps = {
     filterState: FilterState,
@@ -34,18 +28,10 @@ const AsOf = (props: AsOfProps): JSX.Element => {
 
     return (
         <div
-            className={css`
-                display: flex;
-                flex-flow: column nowrap;
-
-                width: 100%;
-                @media (min-width: 700px) {
-                    width: 12rem;
-                }
-            `}
+            className={style.asOf}
         >
             <label htmlFor="asOf">As of {monthNumberToName(asOf.month)}, {asOf.year}</label>
-            <Input
+            <input className={style.input}
                 id="asOf"
                 type="range"
                 min="0"

@@ -1,0 +1,21 @@
+@use "../../../app/common";
+
+.input {
+  height: 2rem;
+  border: 1px solid common.$colorPrimary;
+  border-radius: common.$spacingBorderRadius;
+
+  &:focus-visible {
+    outline: common.$spacingFocusOutlineSize solid common.$colorSecondary;
+  }
+}
+
+.container {
+  display: flex;
+  flex-flow: column nowrap;
+
+  width: 100%;
+  @media (min-width: 700px) {
+    width: unset;
+  }
+}

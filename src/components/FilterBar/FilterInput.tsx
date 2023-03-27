@@ -1,18 +1,6 @@
 import React, {useCallback} from "react";
-import {styled} from "linaria/react";
-import {css} from "linaria";
-import {theme} from "../theme";
 import {FilterState} from "../../util/filterState";
-
-const Input = styled.input`
-    height: 2rem;
-    border: 1px solid ${theme.colors.primary};
-    border-radius: ${theme.borderRadius};
-
-    &:focus-visible {
-        outline: ${theme.focusOutlineSize} solid ${theme.colors.secondary};
-    }
-`
+import style from "./FilterInput.module.scss";
 
 type FilterInputProps = {
     filterState: FilterState,
@@ -25,19 +13,9 @@ const FilterInput = (props: FilterInputProps): JSX.Element => {
     const onSetFilter = useCallback(e => setFilterState({...filterState, filter: e.target.value}), [filterState, setFilterState]);
 
     return (
-        <div
-            className={css`
-                display: flex;
-                flex-flow: column nowrap;
-
-                width: 100%;
-                @media (min-width: 700px) {
-                    width: unset;
-                }
-            `}
-        >
+        <div className={style.container}>
             <label htmlFor="filter">Filter</label>
-            <Input
+            <input className={style.input}
                 id="filter"
                 value={filterState.filter}
                 onChange={onSetFilter}
