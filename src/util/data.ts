@@ -521,7 +521,7 @@ export const RAW_DATA: RawDataType = {
 }
 
 RAW_DATA.data.sort((a, b) => {
-    const releaseYearMonthCompare = compareYearMonth(a.release_year_month, b.release_year_month);
+    const releaseYearMonthCompare = -compareYearMonth(a.release_year_month, b.release_year_month);
     if (releaseYearMonthCompare !== 0) {
         return releaseYearMonthCompare;
     } else {
