@@ -60,6 +60,10 @@ async function main() {
             contentType = "application/json";
             cacheControl = "public, max-age=31536000, immutable";
             meta = {};
+        } else if (f.endsWith(".woff2")) {
+            contentType = "font/woff2";
+            cacheControl = "public, max-age=31536000, immutable";
+            meta = {};
         } else {
             throw new Error(`Can't figure out content type or cache-control for: ${f}`);
         }
