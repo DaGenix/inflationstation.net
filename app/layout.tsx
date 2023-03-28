@@ -36,8 +36,7 @@ export default function Layout(props: {children: ReactNode}) {
             <body>
                 <noscript>
                     <style>
-                        {".show-if-js{display:none}"}
-                        {".show-no-js{display:contents}"}
+                        {`.show-if-js{display:none}.show-no-js{display:contents}`}
                     </style>
                 </noscript>
                 {props.children}
