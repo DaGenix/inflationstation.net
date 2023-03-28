@@ -1,12 +1,19 @@
+"use client";
+
 import {priceAfterInflation} from "../util/data";
 import React, {useState} from "react";
 import ShowIfJs from "./ShowIfJs";
-import {useData} from "../util/useData";
 import style from "./Header.module.scss";
+import {DataType, InflationData} from "../util/loadData";
 
-export default function Header() {
+type HeaderProps = {
+    data: DataType,
+    inflationData: InflationData,
+}
+
+export default function Header(props: HeaderProps) {
+    const {data, inflationData} = props;
     const [isOpen, setOpen] = useState(false);
-    const {data, inflationData} = useData();
     const switchItem = data.data.find(i => i.names[0] === "Nintendo Switch");
     if (!switchItem) {
         throw new Error("Couldn't find item for Switch");

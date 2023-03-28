@@ -1,19 +1,20 @@
 import {priceAfterInflation} from "../util/data";
-import React, {CSSProperties} from "react";
+import React, {CSSProperties, ReactNode} from "react";
 import {greaterThanOrEqual, YearMonth} from "../util/yearMonth";
-import {useData} from "../util/useData";
-import {DataItemType} from "../util/loadData";
+import {ClientDataItemType, InflationData} from "../util/loadData";
 import style from "./ConsoleCard.module.scss";
 
-type ConsoleCardInnerProps = {
-    item: DataItemType,
-    lazyLoad: boolean,
+type ConsoleCardProps = {
+    item: ClientDataItemType,
+    enabled: boolean,
+    order: number,
     asOf: YearMonth,
+    inflationData: InflationData,
+    picture: ReactNode,
 }
 
-const ConsoleCardInner = React.memo(function ConsoleCardInner(props: ConsoleCardInnerProps) {
-    const {item, asOf} = props;
-    const {inflationData} = useData();
+const ConsoleCard = React.memo(function ConsoleCardInner(props: ConsoleCardProps) {
+    const {item, enabled, order, asOf, inflationData, picture} = props;
     const current = greaterThanOrEqual(asOf, item.release_year_month);
     let price: string;
     if (current) {
@@ -24,7 +25,11 @@ const ConsoleCardInner = React.memo(function ConsoleCardInner(props: ConsoleCard
     return (
         <div
             className={style.paper}
-            style={{"--opacity": current ? "1" : "0.5"} as CSSProperties}
+            style={{
+                "--opacity": current ? "1" : "0.5",
+                "--index": order,
+                "--display": enabled ? "flex" : "none",
+            } as CSSProperties}
         >
             <h2>{item.names[0]}</h2>
             {item.affiliateLink && <a
@@ -35,34 +40,7 @@ const ConsoleCardInner = React.memo(function ConsoleCardInner(props: ConsoleCard
                 Buy
             </a>}
             <div className={style.spacer} />
-            <a href={item.link}>
-                <picture>
-                    <source srcSet={`
-                                ${item.img300Webp} 1x,
-                                ${item.img600Webp} 2x,
-                                ${item.img900Webp} 3x,
-                                ${item.img1200Webp} 4x,
-                                ${item.img1800Webp} 6x
-                                `.replace(/\s+/gs, " ")}
-                            type="image/webp"
-                    />
-                    <img
-                        alt={`Picture of ${item.names[0]}`}
-                        srcSet={`
-                                 ${item.img300Jpeg} 1x,
-                                 ${item.img600Jpeg} 2x,
-                                 ${item.img900Jpeg} 3x,
-                                 ${item.img1200Jpeg} 4x,
-                                 ${item.img1800Jpeg} 6x
-                                 `.replace(/\s+/gs, " ")}
-                        src={item.img300Jpeg}
-                        width="300"
-                        height="150"
-                        className={style.imgClass}
-                        loading={props.lazyLoad ? "lazy" : undefined}
-                    />
-                </picture>
-            </a>
+            {picture}
             <h2>{price}</h2>
             <div>
                 {item.manufacturer} - {item.release_year_month.year}
@@ -72,33 +50,6 @@ const ConsoleCardInner = React.memo(function ConsoleCardInner(props: ConsoleCard
             </div>
         </div>
     )
-});
-
-type WrapperProps = {
-    index: number,
-    enabled: boolean,
-}
-
-type ConsoleCardProps = {
-    item: DataItemType,
-    enabled: boolean,
-    order: number,
-    asOf: YearMonth,
-}
-
-const ConsoleCard = React.memo(function ConsoleCard(props: ConsoleCardProps) {
-    const {item, asOf} = props;
-    return (
-        <div
-            className={style.wrapper}
-            style={{
-                "--index": props.order,
-                "--display": props.enabled ? "block" : "none",
-            } as CSSProperties}
-        >
-            <ConsoleCardInner item={item} lazyLoad={props.order >= 12} asOf={asOf} />
-        </div>
-    );
 });
 
 export default ConsoleCard;

@@ -1,7 +1,7 @@
-import {useData} from "../util/useData";
 import monthNumberToName from "../util/monthNumberToName";
 import style from "./Footer.module.scss";
 import {ReactNode} from "react";
+import {DataType} from "../util/loadData";
 
 type FooterLinkProps = {
     children: ReactNode,
@@ -17,10 +17,12 @@ const FooterLink: React.FC<FooterLinkProps> = (props) => {
     )
 }
 
+type FooterProps = {
+    data: DataType,
+}
 
-
-export default function Footer() {
-    const {data} = useData();
+export default function Footer(props: FooterProps) {
+    const {data} = props;
     return (
         <footer className={style.footerArea}>
             <ul className={style.list}>

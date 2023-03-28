@@ -1,18 +1,18 @@
 import React, {useCallback} from "react";
 import {FilterState} from "../../util/filterState";
 import {addMonths, monthsBetween, yearMonthsEqual} from "../../util/yearMonth";
-import {useData} from "../../util/useData";
 import monthNumberToName from "../../util/monthNumberToName";
 import style from "./AsOf.module.scss";
+import {ClientDataType} from "../../util/loadData";
 
 type AsOfProps = {
     filterState: FilterState,
     setFilterState: (FilterState) => void,
+    data: ClientDataType,
 }
 
 const AsOf = (props: AsOfProps): JSX.Element => {
-    const {filterState, setFilterState} = props;
-    const {data} = useData();
+    const {filterState, setFilterState, data} = props;
 
     const asOf = filterState.asOf === "mostRecent" ? data.inflation_year_month : filterState.asOf;
     const totalMonths = monthsBetween(data.earliest_year_month, data.inflation_year_month);

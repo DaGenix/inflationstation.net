@@ -64,3 +64,35 @@ export const loadData = (): DataType => {
         }),
     }
 }
+
+export interface ClientDataItemType {
+    type: "home" | "handheld" | "hybrid",
+    release_year_month: YearMonth,
+    orig_prices: number[],
+    manufacturer: string,
+    names: string[],
+    affiliateLink?: string,
+}
+
+export interface ClientDataType {
+    earliest_year_month: YearMonth,
+    inflation_year_month: YearMonth,
+    data: ClientDataItemType[],
+}
+
+export const loadClientData = (): ClientDataType => {
+    return {
+        earliest_year_month: RAW_DATA.earliest_year_month,
+        inflation_year_month: RAW_DATA.inflation_year_month,
+        data: RAW_DATA.data.map((item) => {
+            return {
+                type: item.type,
+                release_year_month: item.release_year_month,
+                orig_prices: item.orig_prices,
+                manufacturer: item.manufacturer,
+                names: item.names,
+                affiliateLink: item.affiliateLink,
+            }
+        })
+    }
+}

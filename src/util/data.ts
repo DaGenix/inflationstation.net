@@ -1,12 +1,12 @@
 import {readFileSync} from 'fs';
 import {compareYearMonth, formatYearMonth, YearMonth} from "./yearMonth";
-import {DataItemType, InflationData} from "./loadData";
+import {ClientDataItemType, DataItemType, InflationData} from "./loadData";
 
 function inflation(inflationData: InflationData, from: YearMonth, ammount, to: YearMonth) {
     return ammount / inflationData[formatYearMonth(from)] * inflationData[formatYearMonth(to)];
 }
 
-export const priceAfterInflation = (inflationData: InflationData, dataItem: DataItemType | RawDataItemType, asOf: YearMonth): number[] => {
+export const priceAfterInflation = (inflationData: InflationData, dataItem: ClientDataItemType | DataItemType | RawDataItemType, asOf: YearMonth): number[] => {
     return dataItem.orig_prices.map(price => {
         const from = {
             year: dataItem.release_year_month.year,

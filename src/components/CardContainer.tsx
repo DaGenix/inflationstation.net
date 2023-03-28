@@ -1,21 +1,29 @@
+"use client";
+
 import {priceAfterInflation} from "../util/data";
-import {useMemo} from "react";
+import {ReactNode, useMemo} from "react";
 import ConsoleCard from "./ConsoleCard";
 import NoResults from "./NoResults";
 import FilterBar from "./FilterBar/FilterBar";
 import {compareYearMonth, YearMonth} from "../util/yearMonth";
-import {FilterState, IncludeType, OrderByType, OrderType} from "../util/filterState";
-import {useData} from "../util/useData";
-import {DataItemType, InflationData} from "../util/loadData";
+import {
+    DEFAULT_FILTER_STATE,
+    deserializeUrlSearchParams,
+    IncludeType,
+    OrderByType,
+    OrderType, serializeUrlSearchParams
+} from "../util/filterState";
+import {ClientDataItemType, ClientDataType, InflationData} from "../util/loadData";
 import style from "./CardContainer.module.scss";
+import useUrlState from "../util/useUrlState";
 
-const calculateSortedPositions = (inflationData: InflationData, items: DataItemType[], asOf: YearMonth, orderBy: OrderByType, order: OrderType): number[] => {
+const calculateSortedPositions = (inflationData: InflationData, items: ClientDataItemType[], asOf: YearMonth, orderBy: OrderByType, order: OrderType): number[] => {
     // Create two lists - significantly, the _items_ in each list are the same.
     // The first list we leave unsorted while the second list is sorted.
     // After we sort the second list, we record the position of every item in that list.
     // Then, we can iterate through the unsorted items in the first list in order to create a
     // mapping of the unsorted position to the sorted position.
-    const unsortedItemsWithIndices: [DataItemType, number][] = items.map(item => [item, -1]);
+    const unsortedItemsWithIndices: [ClientDataItemType, number][] = items.map(item => [item, -1]);
     const sortedItemsWithIndices = [...unsortedItemsWithIndices];
     sortedItemsWithIndices.sort(([a, ], [b, ]) => {
         switch (orderBy) {
@@ -38,7 +46,7 @@ const calculateSortedPositions = (inflationData: InflationData, items: DataItemT
     return unsortedItemsWithIndices.map(([_, index]) => index);
 }
 
-const filterMatches = (item: DataItemType, filter: string): boolean => {
+const filterMatches = (item: ClientDataItemType, filter: string): boolean => {
     if (filter === "") {
         return true;
     } else {
@@ -48,7 +56,7 @@ const filterMatches = (item: DataItemType, filter: string): boolean => {
     }
 };
 
-const includeMatches = (item: DataItemType, include: IncludeType): boolean => {
+const includeMatches = (item: ClientDataItemType, include: IncludeType): boolean => {
     if (include === "all") {
         return true;
     } else {
@@ -56,21 +64,28 @@ const includeMatches = (item: DataItemType, include: IncludeType): boolean => {
     }
 }
 
-const calculateEnabledItems = (items: DataItemType[], filter: string, include: IncludeType): boolean[] => {
+const calculateEnabledItems = (items: ClientDataItemType[], filter: string, include: IncludeType): boolean[] => {
     return items.map(item => {
         return filterMatches(item, filter) && includeMatches(item, include);
     })
 }
 
 type CardContainerProps = {
-    filterState: FilterState,
-    setFilterState: (FilterState) => void,
+    data: ClientDataType,
+    inflationData: InflationData,
+    consolePictures: ReactNode[],
 }
 
 export default function CardContainer(props: CardContainerProps) {
-    const {filterState, setFilterState} = props;
+    const {data, inflationData, consolePictures} = props;
+
+    const [filterState, setFilterState] = useUrlState(
+        DEFAULT_FILTER_STATE,
+        deserializeUrlSearchParams,
+        serializeUrlSearchParams,
+    );
+
     const {filter, include, orderBy, order} = filterState;
-    const {data, inflationData} = useData();
 
     const asOf = filterState.asOf === "mostRecent" ? data.inflation_year_month : filterState.asOf;
 
@@ -89,6 +104,7 @@ export default function CardContainer(props: CardContainerProps) {
     const cards = data.data.map((item, index) => {
         const position = sortedPositions[index];
         const enabled = enabledItems[index];
+        const picture = consolePictures[index];
         return (
             <ConsoleCard
                 key={index}
@@ -96,6 +112,8 @@ export default function CardContainer(props: CardContainerProps) {
                 item={item}
                 enabled={enabled}
                 asOf={asOf}
+                inflationData={inflationData}
+                picture={picture}
             />
         )
     })
@@ -103,7 +121,7 @@ export default function CardContainer(props: CardContainerProps) {
     return (
         <>
             <div className={style.container}>
-                <FilterBar filterState={filterState} setFilterState={setFilterState} />
+                <FilterBar filterState={filterState} setFilterState={setFilterState} data={data} />
                 {cards}
             </div>
 
