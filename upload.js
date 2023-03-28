@@ -14,6 +14,8 @@ async function main() {
         let doUpload = false;
         if (f.endsWith("index.html") || f.endsWith("favicon.ico")) {
             doUpload = true;
+        } else if (f === "index.txt") {
+            doUpload = false;
         } else {
             try {
                 await s3.headObject({Bucket: BUCKET, Key: f}).promise();
@@ -26,49 +28,49 @@ async function main() {
             }
         }
 
-        let contentType;
-        let cacheControl;
-        if (f.endsWith("html")) {
-            contentType = "text/html";
-            cacheControl = "public, max-age=300";
-            meta = {
-                "X-Content-Type-Options": "nosniff",
-                "X-Frame-Options": "DENY",
-                "X-XSS-Protection": "1; mode=block",
-            };
-        } else if (f.endsWith(".ico")) {
-            contentType = "image/vnd.microsoft.icon";
-            cacheControl = "public, max-age=86400";
-            meta = {};
-        } else if (f.endsWith(".jpg")) {
-            contentType = "image/jpeg";
-            cacheControl = "public, max-age=31536000, immutable";
-            meta = {};
-        } else if (f.endsWith(".webp")) {
-            contentType = "image/webp";
-            cacheControl = "public, max-age=31536000, immutable";
-            meta = {};
-        } else if (f.endsWith(".js")) {
-            contentType = "application/javascript";
-            cacheControl = "public, max-age=31536000, immutable";
-            meta = {};
-        } else if (f.endsWith(".css")) {
-            contentType = "text/css";
-            cacheControl = "public, max-age=31536000, immutable";
-            meta = {};
-        } else if (f.endsWith(".json")) {
-            contentType = "application/json";
-            cacheControl = "public, max-age=31536000, immutable";
-            meta = {};
-        } else if (f.endsWith(".woff2")) {
-            contentType = "font/woff2";
-            cacheControl = "public, max-age=31536000, immutable";
-            meta = {};
-        } else {
-            throw new Error(`Can't figure out content type or cache-control for: ${f}`);
-        }
-
         if (doUpload) {
+            let contentType;
+            let cacheControl;
+            if (f.endsWith("html")) {
+                contentType = "text/html";
+                cacheControl = "public, max-age=300";
+                meta = {
+                    "X-Content-Type-Options": "nosniff",
+                    "X-Frame-Options": "DENY",
+                    "X-XSS-Protection": "1; mode=block",
+                };
+            } else if (f.endsWith(".ico")) {
+                contentType = "image/vnd.microsoft.icon";
+                cacheControl = "public, max-age=86400";
+                meta = {};
+            } else if (f.endsWith(".jpg")) {
+                contentType = "image/jpeg";
+                cacheControl = "public, max-age=31536000, immutable";
+                meta = {};
+            } else if (f.endsWith(".webp")) {
+                contentType = "image/webp";
+                cacheControl = "public, max-age=31536000, immutable";
+                meta = {};
+            } else if (f.endsWith(".js")) {
+                contentType = "application/javascript";
+                cacheControl = "public, max-age=31536000, immutable";
+                meta = {};
+            } else if (f.endsWith(".css")) {
+                contentType = "text/css";
+                cacheControl = "public, max-age=31536000, immutable";
+                meta = {};
+            } else if (f.endsWith(".json")) {
+                contentType = "application/json";
+                cacheControl = "public, max-age=31536000, immutable";
+                meta = {};
+            } else if (f.endsWith(".woff2")) {
+                contentType = "font/woff2";
+                cacheControl = "public, max-age=31536000, immutable";
+                meta = {};
+            } else {
+                throw new Error(`Can't figure out content type or cache-control for: ${f}`);
+            }
+
             console.log("Uploading: " + f);
             await s3.putObject({
                 Body: await util.promisify(fs.readFile)(path.join("out", f)),
@@ -79,7 +81,7 @@ async function main() {
                 Metadata: meta,
             }).promise();
         } else {
-            console.log("Already uploaded: " + f);
+            console.log("Already uploaded (or ignored): " + f);
         }
     }
 }
