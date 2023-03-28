@@ -10,7 +10,7 @@ type MainProps = {
 export default function Main(props: MainProps) {
     const {data, inflationData} = props;
     const consolePictures = data.data.map((item, index) => {
-        return <ConsolePicture item={item} lazyLoad={false} />
+        return <ConsolePicture item={item} lazyLoad={index >= 12} />
     });
     return (
         <main>
