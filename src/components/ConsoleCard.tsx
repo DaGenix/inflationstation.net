@@ -27,7 +27,7 @@ const ConsoleCard = React.memo(function ConsoleCardInner(props: ConsoleCardProps
             className={style.paper}
             style={{
                 "--opacity": current ? "1" : "0.5",
-                "--index": order,
+                "--order": order,
                 "--display": enabled ? "flex" : "none",
             } as CSSProperties}
         >
