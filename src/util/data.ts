@@ -105,7 +105,6 @@ export const RAW_DATA: RawDataType = {
             release_year_month: {year: 2017, month: 3},
             img: "Nintendo-Switch-wJoyCons-BlRd-Standing-FL",
             link: "https://en.wikipedia.org/wiki/Nintendo_Switch",
-            affiliateLink: "https://www.amazon.com/Nintendo-Switch-Neon-Blue-Joy%E2%80%91/dp/B07VGRJDFY?th=1&psc=1&linkCode=ll1&tag=inflationstation-20&linkId=40f15625583b82ab9f7cfc7919e1e2a2&language=en_US&ref_=as_li_ss_tl",
         },
         {
             type: "home",
@@ -151,7 +150,6 @@ export const RAW_DATA: RawDataType = {
             release_year_month: {year: 2020, month: 11},
             img: "playstation-5-with-dualsense-front-product-shot-01-ps5-en-30jul20",
             link: "https://en.wikipedia.org/wiki/PlayStation_5",
-            affiliateLink: "https://www.amazon.com/PlayStation-5-Console/dp/B09DFCB66S?&linkCode=ll1&tag=inflationstation-20&linkId=a4e36a4170b6071252dabb53421c4b94&language=en_US&ref_=as_li_ss_tl",
         },
         {
             type: "home",
@@ -161,7 +159,6 @@ export const RAW_DATA: RawDataType = {
             release_year_month: {year: 2020, month: 11},
             img: "playstation-5-digital-edition-with-dualsense-front-product-shot-01-ps5-en-30jul20",
             link: "https://en.wikipedia.org/wiki/PlayStation_5",
-            affiliateLink: "https://www.amazon.com/PlayStation-5-Digital/dp/B09DFHJTF5?&linkCode=ll1&tag=inflationstation-20&linkId=743e59b41d1b621bf4621e98864dbe5b&language=en_US&ref_=as_li_ss_tl",
         },
         {
             type: "home",
@@ -198,7 +195,6 @@ export const RAW_DATA: RawDataType = {
             release_year_month: {year: 2020, month: 11},
             img: "xbox_series_x",
             link: "https://en.wikipedia.org/wiki/Xbox_Series_X_and_Series_S",
-            affiliateLink: "https://www.amazon.com/Xbox-X/dp/B08H75RTZ8?brr=1&pd_rd_r=29c5976d-3641-4cad-a43d-6b3220943f39&pd_rd_w=hnnbQ&pd_rd_wg=zy0Va&qid=1637781679&qsid=140-7325183-0404943&rd=1&s=videogames&sr=1-4&sres=B087VM5XC6%2CB09M94WS14%2CB09MC1VCPQ%2CB08H75RTZ8%2CB08VWQ74JZ%2CB093PPX7SY%2CB09MCQ4J78%2CB08NCFB34H%2CB08XX73P3N%2CB098D55397%2CB08P3YX827%2CB093RRXDFJ%2CB0921N4HVP%2CB091CYFL3C%2CB08NC5LQJ6%2CB099M4DB5R&linkCode=ll1&tag=inflationstation-20&linkId=be2d45ed5b30c58afd5612a630cc717f&language=en_US&ref_=as_li_ss_tl",
         },
         {
             type: "home",
@@ -208,7 +204,6 @@ export const RAW_DATA: RawDataType = {
             release_year_month: {year: 2020, month: 11},
             img: "xbox_series_s",
             link: "https://en.wikipedia.org/wiki/Xbox_Series_X_and_Series_S",
-            affiliateLink: "https://www.amazon.com/Xbox-S/dp/B08G9J44ZN?brr=1&pd_rd_r=29c5976d-3641-4cad-a43d-6b3220943f39&pd_rd_w=hnnbQ&pd_rd_wg=zy0Va&qid=1637781679&qsid=140-7325183-0404943&rd=1&s=videogames&sr=1-4&sres=B087VM5XC6%2CB09M94WS14%2CB09MC1VCPQ%2CB08H75RTZ8%2CB08VWQ74JZ%2CB093PPX7SY%2CB09MCQ4J78%2CB08NCFB34H%2CB08XX73P3N%2CB098D55397%2CB08P3YX827%2CB093RRXDFJ%2CB0921N4HVP%2CB091CYFL3C%2CB08NC5LQJ6%2CB099M4DB5R&linkCode=ll1&tag=inflationstation-20&linkId=d4bec2b97a4803a614c6f23d8eb75dfc&language=en_US&ref_=as_li_ss_tl",
         },
         {
             type: "home",
@@ -505,7 +500,6 @@ export const RAW_DATA: RawDataType = {
             release_year_month: {year: 2021, month: 10},
             img: "Nintendo-Switch-wJoyCons-BlRd-Standing-FL",
             link: "https://en.wikipedia.org/wiki/Nintendo_Switch#OLED_model",
-            affiliateLink: "https://www.amazon.com/gp/product/B098RKWHHZ/ref=as_li_qf_asin_il_tl?ie=UTF8&tag=inflationstation-20&creative=9325&linkCode=as2&creativeASIN=B098RKWHHZ&linkId=552853e8a3e14d8633e6ec58244230f4",
         },
         {
             type: "hybrid",
@@ -515,7 +509,6 @@ export const RAW_DATA: RawDataType = {
             release_year_month: {year: 2019, month: 9},
             img: "Nintendo_Switch_Lite_representation",
             link: "https://en.wikipedia.org/wiki/Nintendo_Switch_Lite",
-            affiliateLink: "https://www.amazon.com/Nintendo-Switch-Lite-Yellow/dp/B092VT1JGD?th=1&linkCode=ll1&tag=inflationstation-20&linkId=df354b37163cf5f11f3046eca1bdd3ac&language=en_US&ref_=as_li_ss_tl",
         },
     ],
 }
