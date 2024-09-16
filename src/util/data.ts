@@ -162,6 +162,15 @@ export const RAW_DATA: RawDataType = {
         },
         {
             type: "home",
+            orig_prices: [699],
+            names: ["PlayStation 5 Pro"],
+            manufacturer: "Sony",
+            release_year_month: {year: 2024, month: 11},
+            img: "ps5-pro",
+            link: "https://en.wikipedia.org/wiki/PlayStation_5",
+        },
+        {
+            type: "home",
             orig_prices: [299],
             names: ["Xbox"],
             manufacturer: "Microsoft",

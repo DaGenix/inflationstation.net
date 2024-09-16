@@ -34,6 +34,8 @@ export default function Footer(props: FooterProps) {
                     href="https://www.playstation.com/en-us/ps5/">Sony</FooterLink></li>
                 <li>PS5 and PS5 Digital Edition prices and release dates from <FooterLink
                     href="https://en.wikipedia.org/wiki/PlayStation_5">Wikipedia</FooterLink></li>
+                <li>PS5 Pro image, release date, and prices from <FooterLink
+                    href="https://blog.playstation.com/2024/09/10/welcome-playstation-5-pro-the-most-visually-impressive-way-to-play-games-on-playstation/">PlayStation Blog</FooterLink></li>
                 <li>Xbox Series X and Xbox Series S prices and release dates from <FooterLink
                     href="https://en.wikipedia.org/wiki/Xbox_Series_X_and_Series_S">Wikipedia</FooterLink></li>
                 <li>Switch Lite image by <FooterLink
