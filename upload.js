@@ -7,7 +7,7 @@ const fs = require("fs");
 async function main() {
     const BUCKET = "www.inflationstation.net";
 
-    AWS.config.credentials = new AWS.SharedIniFileCredentials({profile: "personal-account"});
+    AWS.config.credentials = new AWS.SharedIniFileCredentials({profile: "personal"});
     const s3 = new AWS.S3();
 
     for (const f of await util.promisify(glob)("**", {nodir: true, cwd: "out"})) {
