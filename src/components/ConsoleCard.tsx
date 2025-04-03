@@ -3,6 +3,7 @@ import React, {CSSProperties, ReactNode} from "react";
 import {greaterThanOrEqual, YearMonth} from "../util/yearMonth";
 import {ClientDataItemType, InflationData} from "../util/loadData";
 import style from "./ConsoleCard.module.scss";
+import {RAW_DATA} from "../util/data";
 
 type ConsoleCardProps = {
     item: ClientDataItemType,
@@ -15,12 +16,17 @@ type ConsoleCardProps = {
 
 const ConsoleCard = React.memo(function ConsoleCardInner(props: ConsoleCardProps) {
     const {item, enabled, order, asOf, inflationData, picture} = props;
-    const current = greaterThanOrEqual(asOf, item.release_year_month);
     let price: string;
-    if (current) {
+    let current: boolean;
+    if (greaterThanOrEqual(asOf, item.release_year_month)) {
         price = "$" + priceAfterInflation(inflationData, item, asOf).map(s => s.toLocaleString()).join("/$");
+        current = true;
+    } else if (greaterThanOrEqual(asOf, RAW_DATA.inflation_year_month)) {
+        price = "$" + item.orig_prices.map(s => s.toLocaleString()).join("/$");
+        current = true;
     } else {
         price = "Not Released";
+        current = false;
     }
     return (
         <div
