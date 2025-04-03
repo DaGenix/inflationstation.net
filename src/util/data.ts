@@ -107,6 +107,15 @@ export const RAW_DATA: RawDataType = {
             link: "https://en.wikipedia.org/wiki/Nintendo_Switch",
         },
         {
+            type: "hybrid",
+            orig_prices: [449],
+            names: ["Nintendo Switch 2"],
+            manufacturer: "Nintendo",
+            release_year_month: {year: 2025, month: 6},
+            img: "radio-times-switch-2-size-comparison1-3ef5e14",
+            link: "https://en.wikipedia.org/wiki/Nintendo_Switch_2",
+        },
+        {
             type: "home",
             orig_prices: [299],
             names: ["PlayStation"],
