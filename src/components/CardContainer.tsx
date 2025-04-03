@@ -5,7 +5,7 @@ import {ReactNode, useMemo} from "react";
 import ConsoleCard from "./ConsoleCard";
 import NoResults from "./NoResults";
 import FilterBar from "./FilterBar/FilterBar";
-import {compareYearMonth, YearMonth} from "../util/yearMonth";
+import {compareYearMonth, greaterThanOrEqual, YearMonth} from "../util/yearMonth";
 import {
     DEFAULT_FILTER_STATE,
     deserializeUrlSearchParams,
@@ -16,6 +16,15 @@ import {
 import {ClientDataItemType, ClientDataType, InflationData} from "../util/loadData";
 import style from "./CardContainer.module.scss";
 import useUrlState from "../util/useUrlState";
+import {RAW_DATA} from "../util/data";
+
+const calculatePrice = (inflationData: InflationData, item: ClientDataItemType, asOf: YearMonth): number[] => {
+    if (greaterThanOrEqual(item.release_year_month, asOf) && asOf.year === RAW_DATA.inflation_year_month.year && asOf.month === RAW_DATA.inflation_year_month.month) {
+        return item.orig_prices;
+    } else {
+        return priceAfterInflation(inflationData, item, asOf);
+    }
+}
 
 const calculateSortedPositions = (inflationData: InflationData, items: ClientDataItemType[], asOf: YearMonth, orderBy: OrderByType, order: OrderType): number[] => {
     // Create two lists - significantly, the _items_ in each list are the same.
@@ -30,7 +39,9 @@ const calculateSortedPositions = (inflationData: InflationData, items: ClientDat
             case "year":
                 return compareYearMonth(a.release_year_month, b.release_year_month)
             case "price":
-                return priceAfterInflation(inflationData, a, asOf)[0] - priceAfterInflation(inflationData, b, asOf)[0];
+                let priceA = calculatePrice(inflationData, a, asOf)[0];
+                let priceB = calculatePrice(inflationData, b, asOf)[0];
+                return priceA - priceB;
             case "orig-price":
                 return a.orig_prices[0] - b.orig_prices[0];
             case "manufacturer":
