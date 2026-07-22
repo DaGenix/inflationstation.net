@@ -8,3 +8,4 @@ node_modules
 .linaria-cache/
 
 .vscode
+.direnv/
