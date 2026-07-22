@@ -28,15 +28,13 @@ export default function Header(props: HeaderProps) {
             {
                 isOpen &&
                 <p className={style.textArea}>
-                    Prices have been adjusted for inflation since the consoles
+                    Original launch prices have been adjusted for inflation since the consoles
                     were initially released. Some consoles are still available at the same price
-                    they were released at. Due to inflation, these consoles have effectively
-                    become cheaper even though their price hasn't changed. For example, the
+                    they were released at. However, due to inflation, if these consoles were released
+                    today at the same relative cost, they would be more expensive. For example, the
                     Switch was released in {switchYear} for ${origSwitchPrice.toLocaleString()}.
                     Due to inflation, ${origSwitchPrice.toLocaleString()} of goods in {switchYear} would now
-                    cost ${todaysSwitchPrice.toLocaleString()}. Since the Switch's price hasn't changed,
-                    its effectively become ${switchDiscount} cheaper than it was when
-                    it was released.&nbsp;
+                    cost ${todaysSwitchPrice.toLocaleString()}.&nbsp;
                     <button className={style.expand}
                         onClick={(e) => {
                             setOpen(false);
@@ -49,7 +47,7 @@ export default function Header(props: HeaderProps) {
             {
                 !isOpen &&
                 <p className={style.textArea}>
-                    Prices have been adjusted for inflation
+                    Original launch prices have been adjusted for inflation
                     <ShowIfJs component="span">
                         ...&nbsp;
                         <button className={style.expand}
