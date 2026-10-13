@@ -40,7 +40,7 @@ export const RAW_DATA: RawDataType = {
     },
     inflation_year_month: {
         year: 2026,
-        month: 6,
+        month: 8,
     },
     data: [
         {
