@@ -32,18 +32,26 @@ convert_avif() {
   rm -f .out.png
 }
 
+convert_jpg() {
+  local img="$1"
+  local size="$2"
+  resize_png "$img" "$size"
+  cjpegli -q 56 .out.png .out.jpg
+  rm -f .out.png
+}
+
 do_convert () {
   local img="$1"
 
-	convert "$img" -resize "300x150" -background white -gravity center -extent 300x150 ".out.jpg"
+	convert_jpg "$img" "300x150"
 	do_copy "$img" "300" "jpg"
-	convert "$img" -resize "600x300" -background white -gravity center -extent 600x300 ".out.jpg"
+	convert_jpg "$img" "600x300"
 	do_copy "$img" "600" "jpg"
-	convert "$img" -resize "900x450" -background white -gravity center -extent 900x450 ".out.jpg"
+	convert_jpg "$img" "900x450"
 	do_copy "$img" "900" "jpg"
-	convert "$img" -resize "1200x600" -background white -gravity center -extent 1200x600 ".out.jpg"
+	convert_jpg "$img" "1200x600"
 	do_copy "$img" "1200" "jpg"
-	convert "$img" -resize "1800x900" -background white -gravity center -extent 1800x900 ".out.jpg"
+	convert_jpg "$img" "1800x900"
 	do_copy "$img" "1800" "jpg"
 	convert_avif "$img" "300x150"
 	do_copy "$img" "300" "avif"
