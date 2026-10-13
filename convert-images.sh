@@ -12,7 +12,7 @@ do_copy() {
   local extension="$3"
 
 	local hash=$(shasum -a 256 ".out.${extension}" | awk '{print $1}')
-	local bn="$(basename -- "$img")"
+	local bn="$(basename -- "$source_img")"
   local filename="${bn%.*}"
 
 	mv ".out.${extension}" "public/img/${filename}-${hash}-${width}.${extension}"
