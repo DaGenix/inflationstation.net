@@ -12,13 +12,13 @@ function ConsolePicture(props: ConsolePictureProps) {
         <a href={item.link}>
             <picture>
                 <source srcSet={`
-                            ${item.img300Webp} 1x,
-                            ${item.img600Webp} 2x,
-                            ${item.img900Webp} 3x,
-                            ${item.img1200Webp} 4x,
-                            ${item.img1800Webp} 6x
+                            ${item.img300Avif} 1x,
+                            ${item.img600Avif} 2x,
+                            ${item.img900Avif} 3x,
+                            ${item.img1200Avif} 4x,
+                            ${item.img1800Avif} 6x
                             `.replace(/\s+/gs, " ")}
-                        type="image/webp"
+                        type="image/avif"
                 />
                 <img
                     alt={`Picture of ${item.names[0]}`}

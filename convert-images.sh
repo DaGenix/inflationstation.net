@@ -18,6 +18,20 @@ do_copy() {
 	mv ".out.${extension}" "public/img/${filename}-${hash}-${width}.${extension}"
 }
 
+resize_png() {
+  local img="$1"
+  local size="$2"
+  magick "$img" -resize "${size}" -background white -gravity center -extent "${size}" .out.png
+}
+
+convert_avif() {
+  local img="$1"
+  local size="$2"
+  resize_png "$img" "$size"
+  ffmpeg -y -v error -i .out.png -c:v libaom-av1 -still-picture 1 -crf 40 -cpu-used 3 .out.avif
+  rm -f .out.png
+}
+
 do_convert () {
   local img="$1"
 
@@ -31,16 +45,16 @@ do_convert () {
 	do_copy "$img" "1200" "jpg"
 	convert "$img" -resize "1800x900" -background white -gravity center -extent 1800x900 ".out.jpg"
 	do_copy "$img" "1800" "jpg"
-	convert "$img" -resize "300x150" -background white -gravity center -extent 300x150 ".out.webp"
-	do_copy "$img" "300" "webp"
-	convert "$img" -resize "600x300" -background white -gravity center -extent 600x300 ".out.webp"
-	do_copy "$img" "600" "webp"
-	convert "$img" -resize "900x450" -background white -gravity center -extent 900x450 ".out.webp"
-	do_copy "$img" "900" "webp"
-	convert "$img" -resize "1200x600" -background white -gravity center -extent 1200x600 ".out.webp"
-	do_copy "$img" "1200" "webp"
-	convert "$img" -resize "1800x900" -background white -gravity center -extent 1800x900 ".out.webp"
-	do_copy "$img" "1800" "webp"
+	convert_avif "$img" "300x150"
+	do_copy "$img" "300" "avif"
+	convert_avif "$img" "600x300"
+	do_copy "$img" "600" "avif"
+	convert_avif "$img" "900x450"
+	do_copy "$img" "900" "avif"
+	convert_avif "$img" "1200x600"
+	do_copy "$img" "1200" "avif"
+	convert_avif "$img" "1800x900"
+	do_copy "$img" "1800" "avif"
 }
 
 for img in src/img/*; do

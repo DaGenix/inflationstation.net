@@ -47,8 +47,8 @@ async function main() {
                 contentType = "image/jpeg";
                 cacheControl = "public, max-age=31536000, immutable";
                 meta = {};
-            } else if (f.endsWith(".webp")) {
-                contentType = "image/webp";
+            } else if (f.endsWith(".avif")) {
+                contentType = "image/avif";
                 cacheControl = "public, max-age=31536000, immutable";
                 meta = {};
             } else if (f.endsWith(".js")) {

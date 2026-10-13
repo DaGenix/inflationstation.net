@@ -26,11 +26,11 @@ export const loadInflationData = (): InflationData => {
 }
 
 export interface DataItemType extends RawDataItemType {
-    img300Webp: string,
-    img600Webp: string,
-    img900Webp: string,
-    img1200Webp: string,
-    img1800Webp: string,
+    img300Avif: string,
+    img600Avif: string,
+    img900Avif: string,
+    img1200Avif: string,
+    img1800Avif: string,
     img300Jpeg: string,
     img600Jpeg: string,
     img900Jpeg: string,
@@ -50,11 +50,11 @@ export const loadData = (): DataType => {
         data: RAW_DATA.data.map(data => {
             return {
                 ...data,
-                img300Webp: "/" + glob.sync(`img/${data.img}*-300.webp`, {cwd: "public"})[0],
-                img600Webp: "/" + glob.sync(`img/${data.img}*-600.webp`, {cwd: "public"})[0],
-                img900Webp: "/" + glob.sync(`img/${data.img}*-900.webp`, {cwd: "public"})[0],
-                img1200Webp: "/" + glob.sync(`img/${data.img}*-1200.webp`, {cwd: "public"})[0],
-                img1800Webp: "/" + glob.sync(`img/${data.img}*-1800.webp`, {cwd: "public"})[0],
+                img300Avif: "/" + glob.sync(`img/${data.img}*-300.avif`, {cwd: "public"})[0],
+                img600Avif: "/" + glob.sync(`img/${data.img}*-600.avif`, {cwd: "public"})[0],
+                img900Avif: "/" + glob.sync(`img/${data.img}*-900.avif`, {cwd: "public"})[0],
+                img1200Avif: "/" + glob.sync(`img/${data.img}*-1200.avif`, {cwd: "public"})[0],
+                img1800Avif: "/" + glob.sync(`img/${data.img}*-1800.avif`, {cwd: "public"})[0],
                 img300Jpeg: "/" + glob.sync(`img/${data.img}*-300.jpg`, {cwd: "public"})[0],
                 img600Jpeg: "/" + glob.sync(`img/${data.img}*-600.jpg`, {cwd: "public"})[0],
                 img900Jpeg: "/" + glob.sync(`img/${data.img}*-900.jpg`, {cwd: "public"})[0],
