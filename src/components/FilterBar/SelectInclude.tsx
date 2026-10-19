@@ -8,7 +8,7 @@ type SelectIncludeProps = {
     setFilterState: (FilterState) => void,
 }
 
-const SelectInclude = (props: SelectIncludeProps): JSX.Element => {
+const SelectInclude = (props: SelectIncludeProps): React.JSX.Element => {
     const {filterState, setFilterState} = props;
 
     const onSetInclude = useCallback(e => setFilterState({...filterState, include: validateIncludeOrDefault(e.target.value)}), [filterState, setFilterState]);

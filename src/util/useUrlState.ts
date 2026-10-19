@@ -7,7 +7,7 @@ export default function useUrlState<S>(
     serializeState: (S) => URLSearchParams,
 ): [S, (S) => void] {
     const [cachedQuery, setCachedQuery] = useState("");
-    const timerRef = useRef<number>();
+    const timerRef = useRef<number | undefined>(undefined);
 
     useEffect(() => {
             setCachedQuery(window.location.search);

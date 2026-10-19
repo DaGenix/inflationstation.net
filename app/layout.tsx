@@ -1,8 +1,9 @@
 import {ReactNode} from "react";
 import Script from 'next/script';
 import { Manrope } from 'next/font/google';
-import variables from "./layout.module.scss";
 import "./root.scss"
+
+const COLOR_PRIMARY = "#0048ba";
 
 const manrope = Manrope({
     subsets: ["latin"],
@@ -16,7 +17,10 @@ export const metadata = {
     alternates: {
         canonical: "https://www.inflationstation.net/"
     },
-    themeColor: variables.colorPrimary,
+}
+
+export const viewport = {
+    themeColor: COLOR_PRIMARY,
 }
 
 export default function Layout(props: {children: ReactNode}) {

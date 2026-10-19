@@ -7,7 +7,7 @@ type FilterInputProps = {
     setFilterState: (FilterState) => void,
 }
 
-const FilterInput = (props: FilterInputProps): JSX.Element => {
+const FilterInput = (props: FilterInputProps): React.JSX.Element => {
     const {filterState, setFilterState} = props;
 
     const onSetFilter = useCallback(e => setFilterState({...filterState, filter: e.target.value}), [filterState, setFilterState]);

@@ -11,7 +11,7 @@ type AsOfProps = {
     data: ClientDataType,
 }
 
-const AsOf = (props: AsOfProps): JSX.Element => {
+const AsOf = (props: AsOfProps): React.JSX.Element => {
     const {filterState, setFilterState, data} = props;
 
     const asOf = filterState.asOf === "mostRecent" ? data.inflation_year_month : filterState.asOf;

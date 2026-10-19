@@ -8,7 +8,7 @@ type SelectOrderProps = {
     setFilterState: (FilterState) => void,
 }
 
-const SelectOrder = (props: SelectOrderProps): JSX.Element => {
+const SelectOrder = (props: SelectOrderProps): React.JSX.Element => {
     const {filterState, setFilterState} = props;
 
     const onSetAscending = useCallback(e => setFilterState({...filterState, order: e.target.value === "asc" ? "asc" : "desc"}), [filterState, setFilterState]);

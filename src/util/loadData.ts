@@ -1,4 +1,4 @@
-import glob from 'glob';
+import {globSync} from 'glob';
 import {formatYearMonth, YearMonth} from "./yearMonth";
 import {readFileSync} from "fs";
 import {RAW_DATA, RawDataItemType} from "./data";
@@ -50,16 +50,16 @@ export const loadData = (): DataType => {
         data: RAW_DATA.data.map(data => {
             return {
                 ...data,
-                img300Avif: "/" + glob.sync(`img/${data.img}*-300.avif`, {cwd: "public"})[0],
-                img600Avif: "/" + glob.sync(`img/${data.img}*-600.avif`, {cwd: "public"})[0],
-                img900Avif: "/" + glob.sync(`img/${data.img}*-900.avif`, {cwd: "public"})[0],
-                img1200Avif: "/" + glob.sync(`img/${data.img}*-1200.avif`, {cwd: "public"})[0],
-                img1800Avif: "/" + glob.sync(`img/${data.img}*-1800.avif`, {cwd: "public"})[0],
-                img300Jpeg: "/" + glob.sync(`img/${data.img}*-300.jpg`, {cwd: "public"})[0],
-                img600Jpeg: "/" + glob.sync(`img/${data.img}*-600.jpg`, {cwd: "public"})[0],
-                img900Jpeg: "/" + glob.sync(`img/${data.img}*-900.jpg`, {cwd: "public"})[0],
-                img1200Jpeg: "/" + glob.sync(`img/${data.img}*-1200.jpg`, {cwd: "public"})[0],
-                img1800Jpeg: "/" + glob.sync(`img/${data.img}*-1800.jpg`, {cwd: "public"})[0],
+                img300Avif: "/" + globSync(`img/${data.img}*-300.avif`, {cwd: "public"})[0],
+                img600Avif: "/" + globSync(`img/${data.img}*-600.avif`, {cwd: "public"})[0],
+                img900Avif: "/" + globSync(`img/${data.img}*-900.avif`, {cwd: "public"})[0],
+                img1200Avif: "/" + globSync(`img/${data.img}*-1200.avif`, {cwd: "public"})[0],
+                img1800Avif: "/" + globSync(`img/${data.img}*-1800.avif`, {cwd: "public"})[0],
+                img300Jpeg: "/" + globSync(`img/${data.img}*-300.jpg`, {cwd: "public"})[0],
+                img600Jpeg: "/" + globSync(`img/${data.img}*-600.jpg`, {cwd: "public"})[0],
+                img900Jpeg: "/" + globSync(`img/${data.img}*-900.jpg`, {cwd: "public"})[0],
+                img1200Jpeg: "/" + globSync(`img/${data.img}*-1200.jpg`, {cwd: "public"})[0],
+                img1800Jpeg: "/" + globSync(`img/${data.img}*-1800.jpg`, {cwd: "public"})[0],
             }
         }),
     }

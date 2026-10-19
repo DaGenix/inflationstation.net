@@ -1,26 +1,29 @@
 const path = require('path');
-const AWS = require('aws-sdk');
-const glob = require('glob');
+const {S3Client, HeadObjectCommand, PutObjectCommand} = require("@aws-sdk/client-s3");
+const {fromIni} = require("@aws-sdk/credential-providers");
+const {glob} = require('glob');
 const util = require("util");
 const fs = require("fs");
 
 async function main() {
     const BUCKET = "www.inflationstation.net";
 
-    AWS.config.credentials = new AWS.SharedIniFileCredentials({profile: "personal"});
-    const s3 = new AWS.S3();
+    const s3 = new S3Client({
+        region: "us-east-1",
+        credentials: fromIni({profile: "personal"}),
+    });
 
-    for (const f of await util.promisify(glob)("**", {nodir: true, cwd: "out"})) {
+    for (const f of await glob("**", {nodir: true, cwd: "out"})) {
         let doUpload = false;
         if (f.endsWith("index.html") || f.endsWith("favicon.ico")) {
             doUpload = true;
-        } else if (f === "index.txt") {
+        } else if (f.endsWith(".txt")) {
             doUpload = false;
         } else {
             try {
-                await s3.headObject({Bucket: BUCKET, Key: f}).promise();
+                await s3.send(new HeadObjectCommand({Bucket: BUCKET, Key: f}));
             } catch (err) {
-                if (err.code === "NotFound") {
+                if (err.name === "NotFound" || err.$metadata?.httpStatusCode === 404) {
                     doUpload = true;
                 } else {
                     throw err;
@@ -72,14 +75,14 @@ async function main() {
             }
 
             console.log("Uploading: " + f);
-            await s3.putObject({
+            await s3.send(new PutObjectCommand({
                 Body: await util.promisify(fs.readFile)(path.join("out", f)),
                 Bucket: BUCKET,
                 Key: f,
                 CacheControl: cacheControl,
                 ContentType: contentType,
                 Metadata: meta,
-            }).promise();
+            }));
         } else {
             console.log("Already uploaded (or ignored): " + f);
         }

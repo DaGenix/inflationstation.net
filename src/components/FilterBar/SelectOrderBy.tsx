@@ -8,7 +8,7 @@ type SelectOrderByProps = {
     setFilterState: (FilterState) => void,
 }
 
-const SelectOrderBy = (props: SelectOrderByProps): JSX.Element => {
+const SelectOrderBy = (props: SelectOrderByProps): React.JSX.Element => {
     const {filterState, setFilterState} = props;
 
     const onSetOrderBy = useCallback(e => setFilterState({...filterState, orderBy: validateOrderByOrDefault(e.target.value)}), [filterState, setFilterState]);
